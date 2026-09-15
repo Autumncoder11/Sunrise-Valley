@@ -1,0 +1,166 @@
+﻿<krpano version="1.24" title="Virtual Tour" debugmode="true">
+
+	<include url="skin/vtourskin.xml" />
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="true"
+	               maps_type="openstreetmaps"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+	
+
+	
+	<scene name="scene_dji_20260530023817_0241_d" title="DJI_20260530023817_0241_D" onstart="gui_master_startup(); updateRoadLabels();" thumburl="panos/DJI_20260530023817_0241_D.tiles/thumb.jpg" lat="11.12801342" lng="77.00365839" alt="585.75" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="6.629" vlookat="90.000" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/DJI_20260530023817_0241_D.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/DJI_20260530023817_0241_D.tiles/%s/l%l/%0v/l%l_%s_%0v_%0h.jpg" multires="512,640,1280,2560,4864" />
+		</image>
+		<events name="roadlabel_align" onviewchange="updateRoadLabels()" />
+		<!-- Fires once the pano's actual image/tiles have finished loading and
+		     are on screen (unlike onready in tour.html, which only means the
+		     krpano viewer itself has initialized). Hides the HTML loading
+		     overlay; see hideLoadingOverlay() in tour.html.
+		     Also forces road-label-zoom.js to rescan for roadlabelN hotspots:
+		     output_hotspots.xml (which defines them) loads asynchronously,
+		     so road-label-zoom.js's very first scan can run before all of
+		     them exist yet; any missed at that instant were never rescaled
+		     from their placeholder 100px css, which is the giant-yellow-
+		     letters bug. onloadcomplete guarantees everything has actually
+		     finished loading, so the rescan here catches them. -->
+		<events name="loading_events" onloadcomplete="js(hideLoadingOverlay()); js(window.roadLabelZoom &amp;&amp; window.roadLabelZoom.refresh());" />
+
+		<!-- <action name="flatten_plot_labels">
+    	for(set(i,0), i LE 397, inc(i),
+        txtadd(hsname, 'kml_label_', get(i));
+        if(hotspot[get(hsname)],
+            set(hotspot[get(hsname)].distorted, true);
+            set(hotspot[get(hsname)].rx, calc(get(hotspot[get(hsname)].atv) - 90));
+            set(hotspot[get(hsname)].ry, calc(0 - get(hotspot[get(hsname)].ath)));
+        	);
+    	);
+		</action> -->
+		<action name="updateRoadLabels">
+			updateRoadLabel(roadlabel1);
+			updateRoadLabel(roadlabel2);
+			updateRoadLabel(roadlabel3);
+			updateRoadLabel(roadlabel4);
+			updateRoadLabel(roadlabel5);
+			updateRoadLabel(roadlabel6);
+			updateRoadLabel(roadlabel7);
+			updateRoadLabel(roadlabel8);
+			updateRoadLabel(roadlabel9);
+			updateRoadLabel(roadlabel10);
+			updateRoadLabel(roadlabel11);
+			updateRoadLabel(roadlabel12);
+			updateRoadLabel(roadlabel13);
+			updateRoadLabel(roadlabel14);
+			updateRoadLabel(roadlabel15);
+			updateRoadLabel(roadlabel16);
+			updateRoadLabel(roadlabel17);
+			updateRoadLabel(roadlabel18);
+		</action>
+
+		<action name="updateRoadLabel">
+			if(hotspot[%1] AND hotspot[%1].road_dir_ath != null,
+				spheretoscreen(get(hotspot[%1].ath), get(hotspot[%1].atv), label_sx, label_sy);
+				spheretoscreen(get(hotspot[%1].road_dir_ath), get(hotspot[%1].road_dir_atv), dir_sx, dir_sy);
+				set(label_angle, calc(atan2(dir_sy - label_sy, dir_sx - label_sx) * 57.29577951308232));
+				set(hotspot[%1].rotate, calc(label_angle));
+				// font-size is intentionally fixed (basefontsize, set per-label in
+				// output_hotspots.xml) and is no longer touched here. Every attempt
+				// to scale it dynamically with fov/foreshortening either overflowed
+				// or visibly stretched the text at certain angles -- a constant
+				// size that was chosen to fit each road at design time is more
+				// reliable than any runtime formula. Only rotation adapts live.
+			);
+		</action>
+		<action name="set_all_label_rz">
+    set(rzval, %1);
+    for(set(i,0), i LE 397, inc(i),
+        txtadd(hsname, 'kml_label_', get(i));
+        if(hotspot[get(hsname)],
+            set(hotspot[get(hsname)].rz, get(rzval));
+        );
+    );
+</action>
+	<!-- <events onclick="screentosphere(mouse.x, mouse.y, clicked_ath, clicked_atv); js(alert(calc('Clicked coordinates:\n\nath=\x22' + roundval(clicked_ath, 5) + '\x22\natv=\x22' + roundval(clicked_atv, 5) + '\x22')));" /> -->
+	<!-- 🔹 Load entire KML Layout (polygons and text) -->
+    <!-- All real plot click events (styled sidebar card via show_plot_details) live in this file -->
+    <include url="output_hotspots.xml?v=2" />
+    <!-- <include url="hotspots.xml" /> -->
+    <!-- FOV/zoom control panel + Kumaran Medical Center on/off-screen checker -->
+    <include url="gui_fov_kumaran.xml" />
+	<!-- removed the extra "<events onloadcomplete="start_landmark_reveals();" />"
+	     that used to be here — hotspots.xml already triggers its own startup
+	     internally, so this was a redundant 3rd trigger on top of that. -->
+	</scene>
+
+
+</krpano>

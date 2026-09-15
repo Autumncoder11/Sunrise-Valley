@@ -1,0 +1,204 @@
+/* =========================================================================
+   filter-panel.css
+   Top-of-screen collapsible plot filter bar (facing + property size).
+   Pairs with filter-panel.js. Visual language matches the vtourskin
+   controlbar: dark translucent pill, white text, red accent for the
+   primary action.
+   ========================================================================= */
+
+#plotFilterRoot {
+  position: fixed;
+  top: 68px; /* sits just below the action bar (#plotActionBarRoot) */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900; /* below the plot popup (#plotPopupRoot) and action bar, above the pano */
+  font-family: Arial, Helvetica, sans-serif;
+  color: #FFFFFF;
+  max-width: calc(100vw - 24px);
+}
+
+/* ---- Expanded panel ---------------------------------------------------- */
+.plot-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  background: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 10px 16px 10px 22px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.plot-filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plot-filter-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  padding-left: 16px;
+}
+
+/* Facing dropdown -------------------------------------------------------- */
+.plot-filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #000000;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 9px 34px 9px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 150px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0 L5 6 L10 0 Z' fill='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+.plot-filter-select:focus {
+  outline: none;
+  border-color: #E11D2E;
+}
+
+/* Property size group ----------------------------------------------------- */
+.plot-filter-size-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plot-filter-input {
+  background: #1a1a1a;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 14px;
+  width: 78px;
+  text-align: left;
+}
+.plot-filter-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: bold;
+}
+.plot-filter-input:focus {
+  outline: none;
+  border-color: #E11D2E;
+}
+/* Hide native number spinners so the pill shape stays clean */
+.plot-filter-input::-webkit-outer-spin-button,
+.plot-filter-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.plot-filter-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.plot-filter-unit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+}
+.plot-filter-unit svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+}
+
+/* Actions: search / reset / close ---------------------------------------- */
+.plot-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plot-filter-search {
+  background: #E11D2E;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 26px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.plot-filter-search:hover {
+  background: #c9182a;
+}
+
+.plot-filter-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+.plot-filter-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Reset icon uses the accent yellow ring shown in the mockup */
+.plot-filter-reset {
+  border-color: #F5C542;
+  color: #F5C542;
+}
+.plot-filter-reset:hover {
+  background: rgba(245, 197, 66, 0.12);
+}
+
+/* Result count, shown after a search ------------------------------------- */
+.plot-filter-result-count {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  background: rgba(18, 18, 18, 0.88);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.plot-filter-result-count.plot-filter-result-count--none {
+  color: #FCA5A5;
+}
+
+/* ---- Narrow screens: stack fields, allow horizontal scroll ------------- */
+@media (max-width: 640px) {
+  .plot-filter-bar {
+    gap: 14px;
+    padding: 8px 10px;
+    overflow-x: auto;
+  }
+  .plot-filter-select {
+    min-width: 120px;
+  }
+}

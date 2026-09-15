@@ -1,0 +1,168 @@
+/* =========================================================================
+   enquiry-popup.css
+   General "Enquiry" lead-capture modal, opened from the action bar's
+   Enquiry icon. Visual language matches the provided mockup: orange
+   gradient header, cream body, orange-outlined inputs, gradient submit.
+   ========================================================================= */
+
+#enquiryPopupRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 1200; /* above the action bar / filter bar / plot popup */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.enquiry-popup-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.enquiry-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #FFF6EA;
+  border: 2px solid #F97316;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.enquiry-popup-header {
+  position: relative;
+  background: linear-gradient(135deg, #F97316, #7C2D12);
+  border-radius: 17px 17px 0 0;
+  padding: 20px 52px 16px 20px;
+  color: #FFFFFF;
+}
+.enquiry-popup-title {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+.enquiry-popup-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.enquiry-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #EA580C;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.enquiry-popup-close:hover {
+  background: #FDE8DA;
+}
+
+.enquiry-popup-body {
+  padding: 20px 22px 24px 22px;
+}
+
+.enquiry-popup-type-btn {
+  width: 100%;
+  background: #F97316;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: default; /* single fixed enquiry type for now; see enquiry-popup.js */
+}
+
+.enquiry-popup-field {
+  margin-bottom: 16px;
+}
+.enquiry-popup-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #1E3A8A;
+  margin-bottom: 6px;
+}
+.enquiry-popup-field input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1.5px solid #FDBA74;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+.enquiry-popup-field input::placeholder {
+  color: #9CA3AF;
+}
+.enquiry-popup-field input:focus {
+  outline: none;
+  border-color: #F97316;
+}
+.enquiry-popup-field input.enquiry-popup-field--invalid {
+  border-color: #DC2626;
+}
+.enquiry-popup-field-error {
+  display: none;
+  color: #DC2626;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.enquiry-popup-field-error.enquiry-popup-field-error--visible {
+  display: block;
+}
+
+.enquiry-popup-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #FB923C, #EA580C);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.35);
+}
+.enquiry-popup-submit:hover {
+  filter: brightness(1.05);
+}
+.enquiry-popup-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.enquiry-popup-status {
+  margin-top: 14px;
+  font-size: 13px;
+  text-align: center;
+  display: none;
+}
+.enquiry-popup-status--success {
+  color: #15803D;
+  display: block;
+}
+.enquiry-popup-status--error {
+  color: #DC2626;
+  display: block;
+}
