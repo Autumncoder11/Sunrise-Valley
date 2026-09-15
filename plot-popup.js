@@ -289,6 +289,7 @@
         dataReady = true;
         applyBaseStyling();
         disableHotspotCapture();
+        applyPlotNumberLabelScale();
         if (pendingClick) {
           var hs = pendingClick;
           pendingClick = null;
@@ -333,6 +334,41 @@
       kset("hotspot[" + hotspotName + "].capture", "false");
     });
   }
+
+  // ---- Mobile-only plot-number label scaling ---------------------------
+  // The "212" / "211" / "210" ... plot-number hotspots are named
+  // "kml_label_N" (one per "kml_poly_N" in PLOT_DATA) and their font-size
+  // is baked in by tour.xml's flatten_plot_labels() -- not this file --
+  // so it can't be changed at the source here. Every krpano hotspot,
+  // regardless of how its own text/font is built, still honors a "scale"
+  // transform on top, so shrinking these on phones is done by applying a
+  // scale factor to each kml_label_* hotspot, left at 1.0 (untouched) on
+  // desktop/tablet-and-up widths.
+  var MOBILE_LABEL_MAX_WIDTH_PX = 768;
+  var MOBILE_LABEL_SCALE = 0.6; // tweak this until it looks right on your phone
+
+  function isMobileLabelViewport() {
+    return window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX;
+  }
+
+  function applyPlotNumberLabelScale() {
+    if (!window.krpano || !PLOT_DATA) return;
+    var scale = isMobileLabelViewport() ? MOBILE_LABEL_SCALE : 1.0;
+    Object.keys(PLOT_DATA).forEach(function (hotspotName) {
+      var labelName = hotspotName.replace("kml_poly_", "kml_label_");
+      kset("hotspot[" + labelName + "].scale", scale);
+    });
+  }
+
+  var labelScaleResizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(labelScaleResizeTimer);
+    labelScaleResizeTimer = setTimeout(applyPlotNumberLabelScale, 150);
+  });
+  window.addEventListener("orientationchange", function () {
+    clearTimeout(labelScaleResizeTimer);
+    labelScaleResizeTimer = setTimeout(applyPlotNumberLabelScale, 150);
+  });
 
   // Projects a spherical (ath, atv) point to actual on-screen pixels for the
   // CURRENT view. This is what makes rotation/sizing correct at any zoom
