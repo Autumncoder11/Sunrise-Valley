@@ -3318,7 +3318,7 @@
       <point ath="162.65167" atv="37.4614"/>
     </hotspot>
     <hotspot name="kml_label_392" ath="162.68193" atv="36.26082" distorted="false" rx="53.73918" ry="0" rz="-10.00000" type="text" html="393" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
-    <hotspot name="kml_label_393" ath="35.80658" atv="75.83112" distorted="false" rx="14.16888" ry="0" rz="-10.00000" type="text" html="Road network outline" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <!-- <hotspot name="kml_label_393" ath="35.80658" atv="75.83112" distorted="false" rx="14.16888" ry="0" rz="-10.00000" type="text" html="Road network outline" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" /> -->
     <hotspot name="kml_poly_394" fillcolor="0xFF9900" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_394'));">
       <point ath="-75.47054" atv="31.52269"/>
       <point ath="-72.80689" atv="38.23696"/>
