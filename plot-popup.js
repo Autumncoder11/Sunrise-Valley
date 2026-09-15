@@ -288,6 +288,7 @@
         PLOT_DATA = data;
         dataReady = true;
         applyBaseStyling();
+        disableHotspotCapture();
         if (pendingClick) {
           var hs = pendingClick;
           pendingClick = null;
@@ -313,6 +314,24 @@
   }
   function kcall(action) {
     if (window.krpano) window.krpano.call(action);
+  }
+
+  // A krpano polygon hotspot with an onclick captures pointer events by
+  // default -- meaning a drag/swipe that STARTS on top of a plot never
+  // reaches the viewer's own pan-to-look control, on either touch or
+  // mouse. The open road area has no hotspot at all, so a drag started
+  // there was never captured and always worked. Turning capture off makes
+  // every plot behave the same way the road does for dragging: krpano
+  // still tells a tap from a drag apart on its own (by movement distance
+  // between down/up), so a genuine tap still opens the popup via
+  // showPlotDetails -- this only stops the plot from swallowing the pan
+  // gesture. Applied to every hotspot in PLOT_DATA (including the
+  // non-sellable/placeholder ones), since any of them sitting under a
+  // swipe could block the same gesture.
+  function disableHotspotCapture() {
+    Object.keys(PLOT_DATA).forEach(function (hotspotName) {
+      kset("hotspot[" + hotspotName + "].capture", "false");
+    });
   }
 
   // Projects a spherical (ath, atv) point to actual on-screen pixels for the
