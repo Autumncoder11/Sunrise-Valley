@@ -333,6 +333,9 @@
     Object.keys(PLOT_DATA).forEach(function (hotspotName) {
       kset("hotspot[" + hotspotName + "].capture", "false");
     });
+    // The road surface is its own hotspot too ("Roads"), not part of
+    // PLOT_DATA -- same capture-blocks-drag issue, same fix.
+    kset("hotspot[Roads].capture", "false");
   }
 
   // ---- Mobile-only plot-number label scaling ---------------------------
@@ -570,6 +573,18 @@
   var INWARD_PULL_MIN_PX = 6;
   var INWARD_PULL_MAX_PX = 26;
   var INWARD_PULL_RATIO = 0.06;
+
+  // Manual sideOffsets (Plot Dimension Editor) gating -- see placeSideLabel().
+  // MANUAL_OFFSET_REF_PX: the plot's on-screen size (its longest edge, in
+  // px -- same value as plotScreenLen) below which manual offsets are
+  // suppressed entirely; above it, they scale up with how far past this
+  // you've zoomed in. If offsets still feel like they kick in too early/
+  // late, raise/lower this.
+  var MANUAL_OFFSET_REF_PX = 150;
+  // Hard cap on how much a manual offset can grow at extreme zoom-in, so
+  // a plot you zoom right into doesn't fling its label far past the nudge
+  // it was tuned for.
+  var MANUAL_OFFSET_MAX_SCALE = 3;
   // Never pull a label more than this fraction of the way to the centroid,
   // regardless of the size-based amount above. Keeps the pull from ever
   // overshooting on a narrow/tapered plot (a sliver or near-triangle
@@ -852,12 +867,33 @@
     // view afterward made the fixed screen-space push no longer line up
     // with the edge's new orientation, and the label visibly drifted away
     // from its edge as the angle changed.
+    //
+    // The nudge itself is still a fixed pixel amount, which doesn't scale
+    // with zoom on its own -- that's fine for a plot zoomed in close (the
+    // small size relative to the plot is what it was tuned for), but the
+    // exact same pixels become a much bigger, more visible push once the
+    // plot shrinks on screen when zoomed OUT. Gate it on zoom instead of
+    // trying to make it zoom-invariant: below MANUAL_OFFSET_REF_PX (the
+    // on-screen plot size these nudges were tuned at) the manual offset is
+    // suppressed entirely, i.e. automatic placement only; the further you
+    // zoom in PAST that reference size, the more the nudge is scaled up
+    // (capped at MANUAL_OFFSET_MAX_SCALE so it can't run away at extreme
+    // zoom). Tune MANUAL_OFFSET_REF_PX against a plot you know is tuned
+    // well (e.g. one with small offsets) if this doesn't feel right.
     if (manualOffset) {
-      var offRad = angle * Math.PI / 180;
-      var odx = manualOffset.dx || 0;
-      var ody = manualOffset.dy || 0;
-      midX += odx * Math.cos(offRad) - ody * Math.sin(offRad);
-      midY += odx * Math.sin(offRad) + ody * Math.cos(offRad);
+      var curScreenLen = plotScreenLen || screenLen;
+      var zoomScale = curScreenLen / MANUAL_OFFSET_REF_PX;
+      if (zoomScale > 1) {
+        if (zoomScale > MANUAL_OFFSET_MAX_SCALE) zoomScale = MANUAL_OFFSET_MAX_SCALE;
+        var offRad = angle * Math.PI / 180;
+        var odx = (manualOffset.dx || 0) * zoomScale;
+        var ody = (manualOffset.dy || 0) * zoomScale;
+        midX += odx * Math.cos(offRad) - ody * Math.sin(offRad);
+        midY += odx * Math.sin(offRad) + ody * Math.cos(offRad);
+      }
+      // zoomScale <= 1 (zoomed out to/past the reference size): manual
+      // offset stays at 0, i.e. not applied at all -- midX/midY are left
+      // exactly where the automatic clearance search put them.
     }
 
     var midSphere = screenToSphere(midX, midY);
