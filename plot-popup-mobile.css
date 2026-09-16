@@ -98,11 +98,11 @@
   }
 
   #plotPopupRoot .plot-popup-side-label {
-    font-size: 9px;
+    font-size: 7px;
   }
 
   #plotPopupRoot .plot-popup-side-value {
-    font-size: 12px;
+    font-size: 7px;
   }
 
   /* Collapsed state: toggled by plot-popup-mobile.js.
