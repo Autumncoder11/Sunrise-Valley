@@ -290,6 +290,7 @@
         applyBaseStyling();
         disableHotspotCapture();
         applyPlotNumberLabelScale();
+        applyPlotNumberLabelBold();
         if (pendingClick) {
           var hs = pendingClick;
           pendingClick = null;
@@ -360,7 +361,32 @@
     Object.keys(PLOT_DATA).forEach(function (hotspotName) {
       var labelName = hotspotName.replace("kml_poly_", "kml_label_");
       kset("hotspot[" + labelName + "].scale", scale);
+      // Without this, the label is a fixed screen-pixel size regardless
+      // of camera fov -- fine fully zoomed out (matches the tiny on-
+      // screen plots), but it stays that same tiny size once you zoom
+      // into a single plot, since it never grows with the view like a
+      // real ground object would. zoom="true" ties its size to the
+      // current fov so it scales up as you zoom in.
+      kset("hotspot[" + labelName + "].zoom", "true");
     });
+  }
+
+  // One-time bump to bold, layered on top of whatever font tour.xml's
+  // flatten_plot_labels() already baked into each label's css -- read
+  // the existing value and append rather than overwrite, so color/
+  // font-family/etc. from tour.xml survive. Guarded by the flag so this
+  // string get/set only runs once, not on every resize/orientation tick.
+  var labelBoldApplied = false;
+  function applyPlotNumberLabelBold() {
+    if (!window.krpano || !PLOT_DATA || labelBoldApplied) return;
+    Object.keys(PLOT_DATA).forEach(function (hotspotName) {
+      var labelName = hotspotName.replace("kml_poly_", "kml_label_");
+      var currentCss = kget("hotspot[" + labelName + "].css") || "";
+      if (currentCss.indexOf("font-weight") === -1) {
+        kset("hotspot[" + labelName + "].css", currentCss + ";font-weight:bold;");
+      }
+    });
+    labelBoldApplied = true;
   }
 
   var labelScaleResizeTimer = null;
