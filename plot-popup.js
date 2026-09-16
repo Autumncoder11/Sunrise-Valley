@@ -440,8 +440,8 @@
   // (kml_label_*, sized in tour.xml's flatten_plot_labels()) — this pins
   // every dimension label to a constant 11px instead of scaling with the
   // edge's on-screen length.
-  var LABEL_FONT_MIN_PX = 11;
-  var LABEL_FONT_MAX_PX = 11;
+  var LABEL_FONT_MIN_PX = 7;
+  var LABEL_FONT_MAX_PX = 7;
   // How much of the edge's screen length the font size tracks. Tune this
   // if labels feel too big/small relative to the edges they sit on.
   // No-op now that MIN/MAX are pinned equal above (see comment there) —
