@@ -185,6 +185,7 @@
       <point ath="50.07592" atv="30.85913"/>
       <point ath="48.82317" atv="31.40180"/>
       <point ath="51.29024" atv="32.50925"/>
+      <point ath="51.93314" atv="32.44462"/>
       <point ath="52.90834" atv="32.05854"/>
     </hotspot>
     <hotspot name="kml_label_11" ath="50.76805" atv="31.71607" distorted="false" rx="58.28393" ry="0" rz="-10.00000" type="text" html="12" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
@@ -345,7 +346,7 @@
       <point ath="35.73835" atv="45.61216"/>
       <point ath="32.39680" atv="42.56009"/>
     </hotspot>
-    <hotspot name="kml_label_30" ath="35.51389" atv="43.10895" distorted="false" rx="46.89105" ry="0" rz="-10.00000" type="text" html="31" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_30" ath="35.72895" atv="43.31306" distorted="false" rx="46.89105" ry="0" rz="-10.00000" type="text" html="31" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_31" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_31'));">
       <point ath="36.42939" atv="41.02712"/>
       <point ath="39.87447" atv="39.91967"/>
@@ -394,7 +395,7 @@
       <point ath="51.16529" atv="35.24995"/>
       <point ath="51.15779" atv="35.24747"/>
     </hotspot>
-    <hotspot name="kml_label_36" ath="53.79085" atv="35.52164" distorted="false" rx="54.47836" ry="0" rz="-10.00000" type="text" html="37" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_36" ath="54.24335" atv="35.69533" distorted="false" rx="54.47836" ry="0" rz="-10.00000" type="text" html="37" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_37" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_37'));">
       <point ath="53.43177" atv="34.09838"/>
       <point ath="55.52251" atv="32.97385"/>
@@ -403,7 +404,7 @@
       <point ath="53.43580" atv="34.10152"/>
       <point ath="53.43177" atv="34.09838"/>
     </hotspot>
-    <hotspot name="kml_label_37" ath="55.97084" atv="34.3091" distorted="false" rx="55.69090" ry="0" rz="-10.00000" type="text" html="38" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_37" ath="56.41595" atv="34.46492" distorted="false" rx="55.69090" ry="0" rz="-10.00000" type="text" html="38" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_38" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_38'));">
       <point ath="55.52251" atv="32.97385"/>
       <point ath="57.44423" atv="31.88457"/>
@@ -530,7 +531,7 @@
       <point ath="35.73835" atv="45.61216"/>
       <point ath="36.43926" atv="45.40259"/>
     </hotspot>
-    <hotspot name="kml_label_52" ath="39.81354" atv="46.76781" distorted="false" rx="43.23219" ry="0" rz="-10.00000" type="text" html="53" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_52" ath="40.08274" atv="46.98234" distorted="false" rx="43.23219" ry="0" rz="-10.00000" type="text" html="53" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_53" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_53'));">
       <point ath="51.11780" atv="55.36777"/>
       <point ath="44.49983" atv="51.90147"/>
@@ -581,7 +582,7 @@
       <point ath="61.55871" atv="41.74956"/>
       <point ath="61.57002" atv="41.74834"/>
     </hotspot>
-    <hotspot name="kml_label_58" ath="64.94594" atv="41.79798" distorted="false" rx="48.20202" ry="0" rz="-10.00000" type="text" html="59" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_58" ath="65.73084" atv="42.01303" distorted="false" rx="48.20202" ry="0" rz="-10.00000" type="text" html="59" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_59" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_59'));">
       <point ath="63.81057" atv="39.99715"/>
       <point ath="65.80690" atv="38.32316"/>
@@ -606,7 +607,7 @@
       <point ath="67.59351" atv="36.74233"/>
       <point ath="67.58734" atv="36.73937"/>
     </hotspot>
-    <hotspot name="kml_label_61" ath="70.40554" atv="36.64054" distorted="false" rx="53.35946" ry="0" rz="-10.00000" type="text" html="62" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_61" ath="71.08872" atv="36.78258" distorted="false" rx="53.35946" ry="0" rz="-10.00000" type="text" html="62" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_62" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_62'));">
       <point ath="69.18300" atv="35.23995"/>
       <point ath="74.52887" atv="36.32649"/>
@@ -623,7 +624,7 @@
       <point ath="74.15101" atv="34.51065"/>
       <point ath="70.61115" atv="33.82531"/>
     </hotspot>
-    <hotspot name="kml_label_63" ath="73.36598" atv="32.74177" distorted="false" rx="57.25823" ry="0" rz="-10.00000" type="text" html="64" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_63" ath="73.13516" atv="33.01663" distorted="false" rx="57.25823" ry="0" rz="-10.00000" type="text" html="64" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_64" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_64'));">
       <point ath="74.15101" atv="34.51065"/>
       <point ath="76.09260" atv="32.07468"/>
@@ -640,7 +641,7 @@
       <point ath="81.19026" atv="35.54472"/>
       <point ath="77.33026" atv="35.03177"/>
     </hotspot>
-    <hotspot name="kml_label_65" ath="80.38328" atv="33.86882" distorted="false" rx="56.13118" ry="0" rz="-10.00000" type="text" html="66" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_65" ath="80.22135" atv="34.17228" distorted="false" rx="56.13118" ry="0" rz="-10.00000" type="text" html="66" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_66" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_66'));">
       <point ath="74.52887" atv="36.32649"/>
       <point ath="75.72303" atv="34.77918"/>
@@ -815,7 +816,7 @@
       <point ath="88.64171" atv="36.17231"/>
       <point ath="84.55631" atv="35.88605"/>
     </hotspot>
-    <hotspot name="kml_label_86" ath="86.90243" atv="34.32176" distorted="false" rx="55.67824" ry="0" rz="-10.00000" type="text" html="87" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_86" ath="86.79573" atv="34.63792" distorted="false" rx="55.67824" ry="0" rz="-10.00000" type="text" html="87" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_87" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_87'));">
       <point ath="92.20731" atv="36.30902"/>
       <point ath="88.64171" atv="36.17231"/>
@@ -833,7 +834,7 @@
       <point ath="95.60792" atv="33.70808"/>
       <point ath="96.71363" atv="34.29761"/>
     </hotspot>
-    <hotspot name="kml_label_88" ath="94.78536" atv="34.6163" distorted="false" rx="55.38370" ry="0" rz="-10.00000" type="text" html="89" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_88" ath="94.77302" atv="34.94118" distorted="false" rx="55.38370" ry="0" rz="-10.00000" type="text" html="89" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_89" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_89'));">
       <point ath="90.09220" atv="38.02758"/>
       <point ath="90.42144" atv="36.25414"/>
@@ -923,7 +924,7 @@
       <point ath="100.60279" atv="68.70857"/>
       <point ath="98.42738" atv="68.05956"/>
     </hotspot>
-    <hotspot name="kml_label_99" ath="89.92136" atv="69.85542" distorted="false" rx="20.14458" ry="0" rz="-10.00000" type="text" html="100" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_99" ath="87.71627" atv="70.10718" distorted="false" rx="20.14458" ry="0" rz="-10.00000" type="text" html="100" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_100" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_100'));">
       <point ath="76.95643" atv="67.01749"/>
       <point ath="68.26366" atv="73.61928"/>
@@ -931,7 +932,7 @@
       <point ath="64.45387" atv="64.86666"/>
       <point ath="76.95643" atv="67.01749"/>
     </hotspot>
-    <hotspot name="kml_label_100" ath="65.88187" atv="69.19869" distorted="false" rx="20.80131" ry="0" rz="-10.00000" type="text" html="101" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_100" ath="65.69416" atv="68.99625" distorted="false" rx="20.80131" ry="0" rz="-10.00000" type="text" html="101" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_101" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_101'));">
       <point ath="55.22339" atv="62.22526"/>
       <point ath="64.45387" atv="64.86666"/>
@@ -1091,7 +1092,7 @@
       <point ath="43.04628" atv="66.79024"/>
       <point ath="52.75530" atv="70.41240"/>
     </hotspot>
-    <hotspot name="kml_label_120" ath="38.79182" atv="70.87407" distorted="false" rx="19.12593" ry="0" rz="-10.00000" type="text" html="121" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_120" ath="38.27386" atv="70.57196" distorted="false" rx="19.12593" ry="0" rz="-10.00000" type="text" html="121" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_121" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_121'));">
       <point ath="68.26366" atv="73.61928"/>
       <point ath="47.54693" atv="79.76719"/>
@@ -1099,7 +1100,7 @@
       <point ath="52.75530" atv="70.41240"/>
       <point ath="68.26366" atv="73.61928"/>
     </hotspot>
-    <hotspot name="kml_label_121" ath="50.95286" atv="75.05149" distorted="false" rx="14.94851" ry="0" rz="-10.00000" type="text" html="122" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_121" ath="50.27899" atv="74.70195" distorted="false" rx="14.94851" ry="0" rz="-10.00000" type="text" html="122" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_122" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_122'));">
       <point ath="72.52981" atv="70.96997"/>
       <point ath="101.76628" atv="72.27535"/>
@@ -1107,7 +1108,7 @@
       <point ath="63.98984" atv="75.58114"/>
       <point ath="72.52981" atv="70.96997"/>
     </hotspot>
-    <hotspot name="kml_label_122" ath="85.04115" atv="74.76542" distorted="false" rx="15.23458" ry="0" rz="-10.00000" type="text" html="123" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_122" ath="85.13635" atv="74.90201" distorted="false" rx="15.23458" ry="0" rz="-10.00000" type="text" html="123" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_123" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_123'));">
       <point ath="47.54693" atv="79.76719"/>
       <point ath="105.39353" atv="83.01023"/>
@@ -1116,16 +1117,16 @@
       <point ath="63.98984" atv="75.58114"/>
       <point ath="47.54693" atv="79.76719"/>
     </hotspot>
-    <hotspot name="kml_label_123" ath="83.33683" atv="80.55571" distorted="false" rx="9.44429" ry="0" rz="-10.00000" type="text" html="124" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_123" ath="79.67652" atv="79.30476" distorted="false" rx="9.44429" ry="0" rz="-10.00000" type="text" html="124" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_124" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_124'));">
-      <point ath="-54.98853" atv="82.70064"/>
-      <point ath="-102.16904" atv="83.31046"/>
-      <point ath="-196.88760" atv="87.80844"/>
-      <point ath="-227.82234" atv="87.95844"/>
-      <point ath="-330.08405" atv="86.01758"/>
-      <point ath="-54.98853" atv="82.70064"/>
+      <point ath="-94.84124" atv="78.74305"/>
+      <point ath="-55.12126" atv="82.74649"/>
+      <point ath="30.90344" atv="85.98351"/>
+      <point ath="132.88284" atv="87.77180"/>
+      <point ath="160.82447" atv="87.57859"/>
+      <point ath="-94.84124" atv="78.74305"/>
     </hotspot>
-    <hotspot name="kml_label_124" ath="-71.76689" atv="88.23504" distorted="false" rx="1.76496" ry="0" rz="-10.00000" type="text" html="125" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_124" ath="-59.31583" atv="87.28155" distorted="false" rx="1.76496" ry="0" rz="-10.00000" type="text" html="125" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_125" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_125'));">
       <point ath="-94.84124" atv="78.74305"/>
       <point ath="-56.20855" atv="77.49439"/>
@@ -1222,7 +1223,7 @@
       <point ath="-78.79711" atv="43.98405"/>
       <point ath="-86.56690" atv="44.06770"/>
     </hotspot>
-    <hotspot name="kml_label_136" ath="-83.36452" atv="42.51162" distorted="false" rx="47.48838" ry="0" rz="-10.00000" type="text" html="137" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_136" ath="-83.07039" atv="42.82717" distorted="false" rx="47.48838" ry="0" rz="-10.00000" type="text" html="137" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_137" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_137'));">
       <point ath="-78.79711" atv="43.98405"/>
       <point ath="-79.33150" atv="41.24984"/>
@@ -1231,7 +1232,7 @@
       <point ath="-71.96517" atv="43.46989"/>
       <point ath="-78.79711" atv="43.98405"/>
     </hotspot>
-    <hotspot name="kml_label_137" ath="-75.36106" atv="42.19546" distorted="false" rx="47.80454" ry="0" rz="-10.00000" type="text" html="138" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_137" ath="-75.76863" atv="42.45005" distorted="false" rx="47.80454" ry="0" rz="-10.00000" type="text" html="138" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_138" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_138'));">
       <point ath="-78.79711" atv="43.98405"/>
       <point ath="-78.28874" atv="46.36729"/>
@@ -1327,7 +1328,7 @@
       <point ath="16.53386" atv="81.43107"/>
       <point ath="29.91595" atv="86.01758"/>
     </hotspot>
-    <hotspot name="kml_label_149" ath="-15.81021" atv="83.55197" distorted="false" rx="6.44803" ry="0" rz="-10.00000" type="text" html="150" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_149" ath="-18.23807" atv="83.43606" distorted="false" rx="6.44803" ry="0" rz="-10.00000" type="text" html="150" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_150" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_150'));">
       <point ath="-20.06609" atv="75.58309"/>
       <point ath="9.20061" atv="76.89429"/>
@@ -1336,7 +1337,7 @@
       <point ath="-31.51650" atv="79.53324"/>
       <point ath="-20.06609" atv="75.58309"/>
     </hotspot>
-    <hotspot name="kml_label_150" ath="-3.14771" atv="78.82394" distorted="false" rx="11.17606" ry="0" rz="-10.00000" type="text" html="151" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_150" ath="-6.90863" atv="78.78925" distorted="false" rx="11.17606" ry="0" rz="-10.00000" type="text" html="151" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_151" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_151'));">
       <point ath="10.43873" atv="71.22941"/>
       <point ath="8.17458" atv="72.00407"/>
@@ -1346,7 +1347,7 @@
       <point ath="10.44571" atv="71.26744"/>
       <point ath="10.43873" atv="71.22941"/>
     </hotspot>
-    <hotspot name="kml_label_151" ath="2.35273" atv="70.48881" distorted="false" rx="19.51119" ry="0" rz="-10.00000" type="text" html="152" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_151" ath="-0.96673" atv="69.89078" distorted="false" rx="19.51119" ry="0" rz="-10.00000" type="text" html="152" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_152" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_152'));">
       <point ath="-8.68436" atv="65.74457"/>
       <point ath="-13.36607" atv="71.09915"/>
@@ -1557,7 +1558,7 @@
       <point ath="-7.56951" atv="63.98986"/>
       <point ath="9.04074" atv="64.50692"/>
     </hotspot>
-    <hotspot name="kml_label_177" ath="2.28197" atv="62.58443" distorted="false" rx="27.41557" ry="0" rz="-10.00000" type="text" html="178" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_177" ath="0.84552" atv="62.97052" distorted="false" rx="27.41557" ry="0" rz="-10.00000" type="text" html="178" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_178" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_178'));">
       <point ath="6.90543" atv="57.24428"/>
       <point ath="-4.20397" atv="56.90282"/>
@@ -1566,7 +1567,7 @@
       <point ath="8.09152" atv="56.65788"/>
       <point ath="6.90543" atv="57.24428"/>
     </hotspot>
-    <hotspot name="kml_label_178" ath="3.08536" atv="55.81853" distorted="false" rx="34.18147" ry="0" rz="-10.00000" type="text" html="179" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_178" ath="1.61494" atv="55.76209" distorted="false" rx="34.18147" ry="0" rz="-10.00000" type="text" html="179" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_179" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_179'));">
       <point ath="-4.20397" atv="56.90282"/>
       <point ath="-11.26878" atv="56.15521"/>
@@ -1777,7 +1778,7 @@
       <point ath="7.61807" atv="50.95159"/>
       <point ath="-2.19022" atv="50.74795"/>
     </hotspot>
-    <hotspot name="kml_label_204" ath="3.59771" atv="49.39235" distorted="false" rx="40.60765" ry="0" rz="-10.00000" type="text" html="205" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_204" ath="2.43212" atv="49.35151" distorted="false" rx="40.60765" ry="0" rz="-10.00000" type="text" html="205" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_205" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_205'));">
       <point ath="6.68671" atv="45.2555"/>
       <point ath="5.90185" atv="45.66993"/>
@@ -1786,7 +1787,7 @@
       <point ath="6.56147" atv="42.96828"/>
       <point ath="6.68671" atv="45.2555"/>
     </hotspot>
-    <hotspot name="kml_label_205" ath="3.39318" atv="44.51573" distorted="false" rx="45.48427" ry="0" rz="-10.00000" type="text" html="206" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_205" ath="2.73797" atv="44.50151" distorted="false" rx="45.48427" ry="0" rz="-10.00000" type="text" html="206" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_206" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_206'));">
       <point ath="6.56147" atv="42.96828"/>
       <point ath="6.44791" atv="40.7456"/>
@@ -1802,7 +1803,7 @@
       <point ath="-4.40577" atv="40.55539"/>
       <point ath="-0.35953" atv="40.74535"/>
     </hotspot>
-    <hotspot name="kml_label_207" ath="-3.03789" atv="43.02503" distorted="false" rx="46.97497" ry="0" rz="-10.00000" type="text" html="208" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_207" ath="-3.07869" atv="43.21054" distorted="false" rx="46.97497" ry="0" rz="-10.00000" type="text" html="208" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_208" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_208'));">
       <point ath="-6.11003" atv="45.18023"/>
       <point ath="-10.70817" atv="44.65112"/>
@@ -1810,7 +1811,7 @@
       <point ath="-4.40577" atv="40.55539"/>
       <point ath="-6.11003" atv="45.18023"/>
     </hotspot>
-    <hotspot name="kml_label_208" ath="-7.29" atv="42.70218" distorted="false" rx="47.29782" ry="0" rz="-10.00000" type="text" html="209" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_208" ath="-7.42600" atv="43.06590" distorted="false" rx="47.29782" ry="0" rz="-10.00000" type="text" html="209" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_209" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_209'));">
       <point ath="-8.0653" atv="40.32693"/>
       <point ath="-10.70817" atv="44.65112"/>
@@ -1819,7 +1820,7 @@
       <point ath="-8.42548" atv="40.29854"/>
       <point ath="-8.0653" atv="40.32693"/>
     </hotspot>
-    <hotspot name="kml_label_209" ath="-10.98025" atv="42.01181" distorted="false" rx="47.98819" ry="0" rz="-10.00000" type="text" html="210" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_209" ath="-11.27663" atv="42.68225" distorted="false" rx="47.98819" ry="0" rz="-10.00000" type="text" html="210" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_210" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_210'));">
       <point ath="-12.81147" atv="40.66816"/>
       <point ath="-15.1134" atv="43.9613"/>
@@ -1893,7 +1894,7 @@
       <point ath="-43.70381" atv="33.94444"/>
       <point ath="-40.33225" atv="32.53856"/>
     </hotspot>
-    <hotspot name="kml_label_218" ath="-41.33824" atv="34.03307" distorted="false" rx="55.96693" ry="0" rz="-10.00000" type="text" html="219" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_218" ath="-40.97409" atv="33.77932" distorted="false" rx="55.96693" ry="0" rz="-10.00000" type="text" html="219" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_219" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_219'));">
       <point ath="-47.12174" atv="32.13824"/>
       <point ath="-48.89983" atv="31.10301"/>
@@ -1902,7 +1903,7 @@
       <point ath="-46.41304" atv="32.17609"/>
       <point ath="-47.12174" atv="32.13824"/>
     </hotspot>
-    <hotspot name="kml_label_219" ath="-46.09588" atv="31.24398" distorted="false" rx="58.75602" ry="0" rz="-10.00000" type="text" html="220" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_219" ath="-45.60560" atv="30.99129" distorted="false" rx="58.75602" ry="0" rz="-10.00000" type="text" html="220" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_220" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_220'));">
       <point ath="-45.0879" atv="29.82345"/>
       <point ath="-48.89983" atv="31.10301"/>
@@ -1927,7 +1928,7 @@
       <point ath="-49.27275" atv="33.47175"/>
       <point ath="-49.16672" atv="33.14922"/>
     </hotspot>
-    <hotspot name="kml_label_222" ath="-51.71253" atv="32.84296" distorted="false" rx="57.15704" ry="0" rz="-10.00000" type="text" html="223" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_222" ath="-52.13130" atv="32.58723" distorted="false" rx="57.15704" ry="0" rz="-10.00000" type="text" html="223" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_223" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_223'));">
       <point ath="-55.50912" atv="31.96700"/>
       <point ath="-52.33514" atv="34.39230"/>
@@ -1952,7 +1953,7 @@
       <point ath="-85.58442" atv="38.74181"/>
       <point ath="-86.21275" atv="38.42239"/>
     </hotspot>
-    <hotspot name="kml_label_225" ath="-84.07785" atv="37.31664" distorted="false" rx="52.68336" ry="0" rz="-10.00000" type="text" html="226" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_225" ath="-83.67361" atv="36.93198" distorted="false" rx="52.68336" ry="0" rz="-10.00000" type="text" html="226" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_226" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_226'));">
       <point ath="-76.99026" atv="35.12451"/>
       <point ath="-86.03856" atv="35.29227"/>
@@ -1970,7 +1971,7 @@
       <point ath="-96.77378" atv="34.43838"/>
       <point ath="-90.45180" atv="34.95371"/>
     </hotspot>
-    <hotspot name="kml_label_227" ath="-92.74954" atv="33.59258" distorted="false" rx="56.40742" ry="0" rz="-10.00000" type="text" html="228" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_227" ath="-93.23282" atv="33.49697" distorted="false" rx="56.40742" ry="0" rz="-10.00000" type="text" html="228" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_228" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_228'));">
       <point ath="-97.56464" atv="35.97586"/>
       <point ath="-96.77378" atv="34.43838"/>
@@ -1978,7 +1979,7 @@
       <point ath="-90.81431" atv="36.56827"/>
       <point ath="-97.56464" atv="35.97586"/>
     </hotspot>
-    <hotspot name="kml_label_228" ath="-93.90959" atv="35.52851" distorted="false" rx="54.47149" ry="0" rz="-10.00000" type="text" html="229" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_228" ath="-93.65963" atv="35.58126" distorted="false" rx="54.47149" ry="0" rz="-10.00000" type="text" html="229" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_229" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_229'));">
       <point ath="-91.22450" atv="38.31584"/>
       <point ath="-90.81431" atv="36.56827"/>
@@ -1986,7 +1987,7 @@
       <point ath="-98.42313" atv="37.63579"/>
       <point ath="-91.22450" atv="38.31584"/>
     </hotspot>
-    <hotspot name="kml_label_229" ath="-94.51777" atv="37.17549" distorted="false" rx="52.82451" ry="0" rz="-10.00000" type="text" html="230" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_229" ath="-94.26059" atv="37.23231" distorted="false" rx="52.82451" ry="0" rz="-10.00000" type="text" html="230" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_230" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_230'));">
       <point ath="-91.69237" atv="40.20956"/>
       <point ath="-91.22450" atv="38.31584"/>
@@ -1994,7 +1995,7 @@
       <point ath="-99.43235" atv="39.42147"/>
       <point ath="-91.69237" atv="40.20956"/>
     </hotspot>
-    <hotspot name="kml_label_230" ath="-95.20767" atv="38.95581" distorted="false" rx="51.04419" ry="0" rz="-10.00000" type="text" html="231" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_230" ath="-94.94248" atv="39.01720" distorted="false" rx="51.04419" ry="0" rz="-10.00000" type="text" html="231" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_231" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_231'));">
       <point ath="-91.69237" atv="40.20956"/>
       <point ath="-99.43235" atv="39.42147"/>
@@ -2002,7 +2003,7 @@
       <point ath="-92.22832" atv="42.26691"/>
       <point ath="-91.69237" atv="40.20956"/>
     </hotspot>
-    <hotspot name="kml_label_231" ath="-95.99463" atv="40.882" distorted="false" rx="49.11800" ry="0" rz="-10.00000" type="text" html="232" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_231" ath="-95.69219" atv="41.00806" distorted="false" rx="49.11800" ry="0" rz="-10.00000" type="text" html="232" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_232" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_232'));">
       <point ath="-92.85464" atv="44.49584"/>
       <point ath="-92.22832" atv="42.26691"/>
@@ -2010,7 +2011,7 @@
       <point ath="-101.86878" atv="43.41668"/>
       <point ath="-92.85464" atv="44.49584"/>
     </hotspot>
-    <hotspot name="kml_label_232" ath="-96.90133" atv="42.96482" distorted="false" rx="47.03518" ry="0" rz="-10.00000" type="text" html="233" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_232" ath="-96.57841" atv="42.99905" distorted="false" rx="47.03518" ry="0" rz="-10.00000" type="text" html="233" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_233" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_233'));">
       <point ath="-92.85464" atv="44.49584"/>
       <point ath="-93.61711" atv="46.91817"/>
@@ -2019,7 +2020,7 @@
       <point ath="-92.87753" atv="44.49959"/>
       <point ath="-92.85464" atv="44.49584"/>
     </hotspot>
-    <hotspot name="kml_label_233" ath="-96.9265" atv="45.08983" distorted="false" rx="44.91017" ry="0" rz="-10.00000" type="text" html="234" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_233" ath="-97.27340" atv="45.05178" distorted="false" rx="44.91017" ry="0" rz="-10.00000" type="text" html="234" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_234" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_234'));">
       <point ath="-94.46670" atv="49.53774"/>
       <point ath="-103.43645" atv="48.34808"/>
@@ -2140,7 +2141,7 @@
       <point ath="126.87684" atv="64.75541"/>
       <point ath="117.22077" atv="66.57488"/>
     </hotspot>
-    <hotspot name="kml_label_248" ath="124.36137" atv="68.66915" distorted="false" rx="21.33085" ry="0" rz="-10.00000" type="text" html="249" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_248" ath="125.32137" atv="69.26295" distorted="false" rx="21.33085" ry="0" rz="-10.00000" type="text" html="249" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_249" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_249'));">
       <point ath="111.32286" atv="62.10915"/>
       <point ath="108.26171" atv="56.87447"/>
@@ -2287,7 +2288,7 @@
       <point ath="139.40325" atv="60.79691"/>
       <point ath="134.89419" atv="62.47882"/>
     </hotspot>
-    <hotspot name="kml_label_266" ath="142.75581" atv="63.24754" distorted="false" rx="26.75246" ry="0" rz="-10.00000" type="text" html="267" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_266" ath="143.88940" atv="63.67127" distorted="false" rx="26.75246" ry="0" rz="-10.00000" type="text" html="267" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_267" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_267'));">
       <point ath="143.27487" atv="68.73888"/>
       <point ath="152.45360" atv="64.38737"/>
@@ -2408,7 +2409,7 @@
       <point ath="-124.86289" atv="44.87364"/>
       <point ath="-120.21484" atv="41.91492"/>
     </hotspot>
-    <hotspot name="kml_label_281" ath="-117.62262" atv="44.33191" distorted="false" rx="45.66809" ry="0" rz="-10.00000" type="text" html="282" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_281" ath="-118.29465" atv="44.52667" distorted="false" rx="45.66809" ry="0" rz="-10.00000" type="text" html="282" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_282" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_282'));">
       <point ath="-124.86289" atv="44.87364"/>
       <point ath="-117.40823" atv="47.69420"/>
@@ -2513,7 +2514,7 @@
       <point ath="147.37037" atv="57.80326"/>
       <point ath="157.66536" atv="60.75171"/>
     </hotspot>
-    <hotspot name="kml_label_294" ath="152.97645" atv="57.49573" distorted="false" rx="32.50427" ry="0" rz="-10.00000" type="text" html="295" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_294" ath="154.16411" atv="57.82951" distorted="false" rx="32.50427" ry="0" rz="-10.00000" type="text" html="295" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_295" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_295'));">
       <point ath="161.77533" atv="56.98024"/>
       <point ath="164.47628" atv="53.90321"/>
@@ -2521,7 +2522,7 @@
       <point ath="151.39541" atv="54.29130"/>
       <point ath="161.77533" atv="56.98024"/>
     </hotspot>
-    <hotspot name="kml_label_295" ath="158.03235" atv="54.319" distorted="false" rx="35.68100" ry="0" rz="-10.00000" type="text" html="296" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_295" ath="158.03235" atv="54.31900" distorted="false" rx="35.68100" ry="0" rz="-10.00000" type="text" html="296" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_296" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_296'));">
       <point ath="166.97475" atv="50.53457"/>
       <point ath="159.01591" atv="48.89571"/>
@@ -2530,7 +2531,7 @@
       <point ath="164.47628" atv="53.90321"/>
       <point ath="166.97475" atv="50.53457"/>
     </hotspot>
-    <hotspot name="kml_label_296" ath="160.56061" atv="50.89987" distorted="false" rx="39.10013" ry="0" rz="-10.00000" type="text" html="297" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_296" ath="161.15608" atv="51.03315" distorted="false" rx="39.10013" ry="0" rz="-10.00000" type="text" html="297" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_297" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_297'));">
       <point ath="171.49753" atv="56.10417"/>
       <point ath="163.64901" atv="54.90925"/>
@@ -2802,7 +2803,7 @@
       <point ath="116.30175" atv="29.03282"/>
       <point ath="116.87634" atv="28.93640"/>
     </hotspot>
-    <hotspot name="kml_label_329" ath="116.68815" atv="30.22813" distorted="false" rx="59.77187" ry="0" rz="-10.00000" type="text" html="330" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_329" ath="116.98699" atv="30.56721" distorted="false" rx="59.77187" ry="0" rz="-10.00000" type="text" html="330" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_330" fillcolor="0x00FF00" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_330'));">
       <point ath="123.14251" atv="30.47214"/>
       <point ath="122.93663" atv="30.76260"/>
@@ -3318,6 +3319,7 @@
       <point ath="162.65167" atv="37.4614"/>
     </hotspot>
     <hotspot name="kml_label_392" ath="162.68193" atv="36.26082" distorted="false" rx="53.73918" ry="0" rz="-10.00000" type="text" html="393" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_393" ath="35.80658" atv="75.83112" distorted="false" rx="14.16888" ry="0" rz="-10.00000" type="text" html="Road network outline" css="font-family:Arial; font-size:9px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_394" fillcolor="0xFF9900" fillalpha="1.0" bordercolor="0x000000" borderwidth="1" onclick="js(showPlotDetails('kml_poly_394'));">
       <point ath="-75.47054" atv="31.52269"/>
       <point ath="-72.80689" atv="38.23696"/>

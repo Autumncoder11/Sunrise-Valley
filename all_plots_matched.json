@@ -7,6 +7,8 @@
         "rot": 0
       }
     },
+    "status": "SOLD",
+    "category": "CORNER",
     "sides": [
       {
         "side": "A",
@@ -68,10 +70,7 @@
           26.54183
         ]
       }
-    ],
-    "status": "SOLD",
-    "category": "CORNER",
-    "facing": "north east"
+    ]
   },
   "kml_poly_1": {
     "sideOffsets": {
@@ -81,6 +80,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -142,10 +143,7 @@
           25.73452
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_10": {
     "sideOffsets": {
@@ -170,6 +168,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -219,16 +219,11 @@
           30.32163
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_100": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -281,10 +276,8 @@
     ]
   },
   "kml_poly_101": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -337,10 +330,8 @@
     ]
   },
   "kml_poly_102": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "north east",
     "sides": [
       {
         "side": "A",
@@ -393,10 +384,8 @@
     ]
   },
   "kml_poly_103": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -449,10 +438,8 @@
     ]
   },
   "kml_poly_104": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -505,10 +492,8 @@
     ]
   },
   "kml_poly_105": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -561,10 +546,8 @@
     ]
   },
   "kml_poly_106": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -617,10 +600,8 @@
     ]
   },
   "kml_poly_107": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -673,10 +654,8 @@
     ]
   },
   "kml_poly_108": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -729,10 +708,8 @@
     ]
   },
   "kml_poly_109": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -788,7 +765,7 @@
     "sideOffsets": {
       "B": {
         "dx": 8,
-        "dy": 8,
+        "dy": 2,
         "rot": 0
       },
       "D": {
@@ -797,6 +774,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -858,16 +837,11 @@
           30.85913
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_110": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -920,10 +894,8 @@
     ]
   },
   "kml_poly_111": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -976,10 +948,8 @@
     ]
   },
   "kml_poly_112": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1032,10 +1002,8 @@
     ]
   },
   "kml_poly_113": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1088,10 +1056,8 @@
     ]
   },
   "kml_poly_114": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1144,10 +1110,8 @@
     ]
   },
   "kml_poly_115": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1200,10 +1164,8 @@
     ]
   },
   "kml_poly_116": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1256,10 +1218,8 @@
     ]
   },
   "kml_poly_117": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1312,10 +1272,8 @@
     ]
   },
   "kml_poly_118": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1368,10 +1326,8 @@
     ]
   },
   "kml_poly_119": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1436,6 +1392,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1485,16 +1443,11 @@
           29.64473
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_120": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1547,10 +1500,8 @@
     ]
   },
   "kml_poly_121": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1603,10 +1554,8 @@
     ]
   },
   "kml_poly_122": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1659,10 +1608,8 @@
     ]
   },
   "kml_poly_123": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -1728,93 +1675,100 @@
   },
   "kml_poly_124": {
     "sideOffsets": {
+      "A": {
+        "dx": 12,
+        "dy": 30,
+        "rot": -39
+      },
       "B": {
-        "dx": -12,
-        "dy": -14,
-        "rot": 0
-      },
-      "C": {
-        "dx": 4,
-        "dy": -12,
-        "rot": 1
-      },
-      "D": {
         "dx": 0,
         "dy": -6,
         "rot": 0
+      },
+      "C": {
+        "dx": 2,
+        "dy": -8,
+        "rot": 0
+      },
+      "D": {
+        "dx": 0,
+        "dy": 2,
+        "rot": 0
+      },
+      "E": {
+        "dx": 40,
+        "dy": 0,
+        "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
         "length": "35' 0\"",
         "from": [
-          -54.98853,
-          82.70064
+          -94.84124,
+          78.74305
         ],
         "to": [
-          -102.16904,
-          83.31046
+          -55.12126,
+          82.74649
         ]
       },
       {
         "side": "B",
         "length": "50' 0\"",
         "from": [
-          -102.16904,
-          83.31046
+          -55.12126,
+          82.74649
         ],
         "to": [
-          163.1124,
-          87.80844
+          30.90344,
+          85.98351
         ]
       },
       {
         "side": "C",
         "length": "30' 0\"",
         "from": [
-          163.1124,
-          87.80844
+          30.90344,
+          85.98351
         ],
         "to": [
-          132.17766,
-          87.95844
+          132.88284,
+          87.7718
         ]
       },
       {
         "side": "D",
         "length": "7' 0\"",
         "from": [
-          132.17766,
-          87.95844
+          132.88284,
+          87.7718
         ],
         "to": [
-          29.91595,
-          86.01758
+          160.82447,
+          87.57859
         ]
       },
       {
         "side": "E",
         "length": "45' 0\"",
         "from": [
-          29.91595,
-          86.01758
+          160.82447,
+          87.57859
         ],
         "to": [
-          -54.98853,
-          82.70064
+          -94.84124,
+          78.74305
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_125": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1867,10 +1821,8 @@
     ]
   },
   "kml_poly_126": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1923,10 +1875,8 @@
     ]
   },
   "kml_poly_127": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -1979,10 +1929,8 @@
     ]
   },
   "kml_poly_128": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2035,10 +1983,8 @@
     ]
   },
   "kml_poly_129": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2103,6 +2049,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2152,16 +2100,11 @@
           29.23853
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_130": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2221,6 +2164,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2270,10 +2215,7 @@
           55.02228
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_132": {
     "sideOffsets": {
@@ -2283,6 +2225,8 @@
         "rot": 2
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2332,10 +2276,7 @@
           51.93728
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_133": {
     "sideOffsets": {
@@ -2350,6 +2291,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2399,10 +2342,7 @@
           49.09079
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_134": {
     "sideOffsets": {
@@ -2417,6 +2357,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2466,16 +2408,11 @@
           46.47342
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_135": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2528,10 +2465,8 @@
     ]
   },
   "kml_poly_136": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2596,10 +2531,8 @@
     ]
   },
   "kml_poly_137": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2664,10 +2597,8 @@
     ]
   },
   "kml_poly_138": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2720,10 +2651,8 @@
     ]
   },
   "kml_poly_139": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2788,6 +2717,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -2837,16 +2768,11 @@
           28.83677
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_140": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2899,10 +2825,8 @@
     ]
   },
   "kml_poly_141": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -2955,10 +2879,8 @@
     ]
   },
   "kml_poly_142": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3011,10 +2933,8 @@
     ]
   },
   "kml_poly_143": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3067,10 +2987,8 @@
     ]
   },
   "kml_poly_144": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3123,10 +3041,8 @@
     ]
   },
   "kml_poly_145": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3179,10 +3095,8 @@
     ]
   },
   "kml_poly_146": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3235,10 +3149,8 @@
     ]
   },
   "kml_poly_147": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3291,10 +3203,8 @@
     ]
   },
   "kml_poly_148": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3347,10 +3257,8 @@
     ]
   },
   "kml_poly_149": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3415,6 +3323,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3464,16 +3374,11 @@
           28.33197
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_150": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3538,10 +3443,8 @@
     ]
   },
   "kml_poly_151": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3606,10 +3509,8 @@
     ]
   },
   "kml_poly_152": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3662,10 +3563,8 @@
     ]
   },
   "kml_poly_153": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3718,10 +3617,8 @@
     ]
   },
   "kml_poly_154": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3774,10 +3671,8 @@
     ]
   },
   "kml_poly_155": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3830,10 +3725,8 @@
     ]
   },
   "kml_poly_156": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3886,10 +3779,8 @@
     ]
   },
   "kml_poly_157": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3942,10 +3833,8 @@
     ]
   },
   "kml_poly_158": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -3998,10 +3887,8 @@
     ]
   },
   "kml_poly_159": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4066,6 +3953,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4115,16 +4004,11 @@
           30.2794
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_160": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4177,10 +4061,8 @@
     ]
   },
   "kml_poly_161": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4233,10 +4115,8 @@
     ]
   },
   "kml_poly_162": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4289,10 +4169,8 @@
     ]
   },
   "kml_poly_163": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4357,10 +4235,8 @@
     ]
   },
   "kml_poly_164": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4425,10 +4301,8 @@
     ]
   },
   "kml_poly_165": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4481,10 +4355,8 @@
     ]
   },
   "kml_poly_166": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4537,10 +4409,8 @@
     ]
   },
   "kml_poly_167": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4593,10 +4463,8 @@
     ]
   },
   "kml_poly_168": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4649,10 +4517,8 @@
     ]
   },
   "kml_poly_169": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4727,6 +4593,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4776,16 +4644,11 @@
           30.99319
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_170": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4838,10 +4701,8 @@
     ]
   },
   "kml_poly_171": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4894,10 +4755,8 @@
     ]
   },
   "kml_poly_172": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -4950,10 +4809,8 @@
     ]
   },
   "kml_poly_173": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5006,10 +4863,8 @@
     ]
   },
   "kml_poly_174": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5062,10 +4917,8 @@
     ]
   },
   "kml_poly_175": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5118,10 +4971,8 @@
     ]
   },
   "kml_poly_176": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5174,10 +5025,8 @@
     ]
   },
   "kml_poly_177": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5242,10 +5091,8 @@
     ]
   },
   "kml_poly_178": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5310,10 +5157,8 @@
     ]
   },
   "kml_poly_179": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5388,6 +5233,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -5437,16 +5284,11 @@
           31.59927
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_180": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5499,10 +5341,8 @@
     ]
   },
   "kml_poly_181": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5555,10 +5395,8 @@
     ]
   },
   "kml_poly_182": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5611,10 +5449,8 @@
     ]
   },
   "kml_poly_183": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5667,10 +5503,8 @@
     ]
   },
   "kml_poly_184": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5723,10 +5557,8 @@
     ]
   },
   "kml_poly_185": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5779,10 +5611,8 @@
     ]
   },
   "kml_poly_186": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5835,10 +5665,8 @@
     ]
   },
   "kml_poly_187": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5891,10 +5719,8 @@
     ]
   },
   "kml_poly_188": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -5947,10 +5773,8 @@
     ]
   },
   "kml_poly_189": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6010,6 +5834,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6071,16 +5897,11 @@
           32.21688
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_190": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6145,10 +5966,8 @@
     ]
   },
   "kml_poly_191": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6213,10 +6032,8 @@
     ]
   },
   "kml_poly_192": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6269,10 +6086,8 @@
     ]
   },
   "kml_poly_193": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6325,10 +6140,8 @@
     ]
   },
   "kml_poly_194": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6381,10 +6194,8 @@
     ]
   },
   "kml_poly_195": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6437,10 +6248,8 @@
     ]
   },
   "kml_poly_196": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6493,10 +6302,8 @@
     ]
   },
   "kml_poly_197": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6549,10 +6356,8 @@
     ]
   },
   "kml_poly_198": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6605,10 +6410,8 @@
     ]
   },
   "kml_poly_199": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6678,6 +6481,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6727,16 +6532,11 @@
           24.9713
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_20": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6789,10 +6589,8 @@
     ]
   },
   "kml_poly_200": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6845,10 +6643,8 @@
     ]
   },
   "kml_poly_201": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6901,10 +6697,8 @@
     ]
   },
   "kml_poly_202": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -6957,10 +6751,8 @@
     ]
   },
   "kml_poly_203": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7013,10 +6805,8 @@
     ]
   },
   "kml_poly_204": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7081,10 +6871,8 @@
     ]
   },
   "kml_poly_205": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7149,10 +6937,8 @@
     ]
   },
   "kml_poly_206": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7205,10 +6991,8 @@
     ]
   },
   "kml_poly_207": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7261,10 +7045,8 @@
     ]
   },
   "kml_poly_208": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7317,10 +7099,8 @@
     ]
   },
   "kml_poly_209": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7385,10 +7165,8 @@
     ]
   },
   "kml_poly_21": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -7441,10 +7219,8 @@
     ]
   },
   "kml_poly_210": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7509,10 +7285,8 @@
     ]
   },
   "kml_poly_211": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7565,10 +7339,8 @@
     ]
   },
   "kml_poly_212": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7621,10 +7393,8 @@
     ]
   },
   "kml_poly_213": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7677,10 +7447,8 @@
     ]
   },
   "kml_poly_214": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7733,10 +7501,8 @@
     ]
   },
   "kml_poly_215": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7789,10 +7555,8 @@
     ]
   },
   "kml_poly_216": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7845,10 +7609,8 @@
     ]
   },
   "kml_poly_217": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7901,10 +7663,8 @@
     ]
   },
   "kml_poly_218": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -7969,10 +7729,8 @@
     ]
   },
   "kml_poly_219": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8037,10 +7795,8 @@
     ]
   },
   "kml_poly_22": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -8105,10 +7861,8 @@
     ]
   },
   "kml_poly_220": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8178,6 +7932,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8227,16 +7983,11 @@
           29.74423
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_222": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8301,10 +8052,8 @@
     ]
   },
   "kml_poly_223": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8357,10 +8106,8 @@
     ]
   },
   "kml_poly_224": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "B",
@@ -8413,10 +8160,8 @@
     ]
   },
   "kml_poly_225": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "B",
@@ -8481,10 +8226,8 @@
     ]
   },
   "kml_poly_226": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8549,10 +8292,8 @@
     ]
   },
   "kml_poly_227": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8617,10 +8358,8 @@
     ]
   },
   "kml_poly_228": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8673,10 +8412,8 @@
     ]
   },
   "kml_poly_229": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8741,6 +8478,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8790,16 +8529,11 @@
           32.872
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_230": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8852,10 +8586,8 @@
     ]
   },
   "kml_poly_231": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8908,10 +8640,8 @@
     ]
   },
   "kml_poly_232": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -8964,10 +8694,8 @@
     ]
   },
   "kml_poly_233": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9020,10 +8748,8 @@
     ]
   },
   "kml_poly_234": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9076,10 +8802,8 @@
     ]
   },
   "kml_poly_235": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9132,10 +8856,8 @@
     ]
   },
   "kml_poly_236": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9188,10 +8910,8 @@
     ]
   },
   "kml_poly_237": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9244,10 +8964,8 @@
     ]
   },
   "kml_poly_238": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9300,10 +9018,8 @@
     ]
   },
   "kml_poly_239": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9368,6 +9084,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9417,16 +9135,11 @@
           32.26508
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_240": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9479,10 +9192,8 @@
     ]
   },
   "kml_poly_241": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9535,10 +9246,8 @@
     ]
   },
   "kml_poly_242": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9591,10 +9300,8 @@
     ]
   },
   "kml_poly_243": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9647,10 +9354,8 @@
     ]
   },
   "kml_poly_244": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9703,10 +9408,8 @@
     ]
   },
   "kml_poly_245": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9759,10 +9462,8 @@
     ]
   },
   "kml_poly_246": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9815,10 +9516,8 @@
     ]
   },
   "kml_poly_247": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9871,10 +9570,8 @@
     ]
   },
   "kml_poly_248": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9927,10 +9624,8 @@
     ]
   },
   "kml_poly_249": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -9995,6 +9690,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10044,16 +9741,11 @@
           31.51234
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_250": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -10106,10 +9798,8 @@
     ]
   },
   "kml_poly_251": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10162,10 +9852,8 @@
     ]
   },
   "kml_poly_252": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10218,10 +9906,8 @@
     ]
   },
   "kml_poly_253": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10274,10 +9960,8 @@
     ]
   },
   "kml_poly_254": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10330,10 +10014,8 @@
     ]
   },
   "kml_poly_255": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10386,10 +10068,8 @@
     ]
   },
   "kml_poly_256": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10442,10 +10122,8 @@
     ]
   },
   "kml_poly_257": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10498,10 +10176,8 @@
     ]
   },
   "kml_poly_258": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10554,10 +10230,8 @@
     ]
   },
   "kml_poly_259": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10610,10 +10284,8 @@
     ]
   },
   "kml_poly_26": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10666,10 +10338,8 @@
     ]
   },
   "kml_poly_260": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10722,10 +10392,8 @@
     ]
   },
   "kml_poly_261": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10778,10 +10446,8 @@
     ]
   },
   "kml_poly_262": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -10834,10 +10500,8 @@
     ]
   },
   "kml_poly_263": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -10890,10 +10554,8 @@
     ]
   },
   "kml_poly_264": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -10946,10 +10608,8 @@
     ]
   },
   "kml_poly_265": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11002,10 +10662,8 @@
     ]
   },
   "kml_poly_266": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11058,10 +10716,8 @@
     ]
   },
   "kml_poly_267": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11114,10 +10770,8 @@
     ]
   },
   "kml_poly_268": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11170,10 +10824,8 @@
     ]
   },
   "kml_poly_269": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11226,10 +10878,8 @@
     ]
   },
   "kml_poly_27": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11294,10 +10944,8 @@
     ]
   },
   "kml_poly_270": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11350,10 +10998,8 @@
     ]
   },
   "kml_poly_271": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11406,10 +11052,8 @@
     ]
   },
   "kml_poly_272": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11462,10 +11106,8 @@
     ]
   },
   "kml_poly_273": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11518,10 +11160,8 @@
     ]
   },
   "kml_poly_274": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11574,10 +11214,8 @@
     ]
   },
   "kml_poly_275": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11630,10 +11268,8 @@
     ]
   },
   "kml_poly_276": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11686,10 +11322,8 @@
     ]
   },
   "kml_poly_277": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11742,10 +11376,8 @@
     ]
   },
   "kml_poly_278": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11798,10 +11430,8 @@
     ]
   },
   "kml_poly_279": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11854,10 +11484,8 @@
     ]
   },
   "kml_poly_28": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -11922,10 +11550,8 @@
     ]
   },
   "kml_poly_280": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -11985,6 +11611,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12046,10 +11674,7 @@
           41.91492
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_282": {
     "sideOffsets": {
@@ -12069,6 +11694,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12118,10 +11745,7 @@
           44.87364
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_283": {
     "sideOffsets": {
@@ -12131,6 +11755,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12180,16 +11806,11 @@
           46.7067
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_284": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12242,10 +11863,8 @@
     ]
   },
   "kml_poly_285": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12298,10 +11917,8 @@
     ]
   },
   "kml_poly_286": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12354,10 +11971,8 @@
     ]
   },
   "kml_poly_287": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12410,10 +12025,8 @@
     ]
   },
   "kml_poly_288": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -12466,10 +12079,8 @@
     ]
   },
   "kml_poly_289": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12522,10 +12133,8 @@
     ]
   },
   "kml_poly_29": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12578,10 +12187,8 @@
     ]
   },
   "kml_poly_290": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -12651,6 +12258,8 @@
         "rot": 1
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -12700,16 +12309,11 @@
           56.71969
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_292": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12762,10 +12366,8 @@
     ]
   },
   "kml_poly_293": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12818,10 +12420,8 @@
     ]
   },
   "kml_poly_294": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12886,10 +12486,8 @@
     ]
   },
   "kml_poly_295": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -12942,10 +12540,8 @@
     ]
   },
   "kml_poly_296": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13010,10 +12606,8 @@
     ]
   },
   "kml_poly_297": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13066,10 +12660,8 @@
     ]
   },
   "kml_poly_298": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13139,6 +12731,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13188,10 +12782,7 @@
           51.89956
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_3": {
     "sideOffsets": {
@@ -13206,6 +12797,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13255,16 +12848,11 @@
           27.1105
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_30": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13329,10 +12917,8 @@
     ]
   },
   "kml_poly_300": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13385,10 +12971,8 @@
     ]
   },
   "kml_poly_301": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13441,10 +13025,8 @@
     ]
   },
   "kml_poly_302": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13497,10 +13079,8 @@
     ]
   },
   "kml_poly_303": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13553,10 +13133,8 @@
     ]
   },
   "kml_poly_304": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13609,10 +13187,8 @@
     ]
   },
   "kml_poly_305": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13665,10 +13241,8 @@
     ]
   },
   "kml_poly_306": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13721,10 +13295,8 @@
     ]
   },
   "kml_poly_307": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13777,10 +13349,8 @@
     ]
   },
   "kml_poly_308": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13833,10 +13403,8 @@
     ]
   },
   "kml_poly_309": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -13889,10 +13457,8 @@
     ]
   },
   "kml_poly_31": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -13945,10 +13511,8 @@
     ]
   },
   "kml_poly_310": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14001,10 +13565,8 @@
     ]
   },
   "kml_poly_311": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14045,10 +13607,8 @@
     ]
   },
   "kml_poly_312": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14111,6 +13671,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14160,10 +13722,7 @@
           36.7389
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_314": {
     "sideOffsets": {
@@ -14188,6 +13747,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14237,10 +13798,7 @@
           36.00969
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_315": {
     "sideOffsets": {
@@ -14265,6 +13823,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14314,10 +13874,7 @@
           35.29779
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_316": {
     "sideOffsets": {
@@ -14342,6 +13899,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14391,10 +13950,7 @@
           34.60175
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_317": {
     "sideOffsets": {
@@ -14409,6 +13965,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14458,10 +14016,7 @@
           33.91969
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_318": {
     "sideOffsets": {
@@ -14476,6 +14031,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14525,10 +14082,7 @@
           33.25649
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_319": {
     "sideOffsets": {
@@ -14538,6 +14092,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14599,16 +14155,11 @@
           31.9221
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_32": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -14661,10 +14212,8 @@
     ]
   },
   "kml_poly_320": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -14717,10 +14266,8 @@
     ]
   },
   "kml_poly_321": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14773,10 +14320,8 @@
     ]
   },
   "kml_poly_322": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14829,10 +14374,8 @@
     ]
   },
   "kml_poly_323": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14885,10 +14428,8 @@
     ]
   },
   "kml_poly_324": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -14948,6 +14489,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -14997,16 +14540,11 @@
           34.32206
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_326": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "F",
@@ -15083,10 +14621,8 @@
     ]
   },
   "kml_poly_327": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15139,10 +14675,8 @@
     ]
   },
   "kml_poly_328": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15202,6 +14736,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15263,16 +14799,11 @@
           29.03282
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_33": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15332,6 +14863,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15393,10 +14926,7 @@
           29.37721
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_331": {
     "sideOffsets": {
@@ -15411,6 +14941,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15460,10 +14992,7 @@
           28.08909
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_332": {
     "sideOffsets": {
@@ -15478,6 +15007,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15527,10 +15058,7 @@
           27.01884
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_333": {
     "sideOffsets": {
@@ -15545,6 +15073,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15594,10 +15124,7 @@
           27.53854
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_334": {
     "sideOffsets": {
@@ -15617,6 +15144,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "B",
@@ -15654,16 +15183,11 @@
           28.61135
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_335": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15728,10 +15252,8 @@
     ]
   },
   "kml_poly_336": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15796,6 +15318,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -15845,10 +15369,7 @@
           31.78095
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_338": {
     "sideOffsets": {
@@ -15863,6 +15384,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15912,10 +15435,7 @@
           32.36539
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_339": {
     "sideOffsets": {
@@ -15940,6 +15460,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -15989,16 +15511,11 @@
           32.96022
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_34": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16073,6 +15590,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16122,10 +15641,7 @@
           33.56471
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_341": {
     "sideOffsets": {
@@ -16150,6 +15666,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16199,10 +15717,7 @@
           34.17796
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_342": {
     "sideOffsets": {
@@ -16222,6 +15737,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16271,10 +15788,7 @@
           34.79889
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_343": {
     "sideOffsets": {
@@ -16294,6 +15808,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16343,10 +15859,7 @@
           35.42621
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_344": {
     "sideOffsets": {
@@ -16371,6 +15884,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -16420,10 +15935,7 @@
           36.05842
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_345": {
     "sideOffsets": {
@@ -16448,6 +15960,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16497,10 +16011,7 @@
           36.69377
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_346": {
     "sideOffsets": {
@@ -16525,6 +16036,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16574,10 +16087,7 @@
           37.33024
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_347": {
     "sideOffsets": {
@@ -16597,6 +16107,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16646,10 +16158,7 @@
           37.96555
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_348": {
     "sideOffsets": {
@@ -16659,6 +16168,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -16708,10 +16219,7 @@
           38.59712
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_349": {
     "sideOffsets": {
@@ -16736,6 +16244,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16785,10 +16295,7 @@
           39.22208
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_35": {
     "sideOffsets": {
@@ -16808,6 +16315,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16857,10 +16366,7 @@
           35.24747
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_350": {
     "sideOffsets": {
@@ -16885,6 +16391,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -16934,16 +16442,11 @@
           39.83728
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_351": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17008,10 +16511,8 @@
     ]
   },
   "kml_poly_352": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17076,10 +16577,8 @@
     ]
   },
   "kml_poly_353": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17132,10 +16631,8 @@
     ]
   },
   "kml_poly_354": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17188,10 +16685,8 @@
     ]
   },
   "kml_poly_355": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17244,10 +16739,8 @@
     ]
   },
   "kml_poly_356": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17300,10 +16793,8 @@
     ]
   },
   "kml_poly_357": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17356,10 +16847,8 @@
     ]
   },
   "kml_poly_358": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17412,10 +16901,8 @@
     ]
   },
   "kml_poly_359": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17480,6 +16967,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17529,16 +17018,11 @@
           34.09838
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_360": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17591,10 +17075,8 @@
     ]
   },
   "kml_poly_361": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17647,10 +17129,8 @@
     ]
   },
   "kml_poly_362": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17703,10 +17183,8 @@
     ]
   },
   "kml_poly_363": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17759,10 +17237,8 @@
     ]
   },
   "kml_poly_364": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17815,10 +17291,8 @@
     ]
   },
   "kml_poly_365": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17871,10 +17345,8 @@
     ]
   },
   "kml_poly_366": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17927,10 +17399,8 @@
     ]
   },
   "kml_poly_367": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -17983,10 +17453,8 @@
     ]
   },
   "kml_poly_368": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18039,10 +17507,8 @@
     ]
   },
   "kml_poly_369": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18119,6 +17585,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18168,16 +17636,11 @@
           32.97385
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_370": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18230,10 +17693,8 @@
     ]
   },
   "kml_poly_371": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18308,6 +17769,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18357,16 +17820,11 @@
           28.32982
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_373": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18441,6 +17899,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18490,16 +17950,11 @@
           27.75563
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_375": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18559,6 +18014,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -18608,10 +18065,7 @@
           27.16937
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_377": {
     "sideOffsets": {
@@ -18626,6 +18080,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18675,10 +18131,7 @@
           26.70946
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_378": {
     "sideOffsets": {
@@ -18703,6 +18156,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18752,10 +18207,7 @@
           26.11587
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_379": {
     "sideOffsets": {
@@ -18780,6 +18232,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18829,10 +18283,7 @@
           24.25941
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_38": {
     "sideOffsets": {
@@ -18847,6 +18298,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18896,10 +18349,7 @@
           31.88457
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_380": {
     "sideOffsets": {
@@ -18919,6 +18369,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -18968,10 +18420,7 @@
           24.94345
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_381": {
     "sideOffsets": {
@@ -18996,6 +18445,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19057,16 +18508,11 @@
           25.61303
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_382": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19119,10 +18565,8 @@
     ]
   },
   "kml_poly_383": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19187,10 +18631,8 @@
     ]
   },
   "kml_poly_384": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19243,10 +18685,8 @@
     ]
   },
   "kml_poly_385": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19299,10 +18739,8 @@
     ]
   },
   "kml_poly_386": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19355,10 +18793,8 @@
     ]
   },
   "kml_poly_387": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19411,10 +18847,8 @@
     ]
   },
   "kml_poly_388": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19467,10 +18901,8 @@
     ]
   },
   "kml_poly_389": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19535,6 +18967,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -19584,16 +19018,11 @@
           30.83203
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_390": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19646,10 +19075,8 @@
     ]
   },
   "kml_poly_391": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19702,10 +19129,8 @@
     ]
   },
   "kml_poly_392": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19782,6 +19207,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19831,16 +19258,11 @@
           27.57261
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_40": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19905,10 +19327,8 @@
     ]
   },
   "kml_poly_41": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -19961,10 +19381,8 @@
     ]
   },
   "kml_poly_42": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20029,10 +19447,8 @@
     ]
   },
   "kml_poly_43": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20085,10 +19501,8 @@
     ]
   },
   "kml_poly_44": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -20141,10 +19555,8 @@
     ]
   },
   "kml_poly_45": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20197,10 +19609,8 @@
     ]
   },
   "kml_poly_46": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -20253,10 +19663,8 @@
     ]
   },
   "kml_poly_47": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -20309,10 +19717,8 @@
     ]
   },
   "kml_poly_48": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20365,10 +19771,8 @@
     ]
   },
   "kml_poly_49": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -20443,6 +19847,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20492,16 +19898,11 @@
           27.96152
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_50": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -20554,10 +19955,8 @@
     ]
   },
   "kml_poly_51": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20610,10 +20009,8 @@
     ]
   },
   "kml_poly_52": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20678,10 +20075,8 @@
     ]
   },
   "kml_poly_53": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20746,10 +20141,8 @@
     ]
   },
   "kml_poly_54": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20802,10 +20195,8 @@
     ]
   },
   "kml_poly_55": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20865,6 +20256,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20914,16 +20307,11 @@
           43.57341
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_57": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -20976,10 +20364,8 @@
     ]
   },
   "kml_poly_58": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21032,10 +20418,8 @@
     ]
   },
   "kml_poly_59": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21100,6 +20484,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21149,16 +20535,11 @@
           28.35418
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_60": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21211,10 +20592,8 @@
     ]
   },
   "kml_poly_61": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21267,10 +20646,8 @@
     ]
   },
   "kml_poly_62": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21323,10 +20700,8 @@
     ]
   },
   "kml_poly_63": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21391,10 +20766,8 @@
     ]
   },
   "kml_poly_64": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21447,10 +20820,8 @@
     ]
   },
   "kml_poly_65": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "B",
@@ -21515,10 +20886,8 @@
     ]
   },
   "kml_poly_66": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21571,10 +20940,8 @@
     ]
   },
   "kml_poly_67": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21627,10 +20994,8 @@
     ]
   },
   "kml_poly_68": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21683,10 +21048,8 @@
     ]
   },
   "kml_poly_69": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21746,6 +21109,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21807,16 +21172,11 @@
           28.74956
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_70": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21869,10 +21229,8 @@
     ]
   },
   "kml_poly_71": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -21925,10 +21283,8 @@
     ]
   },
   "kml_poly_72": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -21981,10 +21337,8 @@
     ]
   },
   "kml_poly_73": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -22037,10 +21391,8 @@
     ]
   },
   "kml_poly_74": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22093,10 +21445,8 @@
     ]
   },
   "kml_poly_75": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22161,10 +21511,8 @@
     ]
   },
   "kml_poly_76": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22229,10 +21577,8 @@
     ]
   },
   "kml_poly_77": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22285,10 +21631,8 @@
     ]
   },
   "kml_poly_78": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22341,10 +21685,8 @@
     ]
   },
   "kml_poly_79": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22409,6 +21751,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22458,16 +21802,11 @@
           29.26505
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_80": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22520,10 +21859,8 @@
     ]
   },
   "kml_poly_81": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22576,10 +21913,8 @@
     ]
   },
   "kml_poly_82": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -22632,10 +21967,8 @@
     ]
   },
   "kml_poly_83": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22688,10 +22021,8 @@
     ]
   },
   "kml_poly_84": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22744,10 +22075,8 @@
     ]
   },
   "kml_poly_85": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -22800,10 +22129,8 @@
     ]
   },
   "kml_poly_86": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -22880,10 +22207,8 @@
     ]
   },
   "kml_poly_87": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "D",
@@ -22936,10 +22261,8 @@
     ]
   },
   "kml_poly_88": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "B",
@@ -23016,10 +22339,8 @@
     ]
   },
   "kml_poly_89": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "C",
@@ -23084,6 +22405,8 @@
         "rot": 0
       }
     },
+    "status": "AVAILABLE",
+    "category": "TBD",
     "sides": [
       {
         "side": "C",
@@ -23133,16 +22456,11 @@
           29.78913
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "category": "TBD",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_90": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23195,10 +22513,8 @@
     ]
   },
   "kml_poly_91": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23251,10 +22567,8 @@
     ]
   },
   "kml_poly_92": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23307,10 +22621,8 @@
     ]
   },
   "kml_poly_93": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23363,10 +22675,8 @@
     ]
   },
   "kml_poly_94": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23419,10 +22729,8 @@
     ]
   },
   "kml_poly_95": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23475,10 +22783,8 @@
     ]
   },
   "kml_poly_96": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23531,10 +22837,8 @@
     ]
   },
   "kml_poly_97": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23587,10 +22891,8 @@
     ]
   },
   "kml_poly_98": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23655,10 +22957,8 @@
     ]
   },
   "kml_poly_99": {
-    "sideOffsets": null,
     "status": "AVAILABLE",
     "category": "TBD",
-    "facing": "TBD",
     "sides": [
       {
         "side": "A",
@@ -23724,6 +23024,7 @@
   },
   "kml_poly_394": {
     "displayName": "EB",
+    "status": "AVAILABLE",
     "category": "EB",
     "needsReview": true,
     "sides": [
@@ -23775,9 +23076,7 @@
           31.52269
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_395": {
     "sideOffsets": {
@@ -23803,6 +23102,7 @@
       }
     },
     "displayName": "LB",
+    "status": "AVAILABLE",
     "category": "LB",
     "needsReview": true,
     "sides": [
@@ -23854,9 +23154,7 @@
           31.13358
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_396": {
     "sideOffsets": {
@@ -23897,6 +23195,7 @@
       }
     },
     "displayName": "PARK",
+    "status": "AVAILABLE",
     "category": "PARK",
     "needsReview": true,
     "sides": [
@@ -23984,9 +23283,7 @@
           36.23467
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_397": {
     "sideOffsets": {
@@ -24002,6 +23299,7 @@
       }
     },
     "displayName": "PARK",
+    "status": "AVAILABLE",
     "category": "PARK",
     "needsReview": true,
     "sides": [
@@ -24041,9 +23339,7 @@
           33.37578
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "facing": "TBD"
+    ]
   },
   "kml_poly_398": {
     "sideOffsets": {
@@ -24079,6 +23375,7 @@
       }
     },
     "displayName": "PARK",
+    "status": "AVAILABLE",
     "category": "PARK",
     "needsReview": true,
     "sides": [
@@ -24154,8 +23451,6 @@
           35.39486
         ]
       }
-    ],
-    "status": "AVAILABLE",
-    "facing": "TBD"
+    ]
   }
 }
