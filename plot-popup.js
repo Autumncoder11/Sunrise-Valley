@@ -71,40 +71,6 @@
   // lagged a beat behind during an active zoom/drag gesture.
   var labelRefreshRAF = null;
 
-  // The RAF loop used to call drawSideLabels() (sphereToScreen bridge calls
-  // for every point + the O(n) clearance search per edge) on EVERY tick,
-  // forever, for as long as a popup stayed open — including while the
-  // camera was sitting perfectly still. That's what was showing up as lag/
-  // battery drain on mobile: real work 60x/sec even when nothing on screen
-  // was actually moving. The loop itself still runs every frame (so it can
-  // react the instant a gesture starts), but each tick now begins with a
-  // cheap read of the current camera pose (a handful of kget() calls) and
-  // only runs the expensive drawSideLabels() when that pose has actually
-  // changed since the last tick.
-  var lastViewSignature = null;
-  var VIEW_CHANGE_EPSILON = 0.001;
-
-  function getViewSignature() {
-    var stage = getStageSize();
-    return [
-      parseFloat(kget("view.hlookat")),
-      parseFloat(kget("view.vlookat")),
-      parseFloat(kget("view.fov")),
-      stage.w,
-      stage.h
-    ];
-  }
-
-  function viewSignatureChanged(a, b) {
-    if (!a || !b) return true;
-    for (var i = 0; i < a.length; i++) {
-      var av = a[i], bv = b[i];
-      if (!isFinite(av) || !isFinite(bv)) return true; // fail open -- redraw rather than get stuck
-      if (Math.abs(av - bv) > VIEW_CHANGE_EPSILON) return true;
-    }
-    return false;
-  }
-
   // Per-selection cache for the parts of drawSideLabels() that do NOT
   // depend on the current camera view (zoom/pan) -- the hotspot's raw
   // ath/atv polygon points (getPolygonPoints), the letter<->edge match
@@ -324,7 +290,6 @@
         applyBaseStyling();
         disableHotspotCapture();
         applyPlotNumberLabelScale();
-        applyPlotNumberLabelBold();
         if (pendingClick) {
           var hs = pendingClick;
           pendingClick = null;
@@ -395,32 +360,7 @@
     Object.keys(PLOT_DATA).forEach(function (hotspotName) {
       var labelName = hotspotName.replace("kml_poly_", "kml_label_");
       kset("hotspot[" + labelName + "].scale", scale);
-      // Without this, the label is a fixed screen-pixel size regardless
-      // of camera fov -- fine fully zoomed out (matches the tiny on-
-      // screen plots), but it stays that same tiny size once you zoom
-      // into a single plot, since it never grows with the view like a
-      // real ground object would. zoom="true" ties its size to the
-      // current fov so it scales up as you zoom in.
-      kset("hotspot[" + labelName + "].zoom", "true");
     });
-  }
-
-  // One-time bump to bold, layered on top of whatever font tour.xml's
-  // flatten_plot_labels() already baked into each label's css -- read
-  // the existing value and append rather than overwrite, so color/
-  // font-family/etc. from tour.xml survive. Guarded by the flag so this
-  // string get/set only runs once, not on every resize/orientation tick.
-  var labelBoldApplied = false;
-  function applyPlotNumberLabelBold() {
-    if (!window.krpano || !PLOT_DATA || labelBoldApplied) return;
-    Object.keys(PLOT_DATA).forEach(function (hotspotName) {
-      var labelName = hotspotName.replace("kml_poly_", "kml_label_");
-      var currentCss = kget("hotspot[" + labelName + "].css") || "";
-      if (currentCss.indexOf("font-weight") === -1) {
-        kset("hotspot[" + labelName + "].css", currentCss + ";font-weight:bold;");
-      }
-    });
-    labelBoldApplied = true;
   }
 
   var labelScaleResizeTimer = null;
@@ -1464,21 +1404,12 @@
     // every RAF tick *within* one open popup, which is the case that
     // actually matters for zoom smoothness.
     labelCache = null;
-    // Also reset the idle/dirty-check baseline -- otherwise the next
-    // startLabelRefresh() (e.g. clicking a different plot) could compare
-    // against a stale pose from the previous popup and wrongly skip its
-    // very first draw.
-    lastViewSignature = null;
   }
 
   function startLabelRefresh(hotspotName, plot) {
     stopLabelRefresh();
     function tick() {
-      var sig = getViewSignature();
-      if (viewSignatureChanged(lastViewSignature, sig)) {
-        lastViewSignature = sig;
-        drawSideLabels(hotspotName, plot);
-      }
+      drawSideLabels(hotspotName, plot);
       labelRefreshRAF = requestAnimationFrame(tick);
     }
     labelRefreshRAF = requestAnimationFrame(tick);
