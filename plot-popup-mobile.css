@@ -21,7 +21,8 @@
    devices regardless of orientation, so it stays matched through a
    rotate; the max-width clause is kept only so a narrow desktop/
    tablet browser window still gets the compact sheet too. */
-@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+@media (hover: none) and (pointer: coarse),
+(max-width: 768px) {
   #plotPopupRoot {
     position: fixed !important;
     left: 0;
@@ -62,7 +63,7 @@
   }
 
   #plotPopupRoot .plot-popup-title {
-    font-size: 17px;
+    font-size: 20px;
   }
 
   #plotPopupRoot .plot-popup-badge {
@@ -97,17 +98,17 @@
   }
 
   #plotPopupRoot .plot-popup-side-label {
-    font-size: 10px;
+    font-size: 7px;
   }
 
   #plotPopupRoot .plot-popup-side-value {
-    font-size: 14px;
+    font-size: 10px;
   }
 
   /* Collapsed state: toggled by plot-popup-mobile.js.
      Hides everything except the header row so the sheet shrinks
      to a thin strip and the map is fully visible. */
-  #plotPopupRoot .plot-popup-card.pp-collapsed > *:not(.plot-popup-header) {
+  #plotPopupRoot .plot-popup-card.pp-collapsed>*:not(.plot-popup-header) {
     display: none !important;
   }
 
