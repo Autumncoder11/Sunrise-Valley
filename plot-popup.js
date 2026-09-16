@@ -348,7 +348,7 @@
   // scale factor to each kml_label_* hotspot, left at 1.0 (untouched) on
   // desktop/tablet-and-up widths.
   var MOBILE_LABEL_MAX_WIDTH_PX = 768;
-  var MOBILE_LABEL_SCALE = 0.6; // tweak this until it looks right on your phone
+  var MOBILE_LABEL_SCALE = 0.8; // tweak this until it looks right on your phone
 
   function isMobileLabelViewport() {
     return window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX;
@@ -440,8 +440,8 @@
   // (kml_label_*, sized in tour.xml's flatten_plot_labels()) — this pins
   // every dimension label to a constant 11px instead of scaling with the
   // edge's on-screen length.
-  var LABEL_FONT_MIN_PX = 9;
-  var LABEL_FONT_MAX_PX = 9;
+  var LABEL_FONT_MIN_PX = 8;
+  var LABEL_FONT_MAX_PX = 8;
   // How much of the edge's screen length the font size tracks. Tune this
   // if labels feel too big/small relative to the edges they sit on.
   // No-op now that MIN/MAX are pinned equal above (see comment there) —
