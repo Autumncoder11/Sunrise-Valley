@@ -348,7 +348,7 @@
   // scale factor to each kml_label_* hotspot, left at 1.0 (untouched) on
   // desktop/tablet-and-up widths.
   var MOBILE_LABEL_MAX_WIDTH_PX = 768;
-  var MOBILE_LABEL_SCALE = 0.8; // tweak this until it looks right on your phone
+  var MOBILE_LABEL_SCALE = 0.6; // tweak this until it looks right on your phone
 
   function isMobileLabelViewport() {
     return window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX;
