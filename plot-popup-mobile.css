@@ -14,7 +14,14 @@
    view, and expands it back to show the side dimensions.
    ============================================================ */
 
-@media (max-width: 768px) {
+/* Was `@media (max-width: 768px)` — width-only, so it dropped out of
+   mobile mode when a phone's width crossed 768px in landscape and the
+   card silently fell back to plot-popup.css's desktop layout mid-
+   rotation. (hover: none) and (pointer: coarse) identifies touch
+   devices regardless of orientation, so it stays matched through a
+   rotate; the max-width clause is kept only so a narrow desktop/
+   tablet browser window still gets the compact sheet too. */
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
   #plotPopupRoot {
     position: fixed !important;
     left: 0;
