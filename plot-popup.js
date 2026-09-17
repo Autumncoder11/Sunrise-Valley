@@ -289,7 +289,7 @@
         dataReady = true;
         applyBaseStyling();
         disableHotspotCapture();
-        applyPlotNumberLabelScale();
+        // applyPlotNumberLabelScale();
         if (pendingClick) {
           var hs = pendingClick;
           pendingClick = null;
