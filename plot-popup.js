@@ -350,7 +350,20 @@
   var MOBILE_LABEL_MAX_WIDTH_PX = 768;
   var MOBILE_LABEL_SCALE = 0.7; // tweak this until it looks right on your phone
 
+  // Touch-based, same as plot-popup-mobile.css's own breakpoint -- a
+  // width-only check (window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX)
+  // flips back to the desktop scale the moment a phone's landscape width
+  // crosses 768px, and flickers between the two scales mid-rotation as
+  // the browser fires resize several times with different intermediate
+  // widths while its chrome/address bar settles. Checking the device's
+  // input type instead keeps the same answer through a rotate, so those
+  // extra resize firings just reapply the same scale (no visible jump).
+  // The width check is kept as a fallback for browsers without
+  // matchMedia and for narrow desktop/tablet windows.
   function isMobileLabelViewport() {
+    if (window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      return true;
+    }
     return window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX;
   }
 
