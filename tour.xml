@@ -3,7 +3,14 @@
 	<include url="skin/vtourskin.xml" />
 
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
-	<skin_settings maps="true"
+	<!-- maps is intentionally device-conditional: the site-plan map overlay
+	     (satellite/OSM tiles + plot polygons) should never appear on
+	     mobile, only on desktop. device.mobile is krpano's own built-in
+	     device-detection flag, evaluated by the skin's own
+	     skin_arrange_buttons action (show_mapbutton = skin_settings.maps
+	     == true), so this hides the map button, and the view it opens,
+	     on mobile without touching the skin file itself. -->
+	<skin_settings maps="calc:!device.mobile"
 	               maps_type="openstreetmaps"
 	               maps_bing_api_key=""
 	               maps_google_api_key=""
