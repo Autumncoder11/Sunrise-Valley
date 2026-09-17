@@ -22,7 +22,7 @@
    rotate; the max-width clause is kept only so a narrow desktop/
    tablet browser window still gets the compact sheet too. */
 @media (hover: none) and (pointer: coarse),
-(max-width: 768px) {
+(max-width: 900px) {
   #plotPopupRoot {
     position: fixed !important;
     left: 0;
@@ -132,7 +132,8 @@
    the internal padding/gaps so the sheet stays compact and the
    map behind it stays visible after rotating.
    ------------------------------------------------------------ */
-@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
+((max-width: 900px) and (orientation: landscape)) {
   #plotPopupRoot {
     max-height: 55vh;
     max-height: 55dvh;

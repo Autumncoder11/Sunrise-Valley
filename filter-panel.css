@@ -201,7 +201,7 @@
    of snapping back to the wider desktop spacing once its width crosses
    640px. */
 @media (hover: none) and (pointer: coarse),
-(max-width: 640px) {
+(max-width: 900px) {
   .plot-filter-bar {
     gap: 14px;
     padding: 8px 10px;
@@ -215,7 +215,8 @@
 /* Landscape phones have much less height to spare than portrait, so
    sit closer under the (now shorter) action bar and shave padding to
    keep the bar from crowding the pano below it. */
-@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
+((max-width: 900px) and (orientation: landscape)) {
   #plotFilterRoot {
     top: 50px; /* tracks the shrunk action-bar height in that mode */
   }

@@ -103,10 +103,14 @@
 
 /* Touch-device check (same as plot-popup-mobile.css) kept alongside the
    width check so a phone in landscape keeps its compact pill sizing
-   instead of snapping back to the wider desktop padding once its width
-   crosses 640px. */
+   instead of snapping back to the wider desktop padding. The width
+   fallback is set to 900px (not a portrait-phone width like 640px)
+   because most phones are WIDER than that in landscape (e.g. ~844-
+   926px) -- if the touch check above ever misreports for a moment
+   during an in-app browser's rotation animation, this fallback still
+   needs to catch a landscape phone, not just a portrait one. */
 @media (hover: none) and (pointer: coarse),
-(max-width: 640px) {
+(max-width: 900px) {
   .plot-action-pill {
     padding: 8px 14px 8px 8px;
     font-size: 13px;
@@ -116,7 +120,8 @@
 /* Landscape phones have much less height to spare than portrait, so
    pull the bar closer to the top edge and shrink the pills a bit
    further to leave more room for the filter bar and pano below it. */
-@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
+((max-width: 900px) and (orientation: landscape)) {
   #plotActionBarRoot {
     top: 8px;
   }
