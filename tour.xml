@@ -85,7 +85,14 @@
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
-		<view hlookat="6.629" vlookat="90.000" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+		<!-- maxpixelzoom is capped lower on mobile (via krpano's built-in
+		     .mobile/.desktop attribute-suffix targeting) so less
+		     high-resolution multires texture gets pulled into GPU memory
+		     at once. The panorama's cube faces go up to 4864px, and that
+		     memory pressure combined with the canvas resize on rotation
+		     is the most likely reason mobile browsers have been
+		     reloading the page. Desktop keeps the original 2.0. -->
+		<view hlookat="6.629" vlookat="90.000" fovtype="MFOV" fov="140.000" maxpixelzoom.mobile="1.0" maxpixelzoom.desktop="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
 		<preview url="panos/DJI_20260530023817_0241_D.tiles/preview.jpg" />
 
