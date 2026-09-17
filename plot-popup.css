@@ -1,139 +1,245 @@
-/* plot-popup.css — matches the reference screenshot */
+/* =========================================================================
+   plot-popup.css
+   Plot detail card — a small, right-anchored translucent "glass" panel
+   (frosted blur, soft edges, iOS system type/colors), not a full-width
+   sheet. plot-popup-mobile.css keeps this same small, right-anchored
+   treatment on phones instead of turning it into a bottom sheet.
+   ========================================================================= */
 
 #plotPopupRoot {
   display: none;
   position: fixed;
-  top: 80px;
-  right: 24px;
+  top: 84px;
+  right: 16px;
   z-index: 10000;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
 }
 
 .plot-popup-card {
-  width: 340px;
+  width: 300px;
   max-width: calc(100vw - 32px);
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  padding: 20px 22px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
   box-sizing: border-box;
+  padding: 18px 18px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.62);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.16),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  color: #1C1C1E;
+  animation: plotPopupIn 0.32s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
+/* A browser without backdrop-filter support (rare) would otherwise show
+   near-transparent text on a busy pano background -- give it a solid
+   enough fallback to stay readable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .plot-popup-card {
+    background: rgba(255, 255, 255, 0.94);
+  }
+}
+
+@keyframes plotPopupIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plot-popup-card {
+    animation: none;
+  }
+}
+
+/* ---- Header: plot number + glass close button ------------------------- */
 .plot-popup-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
 .plot-popup-title {
   margin: 0;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
-  color: #16A34A;
+  letter-spacing: -0.01em;
+  color: #1C1C1E;
 }
 
 .plot-popup-close {
-  background: none;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   border: none;
-  font-size: 22px;
+  background: rgba(120, 120, 128, 0.16);
+  color: #3C3C43;
+  font-size: 17px;
   line-height: 1;
-  color: #9ca3af;
   cursor: pointer;
-  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .plot-popup-close:hover {
-  color: #4b5563;
+  background: rgba(120, 120, 128, 0.26);
 }
 
+.plot-popup-close:active {
+  transform: scale(0.88);
+}
+
+/* ---- Status badge: translucent tinted pill ----------------------------- */
 .plot-popup-badge {
-  display: inline-block;
-  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 10px;
   border-radius: 999px;
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   margin-bottom: 14px;
 }
 
+.plot-popup-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 .plot-popup-badge--available {
-  background: #DCFCE7;
-  color: #16A34A;
+  background: rgba(48, 209, 88, 0.16);
+  color: #248A3D;
 }
 
 .plot-popup-badge--sold {
-  background: #FED7AA;
-  color: #C2410C;
+  background: rgba(255, 69, 58, 0.14);
+  color: #D70015;
 }
 
 .plot-popup-badge--hold {
-  background: #fef3c7;
-  color: #b45309;
+  background: rgba(255, 159, 10, 0.16);
+  color: #C93400;
 }
 
+/* ---- Plain key/value rows (Area, Corner Plot) -------------------------- */
 .plot-popup-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15px;
-  padding: 6px 0;
+  font-size: 14.5px;
+  padding: 9px 2px;
+  color: #1C1C1E;
 }
 
-.plot-popup-row--area span:first-child {
-  color: #6b7280;
+.plot-popup-row>span:first-child {
+  color: rgba(60, 60, 67, 0.6);
 }
 
 .plot-popup-area-value {
-  font-weight: 700;
-  color: #111827;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.plot-popup-row--corner {
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+}
+
+.plot-popup-corner-value--yes {
+  color: #248A3D;
+  font-weight: 600;
+}
+
+/* ---- Facing: a translucent glass tile, not a solid alert box ----------- */
+.plot-popup-facing-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 159, 10, 0.12);
+  border: 1px solid rgba(255, 159, 10, 0.28);
+}
+
+.plot-popup-facing-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #C93400;
+}
+
+.plot-popup-facing-value {
   font-size: 16px;
+  font-weight: 700;
+  color: #C93400;
 }
 
 .plot-popup-divider {
-  border-top: 1px dashed #d1d5db;
-  margin: 8px 0 14px;
+  border: none;
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+  margin: 12px 0;
 }
 
 .plot-popup-section-label {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 10px;
+  color: rgba(60, 60, 67, 0.6);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
+/* ---- Side dimensions: small glass tiles --------------------------------- */
 .plot-popup-side-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .plot-popup-side-box {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 10px 12px;
+  background: rgba(120, 120, 128, 0.08);
+  border: 1px solid rgba(60, 60, 67, 0.08);
+  border-radius: 14px;
+  padding: 9px 10px;
   text-align: center;
 }
 
 .plot-popup-side-label {
-  color: #888;
-  font-size: 13px;
+  color: rgba(60, 60, 67, 0.55);
+  font-size: 11.5px;
   margin-bottom: 2px;
 }
 
 .plot-popup-side-value {
-  color: #16A34A;
+  color: #1C1C1E;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 @media (max-width: 480px) {
   #plotPopupRoot {
-    top: 60px;
-    right: 12px;
-    left: 12px;
+    top: 76px;
+    right: 10px;
   }
 
   .plot-popup-card {
-    width: auto;
+    width: 260px;
   }
 }

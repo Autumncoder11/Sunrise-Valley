@@ -348,7 +348,7 @@
   // scale factor to each kml_label_* hotspot, left at 1.0 (untouched) on
   // desktop/tablet-and-up widths.
   var MOBILE_LABEL_MAX_WIDTH_PX = 768;
-  var MOBILE_LABEL_SCALE = 0.90; // tweak this until it looks right on your phone
+  var MOBILE_LABEL_SCALE = 0.7; // tweak this until it looks right on your phone
 
   // Touch-based, same as plot-popup-mobile.css's own breakpoint -- a
   // width-only check (window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX)
@@ -1297,13 +1297,9 @@
       '<span>Area' + (sqft != null && areaIsEstimated ? ' (est.)' : '') + '</span>' +
       '<span class="plot-popup-area-value">' + areaText + '</span>' +
       '</div>' +
-      '<div class="plot-popup-facing-box" style="' +
-      'border:3px solid #FF5C1A;border-radius:6px;padding:12px 14px;' +
-      'margin:14px 0;background:#FFF7F2;display:flex;' +
-      'align-items:center;justify-content:space-between;">' +
-      '<span style="color:#FF5C1A;font-weight:bold;font-size:14px;letter-spacing:0.3px;">Facing</span>' +
-      '<span class="plot-popup-facing-value" style="' +
-      'color:#FF5C1A;font-weight:bold;font-size:17px;">' +
+      '<div class="plot-popup-facing-box">' +
+      '<span class="plot-popup-facing-label">Facing</span>' +
+      '<span class="plot-popup-facing-value">' +
       facingText + '</span>' +
       '</div>' +
       '<div class="plot-popup-row plot-popup-row--corner">' +

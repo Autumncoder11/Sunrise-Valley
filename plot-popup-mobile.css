@@ -1,161 +1,73 @@
 /* ============================================================
    plot-popup-mobile.css
-   Mobile adaptation for plot-popup.js's #plotPopupRoot card.
+   Mobile refinements for plot-popup.js's #plotPopupRoot card.
 
-   INCLUDE THIS AFTER plot-popup.css in your HTML:
+   INCLUDE THIS AFTER plot-popup.css:
      <link rel="stylesheet" href="plot-popup.css">
      <link rel="stylesheet" href="plot-popup-mobile.css">
 
-   What it does: on phone-width screens, turns the full-height
-   popup into a compact bottom sheet capped at ~38% of the
-   viewport height, so the krpano view/CAD thumbnail behind it
-   stays visible. Tapping the title (see plot-popup-mobile.js)
-   collapses it down to just the header row for an even clearer
-   view, and expands it back to show the side dimensions.
+   The popup stays the SAME small, right-anchored glass card as
+   desktop -- it's intentionally not turned into a full-width bottom
+   sheet, so the pano/CAD map stays visible behind it and the card's
+   shape doesn't change between portrait and landscape. This file
+   only:
+     - nudges its position to clear the mobile action bar/filter bar
+       and respect the device's safe-area insets (notches, home
+       indicator, status bar)
+     - shrinks it slightly for narrow phones
+     - keeps the tap-to-collapse affordance (see plot-popup-mobile.js)
+       so a user can shrink it to just the header row for an
+       unobstructed view of the map, without losing its glass shape
+
+   Gated on the html.is-touch-device class set once in index.html's
+   <head> (touch capability at page load), not on
+   (hover:none)/(pointer:coarse) or a width breakpoint -- see
+   action-bar.css for why: those are re-evaluated live as the
+   viewport changes and can misreport for a moment during a rotation
+   animation, which previously caused this file's rules to drop out
+   partway through a rotation. Touch capability itself never changes
+   when the device rotates, so this can't flip back that way.
    ============================================================ */
 
-/* Gated on the html.is-touch-device class set once in index.html's
-   <head> (touch capability at page load) -- see that inline script.
-   This used to be gated on `@media (hover:none) and (pointer:coarse),
-   (max-width: ...)`, but both of those are re-evaluated live as the
-   viewport changes, and on some mobile/in-app browsers they can
-   misreport for a moment during a rotation animation. Once the
-   landscape width of a large phone exceeded the width fallback too,
-   nothing was left to hold the mobile layout and it snapped back to
-   plot-popup.css's desktop styles. Touch capability itself never
-   changes when the device rotates, so a class set once here can't
-   flip back that way. */
 html.is-touch-device #plotPopupRoot {
-  position: fixed !important;
-  left: 0;
-  right: 0;
-  top: auto !important;
-  bottom: 0;
-  width: 100%;
-  max-height: 38vh;
-  /* dvh accounts for the mobile toolbar showing/hiding mid-rotation;
-     vh above is the fallback for browsers without dvh support. Both
-     rules are kept, the browser just uses whichever it understands. */
-  max-height: 38dvh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  z-index: 9999;
-  background: transparent;
-  /* Smooths any layout shift across an orientation change instead of
-     an abrupt snap (e.g. the vh -> dvh recalculation above). */
-  transition: max-height 0.2s ease;
+  top: calc(56px + env(safe-area-inset-top, 0px));
+  right: calc(10px + env(safe-area-inset-right, 0px));
+  left: auto;
+  bottom: auto;
 }
 
-html.is-touch-device #plotPopupRoot .plot-popup-card {
-  border-radius: 16px 16px 0 0;
-  margin: 0 auto;
-  max-width: 100%;
-  width: 100%;
-  padding: 10px 16px 18px;
-  box-sizing: border-box;
-}
-
-/* drag-handle affordance */
-html.is-touch-device #plotPopupRoot .plot-popup-card::before {
-  content: "";
-  display: block;
-  width: 40px;
-  height: 4px;
-  border-radius: 2px;
-  background: #d5d5d5;
-  margin: 0 auto 10px;
+html.is-touch-device .plot-popup-card {
+  width: min(270px, calc(100vw - 20px));
+  max-height: calc(100vh - 130px);
 }
 
 html.is-touch-device #plotPopupRoot .plot-popup-header {
   cursor: pointer;
-  margin-bottom: 4px;
 }
 
-html.is-touch-device #plotPopupRoot .plot-popup-title {
-  font-size: 17px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-badge {
-  font-size: 11px;
-  padding: 2px 8px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-row--area,
-html.is-touch-device #plotPopupRoot .plot-popup-facing-box,
-html.is-touch-device #plotPopupRoot .plot-popup-row--corner {
-  margin: 5px 0;
-  padding: 7px 10px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-divider {
-  margin: 8px 0;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-section-label {
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-side-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-side-box {
-  padding: 6px 8px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-side-label {
-  font-size: 10px;
-}
-
-html.is-touch-device #plotPopupRoot .plot-popup-side-value {
-  font-size: 14px;
-}
-
-/* Collapsed state: toggled by plot-popup-mobile.js.
-   Hides everything except the header row so the sheet shrinks
-   to a thin strip and the map is fully visible. */
+/* Collapsed state: toggled by plot-popup-mobile.js. Hides everything
+   below the header so the card shrinks to a small pill and the map
+   is fully visible, without losing its rounded-glass shape. */
 html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed>*:not(.plot-popup-header) {
   display: none !important;
 }
 
 html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed {
-  padding-bottom: 12px;
+  padding-bottom: 18px;
 }
 
-/* ------------------------------------------------------------
-   Landscape phones have far less viewport height than portrait
-   (e.g. ~375-430px vs ~800px+), so the same 38vh/38dvh cap above
-   is proportionally fine but can still crowd the pano/CAD view.
-   Loosen the percentage (of a much shorter viewport) and tighten
-   the internal padding/gaps so the sheet stays compact and the
-   map behind it stays visible after rotating.
-
-   (orientation: landscape) is a genuine viewport-geometry media
-   feature (not a device-detection heuristic like hover/pointer),
-   so it's safe to combine directly with the touch class here.
-   ------------------------------------------------------------ */
+/* Landscape phones have much less height to spare than portrait, so
+   sit a little higher (tracking the shorter landscape action bar --
+   see action-bar.css's own landscape block) and allow a bit more of
+   the shorter viewport height. (orientation: landscape) is a real
+   viewport-geometry media feature, not a device-detection heuristic,
+   so it's safe to combine directly with the touch class here. */
 @media (orientation: landscape) {
   html.is-touch-device #plotPopupRoot {
-    max-height: 55vh;
-    max-height: 55dvh;
+    top: calc(46px + env(safe-area-inset-top, 0px));
   }
 
-  html.is-touch-device #plotPopupRoot .plot-popup-card {
-    padding: 8px 14px 12px;
-  }
-
-  html.is-touch-device #plotPopupRoot .plot-popup-title {
-    font-size: 15px;
-  }
-
-  html.is-touch-device #plotPopupRoot .plot-popup-side-grid {
-    gap: 4px;
-  }
-
-  html.is-touch-device #plotPopupRoot .plot-popup-side-box {
-    padding: 4px 6px;
+  html.is-touch-device .plot-popup-card {
+    max-height: calc(100vh - 90px);
   }
 }
