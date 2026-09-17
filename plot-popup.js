@@ -361,7 +361,7 @@
   // The width check is kept as a fallback for browsers without
   // matchMedia and for narrow desktop/tablet windows.
   function isMobileLabelViewport() {
-    if (window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    if (document.documentElement.classList.contains("is-touch-device")) {
       return true;
     }
     return window.innerWidth <= MOBILE_LABEL_MAX_WIDTH_PX;
