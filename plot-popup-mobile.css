@@ -8,13 +8,18 @@
 
    The popup stays the SAME small, right-anchored glass card as
    desktop -- it's intentionally not turned into a full-width bottom
-   sheet, so the pano/CAD map stays visible behind it and the card's
-   shape doesn't change between portrait and landscape. This file
-   only:
+   sheet, so the pano/CAD map stays visible behind it. On mobile
+   (both portrait and landscape) it's sized as a compact, roughly
+   square card rather than a tall rectangle, since a tall narrow
+   card eats a big share of a phone's limited height either way.
+   .plot-popup-card already has overflow-y:auto, so anything past
+   the visible square still reaches it by scrolling inside the card
+   rather than being cut off.
+
+   This file also:
      - nudges its position to clear the mobile action bar/filter bar
        and respect the device's safe-area insets (notches, home
        indicator, status bar)
-     - shrinks it slightly for narrow phones
      - keeps the tap-to-collapse affordance (see plot-popup-mobile.js)
        so a user can shrink it to just the header row for an
        unobstructed view of the map, without losing its glass shape
@@ -37,8 +42,41 @@ html.is-touch-device #plotPopupRoot {
 }
 
 html.is-touch-device .plot-popup-card {
-  width: min(270px, calc(100vw - 20px));
-  max-height: calc(100vh - 130px);
+  width: 220px;
+  max-height: min(220px, calc(100vh - 90px));
+  padding: 14px 14px 16px;
+}
+
+/* Slightly tighter type/spacing so more of the card's content is
+   visible before the user needs to scroll inside the square. */
+html.is-touch-device .plot-popup-title {
+  font-size: 18px;
+}
+
+html.is-touch-device .plot-popup-badge {
+  margin-bottom: 10px;
+}
+
+html.is-touch-device .plot-popup-row {
+  padding: 6px 2px;
+  font-size: 13.5px;
+}
+
+html.is-touch-device .plot-popup-facing-box {
+  margin: 6px 0 2px;
+  padding: 9px 11px;
+}
+
+html.is-touch-device .plot-popup-divider {
+  margin: 8px 0;
+}
+
+html.is-touch-device .plot-popup-side-grid {
+  gap: 6px;
+}
+
+html.is-touch-device .plot-popup-side-box {
+  padding: 7px 8px;
 }
 
 html.is-touch-device #plotPopupRoot .plot-popup-header {
@@ -57,58 +95,17 @@ html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed {
 }
 
 /* Landscape phones have much less height to spare than portrait, so
-   sit a little higher (tracking the shorter landscape action bar --
-   see action-bar.css's own landscape block) and allow a bit more of
-   the shorter viewport height. (orientation: landscape) is a real
-   viewport-geometry media feature, not a device-detection heuristic,
-   so it's safe to combine directly with the touch class here.
-
-   The card is also capped to a roughly square footprint here (fixed
-   width + a much shorter max-height than portrait's tall rectangle),
-   since a tall narrow card eats a big share of a landscape phone's
-   limited height. .plot-popup-card already has overflow-y:auto, so
-   anything past the visible square still reaches it by scrolling
-   inside the card rather than being cut off. */
+   the card needs to sit a little higher to clear the shorter
+   landscape action bar (see action-bar.css's own landscape block).
+   (orientation: landscape) is a real viewport-geometry media
+   feature, not a device-detection heuristic, so it's safe to
+   combine directly with the touch class here. */
 @media (orientation: landscape) {
   html.is-touch-device #plotPopupRoot {
     top: calc(46px + env(safe-area-inset-top, 0px));
   }
 
   html.is-touch-device .plot-popup-card {
-    width: 220px;
     max-height: min(220px, calc(100vh - 70px));
-    padding: 14px 14px 16px;
-  }
-
-  /* Slightly tighter type/spacing so more of the card's content is
-     visible before the user needs to scroll inside the square. */
-  html.is-touch-device .plot-popup-title {
-    font-size: 18px;
-  }
-
-  html.is-touch-device .plot-popup-badge {
-    margin-bottom: 10px;
-  }
-
-  html.is-touch-device .plot-popup-row {
-    padding: 6px 2px;
-    font-size: 13.5px;
-  }
-
-  html.is-touch-device .plot-popup-facing-box {
-    margin: 6px 0 2px;
-    padding: 9px 11px;
-  }
-
-  html.is-touch-device .plot-popup-divider {
-    margin: 8px 0;
-  }
-
-  html.is-touch-device .plot-popup-side-grid {
-    gap: 6px;
-  }
-
-  html.is-touch-device .plot-popup-side-box {
-    padding: 7px 8px;
   }
 }
