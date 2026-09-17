@@ -61,13 +61,54 @@ html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed {
    see action-bar.css's own landscape block) and allow a bit more of
    the shorter viewport height. (orientation: landscape) is a real
    viewport-geometry media feature, not a device-detection heuristic,
-   so it's safe to combine directly with the touch class here. */
+   so it's safe to combine directly with the touch class here.
+
+   The card is also capped to a roughly square footprint here (fixed
+   width + a much shorter max-height than portrait's tall rectangle),
+   since a tall narrow card eats a big share of a landscape phone's
+   limited height. .plot-popup-card already has overflow-y:auto, so
+   anything past the visible square still reaches it by scrolling
+   inside the card rather than being cut off. */
 @media (orientation: landscape) {
   html.is-touch-device #plotPopupRoot {
     top: calc(46px + env(safe-area-inset-top, 0px));
   }
 
   html.is-touch-device .plot-popup-card {
-    max-height: calc(100vh - 90px);
+    width: 220px;
+    max-height: min(220px, calc(100vh - 70px));
+    padding: 14px 14px 16px;
+  }
+
+  /* Slightly tighter type/spacing so more of the card's content is
+     visible before the user needs to scroll inside the square. */
+  html.is-touch-device .plot-popup-title {
+    font-size: 18px;
+  }
+
+  html.is-touch-device .plot-popup-badge {
+    margin-bottom: 10px;
+  }
+
+  html.is-touch-device .plot-popup-row {
+    padding: 6px 2px;
+    font-size: 13.5px;
+  }
+
+  html.is-touch-device .plot-popup-facing-box {
+    margin: 6px 0 2px;
+    padding: 9px 11px;
+  }
+
+  html.is-touch-device .plot-popup-divider {
+    margin: 8px 0;
+  }
+
+  html.is-touch-device .plot-popup-side-grid {
+    gap: 6px;
+  }
+
+  html.is-touch-device .plot-popup-side-box {
+    padding: 7px 8px;
   }
 }
