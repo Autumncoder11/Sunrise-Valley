@@ -9,22 +9,12 @@
 #plotActionBarRoot {
   position: fixed;
   top: 14px;
-  left: 0;
-  right: 0;
-  width: fit-content;
-  max-width: calc(100vw - 16px);
-  margin: 0 auto;
-  /* NOTE: centered with left/right + margin instead of
-     left:50% + transform:translateX(-50%). The transform version promotes
-     the fixed bar to its own composited layer, and Chrome for Android has
-     a long-standing bug where that layer gets stuck at its pre-rotation
-     position (off-screen) after a portrait->landscape rotation until the
-     user touches the page -- which is exactly why the bar was "missing"
-     on Android landscape but fine on iPhone. No transform = no stuck
-     layer. */
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 950;
   /* above the filter bar and pano, below the plot/enquiry popups */
   font-family: Arial, Helvetica, sans-serif;
+  max-width: calc(100vw - 16px);
 }
 
 .plot-action-bar {
@@ -154,37 +144,24 @@ html.is-touch-device .plot-action-pill {
    further to leave more room for the filter bar and pano below it.
    (orientation: landscape) is a genuine viewport-geometry media
    feature (not a device-detection heuristic like hover/pointer), so
-   it's safe to combine directly with the touch class here.
-
-   The pills also drop to ICON-ONLY on touch landscape: seven labeled
-   pills are ~800px+ wide, which overflows the ~740-800px landscape
-   width of many Android phones and pushes Call/Location into the
-   hidden horizontal scroll area (invisible scrollbar = looks like the
-   buttons are missing). Icon-only, all seven always fit with room to
-   spare, on any phone. The label span keeps its own class
-   (.plot-action-label) so the badge (a separate span appended after
-   it) is unaffected. */
+   it's safe to combine directly with the touch class here. */
 @media (orientation: landscape) {
   html.is-touch-device #plotActionBarRoot {
     top: 8px;
   }
 
   html.is-touch-device .plot-action-pill {
-    padding: 7px;
+    padding: 6px 12px 6px 6px;
     font-size: 12px;
   }
 
-  html.is-touch-device .plot-action-label {
-    display: none;
-  }
-
   html.is-touch-device .plot-action-icon {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   html.is-touch-device .plot-action-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 }

@@ -245,24 +245,17 @@
     root.innerHTML = "";
     var bar = el("div", "plot-action-bar");
 
-    // Force a compositing rebuild after an orientation change. Chrome for
-    // Android can leave the krpano WebGL <canvas> promoted to a GPU layer
-    // that paints OVER fixed DOM UI (action bar, plot popup) after a
-    // portrait<->landscape rotation -- the UI flashes for a second, then
-    // the canvas swallows it. Toggling visibility off/on after the
-    // rotation settles forces Chrome to rebuild every layer in the right
-    // order. Both the bar AND the #pano canvas are cycled so whichever
-    // layer is stale gets rebuilt. Harmless no-op reflows on iOS/desktop.
+    // Force the fixed bar to repaint after an orientation change. Chrome
+    // for Android can leave composited fixed-position layers (and the
+    // 100vw-derived sizing above) stale after a portrait<->landscape
+    // rotation, showing the bar at its old position or not at all until
+    // the user happens to touch the page. Toggling display off/on after
+    // the rotation settles forces a clean reflow + repaint. Harmless on
+    // iOS/desktop, where it's just a no-op reflow.
     var repaintAfterRotation = function () {
       setTimeout(function () {
-        var pano = document.getElementById("pano");
-        if (pano) {
-          pano.style.visibility = "hidden";
-          void pano.offsetHeight; // force reflow
-          pano.style.visibility = "";
-        }
         root.style.display = "none";
-        void root.offsetHeight;
+        void root.offsetHeight; // force reflow
         root.style.display = "";
       }, 350); // after the rotation/address-bar animation settles
     };

@@ -7,13 +7,6 @@
   right: 24px;
   z-index: 10000;
   font-family: Arial, Helvetica, sans-serif;
-  /* Own composited GPU layer -- same Chrome-on-Android rotation fix as
-     action-bar.css: without it the krpano WebGL canvas can get promoted
-     above this fixed popup after a portrait->landscape rotation and the
-     popup becomes invisible (or the whole page's DOM UI flickers out). */
-  transform: translateZ(0);
-  will-change: transform;
-  isolation: isolate;
 }
 
 .plot-popup-card {

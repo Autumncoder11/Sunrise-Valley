@@ -31,10 +31,6 @@ html.is-touch-device #plotPopupRoot {
   right: 0;
   top: auto !important;
   bottom: 0;
-  /* keep the translateZ(0) composited layer from plot-popup.css alive on
-     mobile too (this rule doesn't unset transform, but pinned here so a
-     future edit can't drop it by accident) */
-  transform: translateZ(0);
   width: 100%;
   max-height: 38vh;
   /* dvh accounts for the mobile toolbar showing/hiding mid-rotation;
