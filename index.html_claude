@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -26,10 +26,10 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link rel="stylesheet" href="plot-popup.css?v=202609171400" />
-	<link rel="stylesheet" href="plot-popup-mobile.css?v=202609171400">
+	<link rel="stylesheet" href="plot-popup.css?v=202609170334" />
+	<link rel="stylesheet" href="plot-popup-mobile.css?v=202609170334">
 	<link rel="stylesheet" href="filter-panel.css?v=202609170334" />
-	<link rel="stylesheet" href="action-bar.css?v=202609171400" />
+	<link rel="stylesheet" href="action-bar.css?v=202609170334" />
 	<link rel="stylesheet" href="enquiry-popup.css?v=202609170334" />
 	<style>
 		html {
@@ -45,27 +45,6 @@
 			font-size: 16px;
 			color: #FFFFFF;
 			background-color: #000000;
-		}
-
-		/* ---- Chrome-on-Android rotation compositing fix --------------------
-		   The krpano viewer renders into a WebGL <canvas> inside #pano. On
-		   Chrome for Android, rotating the phone promotes that canvas to
-		   its own GPU layer, and it can end up painting OVER the fixed
-		   DOM UI (action bar, plot popup) -- the UI appears for a second,
-		   then disappears in landscape. Giving #pano an explicit low
-		   stacking context and forcing each fixed UI root onto its own
-		   composited layer (translateZ(0)) keeps the UI above the canvas
-		   in every orientation. iOS Safari is unaffected (harmless). */
-		#pano {
-			position: relative;
-			z-index: 0;
-		}
-
-		#plotPopupRoot,
-		#plotActionBarRoot,
-		#plotFilterRoot,
-		#enquiryPopupRoot {
-			transform: translateZ(0);
 		}
 
 		/* ---- Initial loading overlay -------------------------------------
@@ -235,7 +214,7 @@
 	<script src="plot-popup-mobile.js?v=202609170334"></script>
 	<script src="filter-panel.js?v=202609170334"></script>
 	<script src="enquiry-popup.js?v=202609170334"></script>
-	<script src="action-bar.js?v=202609171400"></script>
+	<script src="action-bar.js?v=202609170334"></script>
 	<!-- TEMPORARY: road label position/rotation editor. Remove this line
 	     (and delete road_label_editor.js) once labels are placed correctly. -->
 	<script src="road-label-zoom.js?v=202609170334"></script>

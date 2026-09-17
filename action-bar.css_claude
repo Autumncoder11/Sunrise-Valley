@@ -14,17 +14,16 @@
   width: fit-content;
   max-width: calc(100vw - 16px);
   margin: 0 auto;
-  /* Centered with left/right + margin instead of left:50% +
-     transform:translateX(-50%). The plain translateZ(0) below forces this
-     fixed bar onto its OWN composited GPU layer: on Chrome for Android,
-     the krpano WebGL <canvas> gets promoted to its own layer during the
-     landscape relayout and can end up painting OVER plain fixed DOM UI
-     (action bar AND plot popup) after a rotation -- the "shows for a
-     second then vanishes" symptom. translateZ(0) keeps the UI composited
-     ABOVE the canvas. It has no X/Y offset, so it can't get stuck
-     off-screen the way the old translateX(-50%) centering did. */
-  transform: translateZ(0);
-  z-index: 950; /* above the filter bar and pano, below the plot/enquiry popups */
+  /* NOTE: centered with left/right + margin instead of
+     left:50% + transform:translateX(-50%). The transform version promotes
+     the fixed bar to its own composited layer, and Chrome for Android has
+     a long-standing bug where that layer gets stuck at its pre-rotation
+     position (off-screen) after a portrait->landscape rotation until the
+     user touches the page -- which is exactly why the bar was "missing"
+     on Android landscape but fine on iPhone. No transform = no stuck
+     layer. */
+  z-index: 950;
+  /* above the filter bar and pano, below the plot/enquiry popups */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -33,10 +32,12 @@
   align-items: center;
   gap: 10px;
   overflow-x: auto;
-  padding: 4px 2px; /* room for the pill shadow without clipping */
+  padding: 4px 2px;
+  /* room for the pill shadow without clipping */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .plot-action-bar::-webkit-scrollbar {
   display: none;
 }
@@ -61,9 +62,11 @@
      abrupt snap mid-rotation. */
   transition: padding 0.15s ease, font-size 0.15s ease;
 }
+
 .plot-action-pill:hover {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
 }
+
 .plot-action-pill:active {
   transform: translateY(1px);
 }
@@ -76,24 +79,43 @@
   height: 24px;
   flex: 0 0 auto;
 }
+
 .plot-action-icon svg {
   width: 20px;
   height: 20px;
 }
 
 /* Per-action accent colors, matching the mockup */
-.plot-action-pill--filter .plot-action-icon svg { stroke: #333333; }
-.plot-action-pill--whatsapp .plot-action-icon svg { color: #22C55E; }
-.plot-action-pill--enquiry .plot-action-icon svg { color: #2563EB; }
-.plot-action-pill--brochure .plot-action-icon svg { color: #7C3AED; }
-.plot-action-pill--call .plot-action-icon svg { color: #F59E0B; }
-.plot-action-pill--location .plot-action-icon svg { color: #DB2777; }
+.plot-action-pill--filter .plot-action-icon svg {
+  stroke: #333333;
+}
+
+.plot-action-pill--whatsapp .plot-action-icon svg {
+  color: #22C55E;
+}
+
+.plot-action-pill--enquiry .plot-action-icon svg {
+  color: #2563EB;
+}
+
+.plot-action-pill--brochure .plot-action-icon svg {
+  color: #7C3AED;
+}
+
+.plot-action-pill--call .plot-action-icon svg {
+  color: #F59E0B;
+}
+
+.plot-action-pill--location .plot-action-icon svg {
+  color: #DB2777;
+}
 
 /* Highlight the Filter pill while its panel is open */
 .plot-action-pill--filter.plot-action-pill--active {
   background: #1a1a1a;
   color: #FFFFFF;
 }
+
 .plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg {
   stroke: #FFFFFF;
 }
@@ -132,34 +154,35 @@ html.is-touch-device .plot-action-pill {
    further to leave more room for the filter bar and pano below it.
    (orientation: landscape) is a genuine viewport-geometry media
    feature (not a device-detection heuristic like hover/pointer), so
-   it's safe to combine directly with the touch class here. */
-/* Landscape phones have much less height to spare than portrait, so
-   pull the bar closer to the top edge and shrink the pills. The pills
-   also drop to ICON-ONLY on touch landscape: seven labeled pills are
-   ~800px+ wide, which overflows the ~740-800px landscape width of many
-   Android phones and pushes Call/Location into the hidden horizontal
-   scroll area (invisible scrollbar = looks like buttons are missing).
-   Icon-only, all seven always fit on any phone. The label span has its
-   own class (.plot-action-label, see action-bar.js) so the red Filter
-   count badge -- a separate span appended after it -- is unaffected.
-   (orientation: landscape) is a genuine viewport-geometry media
-   feature (not a device-detection heuristic like hover/pointer), so
-   it's safe to combine directly with the touch class here. */
+   it's safe to combine directly with the touch class here.
+
+   The pills also drop to ICON-ONLY on touch landscape: seven labeled
+   pills are ~800px+ wide, which overflows the ~740-800px landscape
+   width of many Android phones and pushes Call/Location into the
+   hidden horizontal scroll area (invisible scrollbar = looks like the
+   buttons are missing). Icon-only, all seven always fit with room to
+   spare, on any phone. The label span keeps its own class
+   (.plot-action-label) so the badge (a separate span appended after
+   it) is unaffected. */
 @media (orientation: landscape) {
   html.is-touch-device #plotActionBarRoot {
     top: 8px;
   }
+
   html.is-touch-device .plot-action-pill {
     padding: 7px;
     font-size: 12px;
   }
+
   html.is-touch-device .plot-action-label {
     display: none;
   }
+
   html.is-touch-device .plot-action-icon {
     width: 22px;
     height: 22px;
   }
+
   html.is-touch-device .plot-action-icon svg {
     width: 18px;
     height: 18px;
