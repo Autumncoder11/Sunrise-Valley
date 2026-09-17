@@ -14,114 +14,115 @@
    view, and expands it back to show the side dimensions.
    ============================================================ */
 
-/* Was `@media (max-width: 768px)` — width-only, so it dropped out of
-   mobile mode when a phone's width crossed 768px in landscape and the
-   card silently fell back to plot-popup.css's desktop layout mid-
-   rotation. (hover: none) and (pointer: coarse) identifies touch
-   devices regardless of orientation, so it stays matched through a
-   rotate; the max-width clause is kept only so a narrow desktop/
-   tablet browser window still gets the compact sheet too. */
-@media (hover: none) and (pointer: coarse),
-(max-width: 900px) {
-  #plotPopupRoot {
-    position: fixed !important;
-    left: 0;
-    right: 0;
-    top: auto !important;
-    bottom: 0;
-    width: 100%;
-    max-height: 38vh;
-    /* dvh accounts for the mobile toolbar showing/hiding mid-rotation;
-       vh above is the fallback for browsers without dvh support. Both
-       rules are kept -- the browser just uses whichever it understands. */
-    max-height: 38dvh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    z-index: 9999;
-    background: transparent;
-    /* Smooths any layout shift across a breakpoint/orientation change
-       instead of an abrupt snap (e.g. the vh->dvh recalculation above). */
-    transition: max-height 0.2s ease;
-  }
+/* Gated on the html.is-touch-device class set once in index.html's
+   <head> (touch capability at page load) -- see that inline script.
+   This used to be gated on `@media (hover:none) and (pointer:coarse),
+   (max-width: ...)`, but both of those are re-evaluated live as the
+   viewport changes, and on some mobile/in-app browsers they can
+   misreport for a moment during a rotation animation. Once the
+   landscape width of a large phone exceeded the width fallback too,
+   nothing was left to hold the mobile layout and it snapped back to
+   plot-popup.css's desktop styles. Touch capability itself never
+   changes when the device rotates, so a class set once here can't
+   flip back that way. */
+html.is-touch-device #plotPopupRoot {
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  top: auto !important;
+  bottom: 0;
+  width: 100%;
+  max-height: 38vh;
+  /* dvh accounts for the mobile toolbar showing/hiding mid-rotation;
+     vh above is the fallback for browsers without dvh support. Both
+     rules are kept, the browser just uses whichever it understands. */
+  max-height: 38dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 9999;
+  background: transparent;
+  /* Smooths any layout shift across an orientation change instead of
+     an abrupt snap (e.g. the vh -> dvh recalculation above). */
+  transition: max-height 0.2s ease;
+}
 
-  #plotPopupRoot .plot-popup-card {
-    border-radius: 16px 16px 0 0;
-    margin: 0 auto;
-    max-width: 100%;
-    width: 100%;
-    padding: 10px 16px 18px;
-    box-sizing: border-box;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-card {
+  border-radius: 16px 16px 0 0;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+  padding: 10px 16px 18px;
+  box-sizing: border-box;
+}
 
-  /* drag-handle affordance */
-  #plotPopupRoot .plot-popup-card::before {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-    background: #d5d5d5;
-    margin: 0 auto 10px;
-  }
+/* drag-handle affordance */
+html.is-touch-device #plotPopupRoot .plot-popup-card::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: #d5d5d5;
+  margin: 0 auto 10px;
+}
 
-  #plotPopupRoot .plot-popup-header {
-    cursor: pointer;
-    margin-bottom: 4px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-header {
+  cursor: pointer;
+  margin-bottom: 4px;
+}
 
-  #plotPopupRoot .plot-popup-title {
-    font-size: 17px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-title {
+  font-size: 17px;
+}
 
-  #plotPopupRoot .plot-popup-badge {
-    font-size: 11px;
-    padding: 2px 8px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+}
 
-  #plotPopupRoot .plot-popup-row--area,
-  #plotPopupRoot .plot-popup-facing-box,
-  #plotPopupRoot .plot-popup-row--corner {
-    margin: 5px 0;
-    padding: 7px 10px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-row--area,
+html.is-touch-device #plotPopupRoot .plot-popup-facing-box,
+html.is-touch-device #plotPopupRoot .plot-popup-row--corner {
+  margin: 5px 0;
+  padding: 7px 10px;
+}
 
-  #plotPopupRoot .plot-popup-divider {
-    margin: 8px 0;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-divider {
+  margin: 8px 0;
+}
 
-  #plotPopupRoot .plot-popup-section-label {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-section-label {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
 
-  #plotPopupRoot .plot-popup-side-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-side-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
 
-  #plotPopupRoot .plot-popup-side-box {
-    padding: 6px 8px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-side-box {
+  padding: 6px 8px;
+}
 
-  #plotPopupRoot .plot-popup-side-label {
-    font-size: 10px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-side-label {
+  font-size: 10px;
+}
 
-  #plotPopupRoot .plot-popup-side-value {
-    font-size: 14px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-side-value {
+  font-size: 14px;
+}
 
-  /* Collapsed state: toggled by plot-popup-mobile.js.
-     Hides everything except the header row so the sheet shrinks
-     to a thin strip and the map is fully visible. */
-  #plotPopupRoot .plot-popup-card.pp-collapsed>*:not(.plot-popup-header) {
-    display: none !important;
-  }
+/* Collapsed state: toggled by plot-popup-mobile.js.
+   Hides everything except the header row so the sheet shrinks
+   to a thin strip and the map is fully visible. */
+html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed>*:not(.plot-popup-header) {
+  display: none !important;
+}
 
-  #plotPopupRoot .plot-popup-card.pp-collapsed {
-    padding-bottom: 12px;
-  }
+html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed {
+  padding-bottom: 12px;
 }
 
 /* ------------------------------------------------------------
@@ -131,27 +132,30 @@
    Loosen the percentage (of a much shorter viewport) and tighten
    the internal padding/gaps so the sheet stays compact and the
    map behind it stays visible after rotating.
+
+   (orientation: landscape) is a genuine viewport-geometry media
+   feature (not a device-detection heuristic like hover/pointer),
+   so it's safe to combine directly with the touch class here.
    ------------------------------------------------------------ */
-@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
-((max-width: 900px) and (orientation: landscape)) {
-  #plotPopupRoot {
+@media (orientation: landscape) {
+  html.is-touch-device #plotPopupRoot {
     max-height: 55vh;
     max-height: 55dvh;
   }
 
-  #plotPopupRoot .plot-popup-card {
+  html.is-touch-device #plotPopupRoot .plot-popup-card {
     padding: 8px 14px 12px;
   }
 
-  #plotPopupRoot .plot-popup-title {
+  html.is-touch-device #plotPopupRoot .plot-popup-title {
     font-size: 15px;
   }
 
-  #plotPopupRoot .plot-popup-side-grid {
+  html.is-touch-device #plotPopupRoot .plot-popup-side-grid {
     gap: 4px;
   }
 
-  #plotPopupRoot .plot-popup-side-box {
+  html.is-touch-device #plotPopupRoot .plot-popup-side-box {
     padding: 4px 6px;
   }
 }

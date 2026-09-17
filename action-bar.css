@@ -101,39 +101,39 @@
   font-weight: bold;
 }
 
-/* Touch-device check (same as plot-popup-mobile.css) kept alongside the
-   width check so a phone in landscape keeps its compact pill sizing
-   instead of snapping back to the wider desktop padding. The width
-   fallback is set to 900px (not a portrait-phone width like 640px)
-   because most phones are WIDER than that in landscape (e.g. ~844-
-   926px) -- if the touch check above ever misreports for a moment
-   during an in-app browser's rotation animation, this fallback still
-   needs to catch a landscape phone, not just a portrait one. */
-@media (hover: none) and (pointer: coarse),
-(max-width: 900px) {
-  .plot-action-pill {
-    padding: 8px 14px 8px 8px;
-    font-size: 13px;
-  }
+/* Gated on the html.is-touch-device class set once in index.html's <head>
+   (touch capability at page load), not on (hover:none)/(pointer:coarse)
+   or a width breakpoint. Both of those are re-evaluated live as the
+   viewport changes, and on some mobile/in-app browsers they can
+   misreport for a moment during a rotation animation -- with nothing
+   left to fall back on once the landscape width exceeds any width
+   threshold, the layout would snap back to the desktop padding. Touch
+   capability itself never changes when the device rotates, so a class
+   set once here can't flip back that way. */
+html.is-touch-device .plot-action-pill {
+  padding: 8px 14px 8px 8px;
+  font-size: 13px;
 }
 
 /* Landscape phones have much less height to spare than portrait, so
    pull the bar closer to the top edge and shrink the pills a bit
-   further to leave more room for the filter bar and pano below it. */
-@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
-((max-width: 900px) and (orientation: landscape)) {
-  #plotActionBarRoot {
+   further to leave more room for the filter bar and pano below it.
+   (orientation: landscape) is a genuine viewport-geometry media
+   feature (not a device-detection heuristic like hover/pointer), so
+   it's safe to combine directly with the touch class here. */
+@media (orientation: landscape) {
+  html.is-touch-device #plotActionBarRoot {
     top: 8px;
   }
-  .plot-action-pill {
+  html.is-touch-device .plot-action-pill {
     padding: 6px 12px 6px 6px;
     font-size: 12px;
   }
-  .plot-action-icon {
+  html.is-touch-device .plot-action-icon {
     width: 20px;
     height: 20px;
   }
-  .plot-action-icon svg {
+  html.is-touch-device .plot-action-icon svg {
     width: 17px;
     height: 17px;
   }

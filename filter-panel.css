@@ -196,41 +196,45 @@
 }
 
 /* ---- Narrow screens: stack fields, allow horizontal scroll -------------
-   Touch-device check (same as plot-popup-mobile.css) kept alongside the
-   width check so a phone in landscape keeps this compact layout instead
-   of snapping back to the wider desktop spacing once its width crosses
-   640px. */
-@media (hover: none) and (pointer: coarse),
-(max-width: 900px) {
-  .plot-filter-bar {
-    gap: 14px;
-    padding: 8px 10px;
-    overflow-x: auto;
-  }
-  .plot-filter-select {
-    min-width: 120px;
-  }
+   Gated on the html.is-touch-device class set once in index.html's
+   <head> (touch capability at page load), not on
+   (hover:none)/(pointer:coarse) or a width breakpoint. Both of those
+   are re-evaluated live as the viewport changes, and on some mobile/
+   in-app browsers they can misreport for a moment during a rotation
+   animation, snapping the layout back to the desktop spacing once the
+   landscape width exceeds any width threshold. Touch capability
+   itself never changes when the device rotates, so a class set once
+   here can't flip back that way. */
+html.is-touch-device .plot-filter-bar {
+  gap: 14px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+html.is-touch-device .plot-filter-select {
+  min-width: 120px;
 }
 
 /* Landscape phones have much less height to spare than portrait, so
    sit closer under the (now shorter) action bar and shave padding to
-   keep the bar from crowding the pano below it. */
-@media ((hover: none) and (pointer: coarse) and (orientation: landscape)),
-((max-width: 900px) and (orientation: landscape)) {
-  #plotFilterRoot {
+   keep the bar from crowding the pano below it. (orientation:
+   landscape) is a genuine viewport-geometry media feature (not a
+   device-detection heuristic like hover/pointer), so it's safe to
+   combine directly with the touch class here. */
+@media (orientation: landscape) {
+  html.is-touch-device #plotFilterRoot {
     top: 50px; /* tracks the shrunk action-bar height in that mode */
   }
-  .plot-filter-bar {
+  html.is-touch-device .plot-filter-bar {
     gap: 10px;
     padding: 6px 10px;
   }
-  .plot-filter-select,
-  .plot-filter-input,
-  .plot-filter-unit {
+  html.is-touch-device .plot-filter-select,
+  html.is-touch-device .plot-filter-input,
+  html.is-touch-device .plot-filter-unit {
     padding-top: 6px;
     padding-bottom: 6px;
   }
-  .plot-filter-search {
+  html.is-touch-device .plot-filter-search {
     padding: 8px 20px;
   }
 }

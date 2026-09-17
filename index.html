@@ -5,6 +5,23 @@
 	<title>krpano - DJI_20260530023817_0241_D</title>
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+	<script>
+		// Stamps touch capability onto <html> ONCE, before any CSS is
+		// applied. This is the single source of truth the mobile CSS
+		// (action-bar.css / filter-panel.css / plot-popup-mobile.css)
+		// keys off, instead of `(hover:none) and (pointer:coarse)` or a
+		// width breakpoint -- both of which can shift mid-rotation on
+		// some mobile/in-app browsers and cause the layout to snap back
+		// to the desktop styles. Touch capability itself never changes
+		// when the device rotates, so a class set once here can't flip
+		// back the way a live media-query re-evaluation can.
+		document.documentElement.classList.toggle(
+			"is-touch-device",
+			("ontouchstart" in window) ||
+			(navigator.maxTouchPoints > 0) ||
+			(navigator.msMaxTouchPoints > 0)
+		);
+	</script>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="mobile-web-app-capable" content="yes" />
@@ -286,9 +303,7 @@
 			// browsers, etc.). tour.xml's <skin_settings maps="..."/>
 			// reads this as js_is_mobile.
 			initvars: {
-				js_is_mobile: ('ontouchstart' in window) ||
-					(navigator.maxTouchPoints > 0) ||
-					(navigator.msMaxTouchPoints > 0)
+				js_is_mobile: document.documentElement.classList.contains("is-touch-device")
 			},
 			onready: function (krpanoInterface) {
 				krpano = krpanoInterface;        // must be global — plot-popup.js reads window.krpano
