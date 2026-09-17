@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -26,10 +26,10 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link rel="stylesheet" href="plot-popup.css?v=202609171400" />
-	<link rel="stylesheet" href="plot-popup-mobile.css?v=202609171400">
+	<link rel="stylesheet" href="plot-popup.css?v=202609170334" />
+	<link rel="stylesheet" href="plot-popup-mobile.css?v=202609170334">
 	<link rel="stylesheet" href="filter-panel.css?v=202609170334" />
-	<link rel="stylesheet" href="action-bar.css?v=202609171400" />
+	<link rel="stylesheet" href="action-bar.css?v=202609170334" />
 	<link rel="stylesheet" href="enquiry-popup.css?v=202609170334" />
 	<style>
 		html {
@@ -45,27 +45,6 @@
 			font-size: 16px;
 			color: #FFFFFF;
 			background-color: #000000;
-		}
-
-		/* ---- Chrome-on-Android rotation compositing fix --------------------
-		   The krpano viewer renders into a WebGL <canvas> inside #pano. On
-		   Chrome for Android, rotating the phone promotes that canvas to
-		   its own GPU layer, and it can end up painting OVER the fixed
-		   DOM UI (action bar, plot popup) -- the UI appears for a second,
-		   then disappears in landscape. Giving #pano an explicit low
-		   stacking context and forcing each fixed UI root onto its own
-		   composited layer (translateZ(0)) keeps the UI above the canvas
-		   in every orientation. iOS Safari is unaffected (harmless). */
-		#pano {
-			position: relative;
-			z-index: 0;
-		}
-
-		#plotPopupRoot,
-		#plotActionBarRoot,
-		#plotFilterRoot,
-		#enquiryPopupRoot {
-			transform: translateZ(0);
 		}
 
 		/* ---- Initial loading overlay -------------------------------------
@@ -235,7 +214,7 @@
 	<script src="plot-popup-mobile.js?v=202609170334"></script>
 	<script src="filter-panel.js?v=202609170334"></script>
 	<script src="enquiry-popup.js?v=202609170334"></script>
-	<script src="action-bar.js?v=202609171400"></script>
+	<script src="action-bar.js?v=202609170334"></script>
 	<!-- TEMPORARY: road label position/rotation editor. Remove this line
 	     (and delete road_label_editor.js) once labels are placed correctly. -->
 	<script src="road-label-zoom.js?v=202609170334"></script>
@@ -371,6 +350,76 @@
 	<div id="plotActionBarRoot"></div>
 	<div id="plotFilterRoot"></div>
 	<div id="enquiryPopupRoot"></div>
+
+	<script>
+		// Keeps the custom overlay UI (action bar, filter bar, plot popup,
+		// enquiry popup) visible when krpano's landscape/immersive mode
+		// takes an element fullscreen (confirmed via DevTools showing a
+		// "top-layer" badge on #krpanoSWFObject in landscape on Android).
+		// Per the Fullscreen API spec, ONLY the fullscreened element and
+		// its own descendants are painted -- everything else in the page
+		// is invisible regardless of its CSS, even though its inline
+		// style still correctly says display:block. These four divs are
+		// siblings of the pano container, not descendants of it, so they
+		// disappear the instant fullscreen engages. The fix: move them
+		// INTO the fullscreen element while it's active, and move them
+		// back out to <body> the moment fullscreen ends.
+		(function () {
+			"use strict";
+			var OVERLAY_IDS = [
+				"plotPopupRoot",
+				"plotActionBarRoot",
+				"plotFilterRoot",
+				"enquiryPopupRoot"
+			];
+
+			function getFullscreenElement() {
+				return document.fullscreenElement ||
+					document.webkitFullscreenElement ||
+					document.mozFullScreenElement ||
+					document.msFullscreenElement ||
+					null;
+			}
+
+			function moveOverlaysInto(target) {
+				OVERLAY_IDS.forEach(function (id) {
+					var el = document.getElementById(id);
+					if (el && el.parentNode !== target) {
+						target.appendChild(el);
+					}
+				});
+			}
+
+			function moveOverlaysBack() {
+				OVERLAY_IDS.forEach(function (id) {
+					var el = document.getElementById(id);
+					if (el && el.parentNode !== document.body) {
+						document.body.appendChild(el);
+					}
+				});
+			}
+
+			function onFullscreenChange() {
+				var fsEl = getFullscreenElement();
+				// document.documentElement going fullscreen is harmless --
+				// <body> (and these divs) are still its descendants, so
+				// nothing needs to move. Only an INNER element (like
+				// krpano's pano container) going fullscreen strands
+				// these siblings outside the painted subtree.
+				if (fsEl && fsEl !== document.documentElement) {
+					moveOverlaysInto(fsEl);
+				} else {
+					moveOverlaysBack();
+				}
+			}
+
+			["fullscreenchange", "webkitfullscreenchange",
+				"mozfullscreenchange", "MSFullscreenChange"
+			].forEach(function (evt) {
+				document.addEventListener(evt, onFullscreenChange);
+			});
+		})();
+	</script>
 
 	<script>
 		(function () {
