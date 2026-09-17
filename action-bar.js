@@ -54,9 +54,18 @@
     locationLat: "11.12801342",
     locationLng: "77.00365839",
 
-    // Leading slash = always resolve from the site root, even if the tour
-    // page itself lives in a subfolder.
-    brochureUrl: "/SUNRISE_VALLEY_layout.pdf",
+    // Deliberately a RELATIVE path (no leading slash): this resolves
+    // against the current page's own folder. A leading slash resolves
+    // from the actual domain root instead, which breaks the moment the
+    // tour is hosted in a subfolder -- exactly the case here on GitHub
+    // Pages, where the site lives at autumncoder11.github.io/Sunrise-
+    // Valley/, not at the domain root. With a leading slash this was
+    // requesting autumncoder11.github.io/SUNRISE_VALLEY_layout.pdf
+    // (404 -> GitHub's HTML error page gets downloaded instead of the
+    // PDF). If you ever move the PDF into a subfolder alongside
+    // index.html (e.g. "assets/SUNRISE_VALLEY_layout.pdf"), update this
+    // to match -- it's always relative to wherever index.html lives.
+    brochureUrl: "SUNRISE_VALLEY_layout.pdf",
     brochureFileName: "SUNRISE_VALLEY_layout.pdf",
 
     // Constant speed (compass degrees per second) the camera pans at
@@ -121,10 +130,7 @@
     btn.type = "button";
     var iconWrap = el("span", "plot-action-icon", ICONS[key]);
     btn.appendChild(iconWrap);
-    // The label span gets its own class so the CSS can hide it (icon-only
-    // pills) on touch-landscape without also hiding the count badge,
-    // which is appended AFTER this span by the Filter pill setup below.
-    btn.appendChild(el("span", "plot-action-label", label));
+    btn.appendChild(el("span", null, label));
     return btn;
   }
 
@@ -244,23 +250,6 @@
     }
     root.innerHTML = "";
     var bar = el("div", "plot-action-bar");
-
-    // Force the fixed bar to repaint after an orientation change. Chrome
-    // for Android can leave composited fixed-position layers (and the
-    // 100vw-derived sizing above) stale after a portrait<->landscape
-    // rotation, showing the bar at its old position or not at all until
-    // the user happens to touch the page. Toggling display off/on after
-    // the rotation settles forces a clean reflow + repaint. Harmless on
-    // iOS/desktop, where it's just a no-op reflow.
-    var repaintAfterRotation = function () {
-      setTimeout(function () {
-        root.style.display = "none";
-        void root.offsetHeight; // force reflow
-        root.style.display = "";
-      }, 350); // after the rotation/address-bar animation settles
-    };
-    window.addEventListener("orientationchange", repaintAfterRotation);
-    window.addEventListener("resize", repaintAfterRotation);
 
     // ---- Filter ----
     var filterBtn = makePill("filter", "Filter");
