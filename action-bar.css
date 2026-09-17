@@ -97,7 +97,12 @@
   font-weight: bold;
 }
 
-@media (max-width: 640px) {
+/* Touch-device check (same as plot-popup-mobile.css) kept alongside the
+   width check so a phone in landscape keeps its compact pill sizing
+   instead of snapping back to the wider desktop padding once its width
+   crosses 640px. */
+@media (hover: none) and (pointer: coarse),
+(max-width: 640px) {
   .plot-action-pill {
     padding: 8px 14px 8px 8px;
     font-size: 13px;

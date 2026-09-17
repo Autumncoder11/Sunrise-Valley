@@ -191,8 +191,13 @@
   color: #FCA5A5;
 }
 
-/* ---- Narrow screens: stack fields, allow horizontal scroll ------------- */
-@media (max-width: 640px) {
+/* ---- Narrow screens: stack fields, allow horizontal scroll -------------
+   Touch-device check (same as plot-popup-mobile.css) kept alongside the
+   width check so a phone in landscape keeps this compact layout instead
+   of snapping back to the wider desktop spacing once its width crosses
+   640px. */
+@media (hover: none) and (pointer: coarse),
+(max-width: 640px) {
   .plot-filter-bar {
     gap: 14px;
     padding: 8px 10px;
