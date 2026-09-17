@@ -56,7 +56,7 @@
 
     // Leading slash = always resolve from the site root, even if the tour
     // page itself lives in a subfolder.
-    brochureUrl: "/SUNRISE_VALLEY_layout.pdf",
+    brochureUrl: "SUNRISE_VALLEY_layout.pdf",
     brochureFileName: "SUNRISE_VALLEY_layout.pdf",
 
     // Constant speed (compass degrees per second) the camera pans at
