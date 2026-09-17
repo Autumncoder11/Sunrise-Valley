@@ -12,6 +12,8 @@
      above this fixed popup after a portrait->landscape rotation and the
      popup becomes invisible (or the whole page's DOM UI flickers out). */
   transform: translateZ(0);
+  will-change: transform;
+  isolation: isolate;
 }
 
 .plot-popup-card {

@@ -24,7 +24,10 @@
      ABOVE the canvas. It has no X/Y offset, so it can't get stuck
      off-screen the way the old translateX(-50%) centering did. */
   transform: translateZ(0);
-  z-index: 950; /* above the filter bar and pano, below the plot/enquiry popups */
+  will-change: transform;
+  isolation: isolate;
+  z-index: 950;
+  /* above the filter bar and pano, below the plot/enquiry popups */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -33,10 +36,12 @@
   align-items: center;
   gap: 10px;
   overflow-x: auto;
-  padding: 4px 2px; /* room for the pill shadow without clipping */
+  padding: 4px 2px;
+  /* room for the pill shadow without clipping */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .plot-action-bar::-webkit-scrollbar {
   display: none;
 }
@@ -61,9 +66,11 @@
      abrupt snap mid-rotation. */
   transition: padding 0.15s ease, font-size 0.15s ease;
 }
+
 .plot-action-pill:hover {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
 }
+
 .plot-action-pill:active {
   transform: translateY(1px);
 }
@@ -76,24 +83,43 @@
   height: 24px;
   flex: 0 0 auto;
 }
+
 .plot-action-icon svg {
   width: 20px;
   height: 20px;
 }
 
 /* Per-action accent colors, matching the mockup */
-.plot-action-pill--filter .plot-action-icon svg { stroke: #333333; }
-.plot-action-pill--whatsapp .plot-action-icon svg { color: #22C55E; }
-.plot-action-pill--enquiry .plot-action-icon svg { color: #2563EB; }
-.plot-action-pill--brochure .plot-action-icon svg { color: #7C3AED; }
-.plot-action-pill--call .plot-action-icon svg { color: #F59E0B; }
-.plot-action-pill--location .plot-action-icon svg { color: #DB2777; }
+.plot-action-pill--filter .plot-action-icon svg {
+  stroke: #333333;
+}
+
+.plot-action-pill--whatsapp .plot-action-icon svg {
+  color: #22C55E;
+}
+
+.plot-action-pill--enquiry .plot-action-icon svg {
+  color: #2563EB;
+}
+
+.plot-action-pill--brochure .plot-action-icon svg {
+  color: #7C3AED;
+}
+
+.plot-action-pill--call .plot-action-icon svg {
+  color: #F59E0B;
+}
+
+.plot-action-pill--location .plot-action-icon svg {
+  color: #DB2777;
+}
 
 /* Highlight the Filter pill while its panel is open */
 .plot-action-pill--filter.plot-action-pill--active {
   background: #1a1a1a;
   color: #FFFFFF;
 }
+
 .plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg {
   stroke: #FFFFFF;
 }
@@ -149,17 +175,21 @@ html.is-touch-device .plot-action-pill {
   html.is-touch-device #plotActionBarRoot {
     top: 8px;
   }
+
   html.is-touch-device .plot-action-pill {
     padding: 7px;
     font-size: 12px;
   }
+
   html.is-touch-device .plot-action-label {
     display: none;
   }
+
   html.is-touch-device .plot-action-icon {
     width: 22px;
     height: 22px;
   }
+
   html.is-touch-device .plot-action-icon svg {
     width: 18px;
     height: 18px;
