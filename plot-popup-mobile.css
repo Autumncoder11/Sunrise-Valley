@@ -31,10 +31,17 @@
     bottom: 0;
     width: 100%;
     max-height: 38vh;
+    /* dvh accounts for the mobile toolbar showing/hiding mid-rotation;
+       vh above is the fallback for browsers without dvh support. Both
+       rules are kept -- the browser just uses whichever it understands. */
+    max-height: 38dvh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 9999;
     background: transparent;
+    /* Smooths any layout shift across a breakpoint/orientation change
+       instead of an abrupt snap (e.g. the vh->dvh recalculation above). */
+    transition: max-height 0.2s ease;
   }
 
   #plotPopupRoot .plot-popup-card {
@@ -114,5 +121,36 @@
 
   #plotPopupRoot .plot-popup-card.pp-collapsed {
     padding-bottom: 12px;
+  }
+}
+
+/* ------------------------------------------------------------
+   Landscape phones have far less viewport height than portrait
+   (e.g. ~375-430px vs ~800px+), so the same 38vh/38dvh cap above
+   is proportionally fine but can still crowd the pano/CAD view.
+   Loosen the percentage (of a much shorter viewport) and tighten
+   the internal padding/gaps so the sheet stays compact and the
+   map behind it stays visible after rotating.
+   ------------------------------------------------------------ */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  #plotPopupRoot {
+    max-height: 55vh;
+    max-height: 55dvh;
+  }
+
+  #plotPopupRoot .plot-popup-card {
+    padding: 8px 14px 12px;
+  }
+
+  #plotPopupRoot .plot-popup-title {
+    font-size: 15px;
+  }
+
+  #plotPopupRoot .plot-popup-side-grid {
+    gap: 4px;
+  }
+
+  #plotPopupRoot .plot-popup-side-box {
+    padding: 4px 6px;
   }
 }

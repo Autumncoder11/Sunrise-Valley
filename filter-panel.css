@@ -28,6 +28,10 @@
   padding: 10px 16px 10px 22px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Smooths the padding/gap change across the touch/width breakpoint
+     and the landscape-specific rule below, instead of an abrupt snap
+     mid-rotation. */
+  transition: padding 0.15s ease, gap 0.15s ease;
 }
 
 .plot-filter-field {
@@ -205,5 +209,27 @@
   }
   .plot-filter-select {
     min-width: 120px;
+  }
+}
+
+/* Landscape phones have much less height to spare than portrait, so
+   sit closer under the (now shorter) action bar and shave padding to
+   keep the bar from crowding the pano below it. */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  #plotFilterRoot {
+    top: 50px; /* tracks the shrunk action-bar height in that mode */
+  }
+  .plot-filter-bar {
+    gap: 10px;
+    padding: 6px 10px;
+  }
+  .plot-filter-select,
+  .plot-filter-input,
+  .plot-filter-unit {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .plot-filter-search {
+    padding: 8px 20px;
   }
 }

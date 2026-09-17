@@ -44,6 +44,10 @@
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
+  /* Smooths the padding/font-size change across the touch/width
+     breakpoint and the landscape-specific rule below, instead of an
+     abrupt snap mid-rotation. */
+  transition: padding 0.15s ease, font-size 0.15s ease;
 }
 .plot-action-pill:hover {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
@@ -106,5 +110,26 @@
   .plot-action-pill {
     padding: 8px 14px 8px 8px;
     font-size: 13px;
+  }
+}
+
+/* Landscape phones have much less height to spare than portrait, so
+   pull the bar closer to the top edge and shrink the pills a bit
+   further to leave more room for the filter bar and pano below it. */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  #plotActionBarRoot {
+    top: 8px;
+  }
+  .plot-action-pill {
+    padding: 6px 12px 6px 6px;
+    font-size: 12px;
+  }
+  .plot-action-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .plot-action-icon svg {
+    width: 17px;
+    height: 17px;
   }
 }
