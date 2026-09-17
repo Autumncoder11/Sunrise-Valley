@@ -277,6 +277,19 @@
 		embedpano({
 			xml: "tour.xml",
 			target: "pano",
+			// Same touch-capability test the mobile CSS relies on (see
+			// action-bar.css / filter-panel.css / plot-popup-mobile.css),
+			// so krpano's XML sees the exact same "is this mobile" answer
+			// as the rest of the page instead of its own separate
+			// user-agent-based device.mobile detection, which can
+			// disagree with reality (desktop-site mode, some in-app
+			// browsers, etc.). tour.xml's <skin_settings maps="..."/>
+			// reads this as js_is_mobile.
+			initvars: {
+				js_is_mobile: ('ontouchstart' in window) ||
+					(navigator.maxTouchPoints > 0) ||
+					(navigator.msMaxTouchPoints > 0)
+			},
 			onready: function (krpanoInterface) {
 				krpano = krpanoInterface;        // must be global — plot-popup.js reads window.krpano
 				plotPopup.init("all_plots_matched.json"); // starts loading your plot data
