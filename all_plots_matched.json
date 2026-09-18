@@ -9,6 +9,7 @@
     },
     "status": "SOLD",
     "category": "CORNER",
+    "facing": "NORTH",
     "sides": [
       {
         "side": "A",
