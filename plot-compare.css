@@ -61,6 +61,13 @@
   justify-content: center;
   padding: 16px;
   box-sizing: border-box;
+  /* Safety net: if the card's own max-height/overflow ever gets
+     overridden by something (or a flex child refuses to shrink below
+     its content's min size, which can happen in some mobile browsers),
+     the backdrop itself can still scroll instead of clipping the card's
+     top (header/close button) off-screen. */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .plot-compare-card {
@@ -70,9 +77,19 @@
   padding: 18px 20px 20px;
   width: 100%;
   max-width: 640px;
+  /* dvh accounts for mobile browsers' address/toolbar showing or hiding
+     -- plain vh is measured against the LARGEST possible viewport, so on
+     a phone in landscape (where the toolbar takes up a big share of an
+     already-short screen) 85vh can be taller than what's actually
+     visible, pushing the card's header above the fold. Falls back to vh
+     on older browsers that don't support dvh. */
   max-height: 85vh;
+  max-height: 85dvh;
   overflow-y: auto;
   box-sizing: border-box;
+  /* Margin (not just centering) so a tall card still gets breathing room
+     top and bottom when the backdrop itself has to scroll. */
+  margin: auto;
 }
 
 .plot-compare-header {
@@ -225,5 +242,48 @@
 @media (max-width: 480px) {
   .plot-compare-card {
     padding: 14px 12px 16px;
+  }
+}
+
+/* Landscape phones: much less height to spare, so tighten padding and
+   font sizes to fit more of the card without scrolling, and start the
+   card near the top of the screen rather than dead-center (centering a
+   card taller than the screen just pushes its header above the visible
+   area). Gated on html.is-touch-device, same as action-bar.css's own
+   landscape rule, since (orientation: landscape) + (hover:none) can
+   misreport mid-rotation on some Android browsers. */
+@media (orientation: landscape) {
+  html.is-touch-device .plot-compare-backdrop {
+    align-items: flex-start;
+    padding: 10px 16px;
+  }
+
+  html.is-touch-device .plot-compare-card {
+    padding: 12px 14px 14px;
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+
+  html.is-touch-device .plot-compare-title {
+    font-size: 15px;
+  }
+
+  html.is-touch-device .plot-compare-col-header {
+    padding: 8px 6px 6px;
+  }
+
+  html.is-touch-device .plot-compare-name {
+    font-size: 12px;
+  }
+
+  html.is-touch-device .plot-compare-row-label,
+  html.is-touch-device .plot-compare-cell {
+    font-size: 11px;
+    padding: 4px 3px;
+  }
+
+  html.is-touch-device .plot-compare-grid {
+    row-gap: 4px;
+    column-gap: 6px;
   }
 }
