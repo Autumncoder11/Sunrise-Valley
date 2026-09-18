@@ -42,7 +42,13 @@
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 1000; /* above the action bar (950) and the plot popup */
+  /* Deliberately much higher than the action bar's 950 -- plot-popup.css
+     (not a file we have here) sets its own z-index for the plot popup
+     card, and if that happens to be above 1000, this panel would render
+     correctly but sit BEHIND that still-open popup, invisibly. 2000 is
+     picked to clear any reasonable popup z-index; raise it further if
+     your plot-popup.css ever goes higher than that. */
+  z-index: 2000;
   font-family: Arial, Helvetica, sans-serif;
 }
 

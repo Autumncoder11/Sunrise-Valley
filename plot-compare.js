@@ -226,6 +226,10 @@
   }
 
   function openPanel() {
+    // Close any open plot popup first -- otherwise it can visually sit on
+    // top of (or just clutter alongside) the comparison panel, since both
+    // are full-detail cards competing for the same screen space.
+    if (typeof window.closePlotPopup === "function") window.closePlotPopup();
     panelOpen = true;
     renderPanel();
   }
