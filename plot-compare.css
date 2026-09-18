@@ -245,19 +245,27 @@
   }
 }
 
-/* Landscape phones: much less height to spare, so tighten padding and
-   font sizes to fit more of the card without scrolling, and start the
-   card near the top of the screen rather than dead-center (centering a
-   card taller than the screen just pushes its header above the visible
-   area). Gated on html.is-touch-device, same as action-bar.css's own
-   landscape rule, since (orientation: landscape) + (hover:none) can
-   misreport mid-rotation on some Android browsers. */
+/* Landscape, ANY pointer type: centering a card taller than the screen
+   (align-items: center, the default) pushes the excess off equally on
+   both top and bottom -- and because a scrolling container can't scroll
+   to a negative offset, that top portion (the header + close button)
+   becomes permanently unreachable, not just visually tight. This isn't
+   a touch-only problem: a short landscape browser window with a mouse
+   hits it just as hard. So this part is UNGATED, unlike the cosmetic
+   padding/font tightening below (which stays behind is-touch-device,
+   same as action-bar.css's own landscape rule, since (orientation:
+   landscape) + (hover:none) can misreport mid-rotation on some Android
+   browsers -- that risk only affects cosmetics here, not reachability). */
 @media (orientation: landscape) {
-  html.is-touch-device .plot-compare-backdrop {
+  .plot-compare-backdrop {
     align-items: flex-start;
     padding: 10px 16px;
   }
+}
 
+/* Landscape phones: much less height to spare, so also tighten padding
+   and font sizes to fit more of the card without scrolling. */
+@media (orientation: landscape) {
   html.is-touch-device .plot-compare-card {
     padding: 12px 14px 14px;
     max-height: 92vh;
