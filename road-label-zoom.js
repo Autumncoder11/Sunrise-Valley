@@ -117,9 +117,6 @@
     return css + sep + decl;
   }
 
-  var lastPx = null;
-  var lastFov = null;
-
   function update() {
     if (!running) return;
     var kr = window.krpano;
@@ -127,25 +124,26 @@
       if (!roadLabels) roadLabels = collectRoadLabels();
       if (roadLabels.length) {
         var fov = parseFloat(kr.get("view.fov"));
-        if (isFinite(fov) && fov !== lastFov) {
-          lastFov = fov;
+        if (isFinite(fov)) {
           var b = fovBounds();
+          // fov SHRINKS as the user zooms in, so invert it: t=0 at
+          // fovmax (zoomed all the way out) -> MIN_FONT_PX, t=1 at
+          // fovmin (zoomed all the way in) -> MAX_FONT_PX.
           var t = (b.max - fov) / (b.max - b.min);
           if (t < 0) t = 0;
           if (t > 1) t = 1;
           var px = MIN_FONT_PX + t * (MAX_FONT_PX - MIN_FONT_PX);
-
-          // Only write to krpano (and force a re-render of every
-          // roadlabel hotspot's texture) when the size would
-          // actually change -- writing every frame regardless of
-          // whether fov moved was forcing continuous GPU texture
-          // churn even while the camera sat completely still.
-          if (lastPx === null || Math.abs(px - lastPx) >= 0.05) {
-            lastPx = px;
-            for (var i = 0; i < roadLabels.length; i++) {
-              var rl = roadLabels[i];
-              kset("hotspot[" + rl.name + "].css", withFontSize(rl.baseCss, px));
+          if (DEBUG) {
+            var now = Date.now();
+            if (now - lastDebugLogTime > 2000) {
+              lastDebugLogTime = now;
+              console.log("road-label-zoom: fov=" + fov.toFixed(2) +
+                " -> t=" + t.toFixed(2) + " -> font-size=" + px.toFixed(2) + "px");
             }
+          }
+          for (var i = 0; i < roadLabels.length; i++) {
+            var rl = roadLabels[i];
+            kset("hotspot[" + rl.name + "].css", withFontSize(rl.baseCss, px));
           }
         }
       }
