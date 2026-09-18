@@ -13,13 +13,24 @@
 		(function () {
 			"use strict";
 			var el = document.getElementById("ppDebugOverlay");
-			var lines = [];
+			var STORAGE_KEY = "pp_debug_log";
+			var lines = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "[]");
+
+			function render() { el.textContent = lines.slice(-30).join("\n"); }
+
 			function log(msg) {
 				var t = new Date().toISOString().substr(11, 12);
 				lines.push(t + " " + msg);
-				if (lines.length > 25) lines.shift();
-				el.textContent = lines.join("\n");
+				if (lines.length > 60) lines.shift();
+				sessionStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+				render();
 			}
+
+			// If this script is running with log lines already in sessionStorage,
+			// this execution is a FRESH page load that inherited an old log --
+			// which only happens after a real navigation/reload of the tab.
+			if (lines.length > 0) log("=== SCRIPT RE-INIT (page reloaded/navigated) ===");
+			render();
 
 			function watchRoot() {
 				var root = document.getElementById("plotPopupRoot");
@@ -30,19 +41,21 @@
 					muts.forEach(function (m) {
 						if (m.type === "attributes") {
 							log("root attr '" + m.attributeName + "' -> " + root.getAttribute(m.attributeName));
-						} else if (m.type === "childList") {
+						} else {
 							log("root childList changed, childCount=" + root.childNodes.length);
 						}
 					});
-				}).observe(root, { attributes: true, childList: true, subtree: false });
+				}).observe(root, { attributes: true, childList: true });
 
-				// Catch the root itself being removed from the DOM entirely.
 				new MutationObserver(function () {
 					if (!document.body.contains(root)) log("root REMOVED FROM DOM");
 				}).observe(document.body, { childList: true, subtree: true });
 			}
 
 			window.addEventListener("orientationchange", function () { log("orientationchange fired"); });
+			window.addEventListener("pagehide", function (e) { log("pagehide, persisted=" + e.persisted); });
+			document.addEventListener("visibilitychange", function () { log("visibilitychange -> " + document.visibilityState); });
+
 			document.addEventListener("DOMContentLoaded", watchRoot);
 			if (document.readyState !== "loading") watchRoot();
 		})();
