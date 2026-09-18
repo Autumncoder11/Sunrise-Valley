@@ -151,6 +151,7 @@
       if (data[hotspotName]) return; // real data already loaded for this key -- don't clobber it
       var cfg = PLACEHOLDER_PLOTS[hotspotName];
       data[hotspotName] = {
+        hotspotName: hotspotName,
         displayName: cfg.displayName || deriveDisplayName(hotspotName),
         sides: {},
         sidesRing: [],
@@ -262,6 +263,7 @@
           var sidesArr = isWrapped ? entry.sides : (Array.isArray(entry) ? entry : []);
           var extra = isWrapped ? entry : {};
           data[hotspotName] = {
+            hotspotName: hotspotName, // so a plot object alone (e.g. passed to plot-compare.js) knows its own key
             displayName: extra.displayName || deriveDisplayName(hotspotName),
             sides: sidesArrayToObject(sidesArr),
             // Ordered [{side, length, from, to}, ...] in true polygon
@@ -1228,6 +1230,18 @@
     }
   }
 
+  // Accepts a dedicated isCorner/corner flag if the JSON provides one, in
+  // addition to (case-insensitively) category === "CORNER" -- some plots
+  // may be flagged as corner plots without being put in the CORNER
+  // category bucket (which also drives the pink map border/fill).
+  // Pulled out to its own function (used to be inline in renderPopup only)
+  // so plot-compare.js's side-by-side view can apply the exact same rule
+  // via window.plotPopup.isCornerPlot() instead of re-guessing it.
+  function isCornerPlot(plot) {
+    return plot.isCorner === true || plot.corner === true ||
+      (typeof plot.category === "string" && plot.category.toUpperCase() === "CORNER");
+  }
+
   function renderPopup(plot) {
     var root = document.getElementById("plotPopupRoot");
     if (!root) {
@@ -1276,13 +1290,24 @@
     var facingLabel = facingToLabel(plot.facing);
     var facingText = facingLabel ? toTitleCase(facingLabel) : "—";
 
-    // Accept a dedicated isCorner/corner flag if the JSON provides one, in
-    // addition to (case-insensitively) category === "CORNER" -- some plots
-    // may be flagged as corner plots without being put in the CORNER
-    // category bucket (which also drives the pink map border/fill).
-    var isCorner = plot.isCorner === true || plot.corner === true ||
-      (typeof plot.category === "string" && plot.category.toUpperCase() === "CORNER");
+    var isCorner = isCornerPlot(plot);
     var cornerText = isCorner ? "Yes" : "No";
+
+    // ---- Compare button --------------------------------------------------
+    // Only rendered if plot-compare.js has loaded (guards load order --
+    // plot-popup.css/js don't otherwise know or care that compare exists).
+    // Label reflects whether THIS plot is already in the compare list, so
+    // reopening a plot you'd previously added shows "Remove" instead of
+    // "Add" again.
+    var compareHtml = "";
+    if (window.plotCompare && typeof window.plotCompare.isSelected === "function") {
+      var inCompare = window.plotCompare.isSelected(plot.hotspotName);
+      compareHtml =
+        '<button class="plot-popup-compare-btn' + (inCompare ? ' plot-popup-compare-btn--active' : '') + '" ' +
+        'data-hotspot="' + plot.hotspotName + '">' +
+        (inCompare ? '\u2713 In Compare \u2014 Remove' : '+ Add to Compare') +
+        '</button>';
+    }
 
     root.innerHTML =
       '<div class="plot-popup-card">' +
@@ -1293,6 +1318,7 @@
       '<span class="plot-popup-badge ' + statusClass(plot.status) + '">' +
       (plot.status ? plot.status.toUpperCase() : "AVAILABLE") +
       '</span>' +
+      compareHtml +
       '<div class="plot-popup-row plot-popup-row--area">' +
       '<span>Area' + (sqft != null && areaIsEstimated ? ' (est.)' : '') + '</span>' +
       '<span class="plot-popup-area-value">' + areaText + '</span>' +
@@ -1316,7 +1342,34 @@
 
     root.style.display = "block";
     root.querySelector(".plot-popup-close").addEventListener("click", closePlotPopup);
+
+    var compareBtn = root.querySelector(".plot-popup-compare-btn");
+    if (compareBtn) {
+      compareBtn.addEventListener("click", function () {
+        var hotspotName = compareBtn.getAttribute("data-hotspot");
+        window.plotCompare.toggle(hotspotName);
+        // toggle() already fires "plotcompare:changed" (see the listener
+        // right below), which is what actually repaints this button --
+        // no need to touch its label/class here too.
+      });
+    }
   }
+
+  // Keeps the popup's own Compare button in sync when the compare list
+  // changes from somewhere else (e.g. the user hits the little "x" on
+  // this same plot inside the comparison panel while its popup is still
+  // open). A single listener added once at load, rather than one added
+  // fresh inside every renderPopup() call, so repeated open/close of the
+  // popup never piles up duplicate listeners.
+  document.addEventListener("plotcompare:changed", function () {
+    if (!currentSelected || !window.plotCompare) return;
+    var root = document.getElementById("plotPopupRoot");
+    var btn = root && root.querySelector(".plot-popup-compare-btn");
+    if (!btn) return;
+    var inCompare = window.plotCompare.isSelected(currentSelected);
+    btn.textContent = inCompare ? "\u2713 In Compare \u2014 Remove" : "+ Add to Compare";
+    btn.classList.toggle("plot-popup-compare-btn--active", inCompare);
+  });
 
   // Computes fresh screen positions for every side label of the given plot
   // and draws them. Safe to call repeatedly (e.g. on a timer) — each call
@@ -1621,6 +1674,14 @@
     // `sidesRing` array (as returned by getPlotData()); `pts` is the
     // polygon's screen/sphere points, e.g. from getPolygonPoints().
     matchSidesToEdges: matchSidesToEdges,
+
+    // Exposed so plot-compare.js's side-by-side view can format area/
+    // facing/corner exactly the same way the popup itself does, instead
+    // of re-implementing (and risking drifting from) the same rules.
+    getAreaSqft: getAreaSqft,
+    facingToLabel: facingToLabel,
+    formatSqft: formatSqft,
+    isCornerPlot: isCornerPlot,
 
     // Same krpano polygon-point reader showPlotDetails() uses internally,
     // exposed so a consumer doesn't need its own duplicate copy just to

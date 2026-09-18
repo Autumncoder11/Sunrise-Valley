@@ -110,13 +110,21 @@
   color: #DB2777;
 }
 
-/* Highlight the Filter pill while its panel is open */
-.plot-action-pill--filter.plot-action-pill--active {
+.plot-action-pill--compare .plot-action-icon svg {
+  stroke: #0D9488;
+}
+
+/* Highlight the Filter/Compare pill while its panel is open. Grouped
+   together (rather than duplicated per-pill) since both use the same
+   stroke-only icon style and the same dark "active" treatment. */
+.plot-action-pill--filter.plot-action-pill--active,
+.plot-action-pill--compare.plot-action-pill--active {
   background: #1a1a1a;
   color: #FFFFFF;
 }
 
-.plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg {
+.plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg,
+.plot-action-pill--compare.plot-action-pill--active .plot-action-icon svg {
   stroke: #FFFFFF;
 }
 

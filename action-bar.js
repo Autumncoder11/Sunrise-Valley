@@ -1,11 +1,16 @@
 /* =========================================================================
    action-bar.js
-   Top icon bar: Filter, WhatsApp, Enquiry, 360 Tour, Brochure, Call, Location.
+   Top icon bar: Filter, WhatsApp, Enquiry, 360 Tour, Brochure, Call,
+   Location, Compare.
 
    - Filter    -> toggles window.plotFilterPanel (filter-panel.js) and shows
                   a match-count badge once a search has been run.
    - WhatsApp  -> opens a wa.me chat pre-filled with an enquiry message.
    - Enquiry   -> opens window.enquiryPopup (enquiry-popup.js).
+   - Compare   -> toggles window.plotCompare's side-by-side comparison
+                  panel (plot-compare.js) and shows a running count badge.
+                  Plots are queued for comparison via a "+ Add to Compare"
+                  button inside each plot's own popup (plot-popup.js).
    - 360 Tour  -> eases the camera from its current view over to the
                   leftmost landmark hotspot defined in gui_fov_kumaran.xml
                   a bit quickly, then continuously pans at a constant slow
@@ -26,8 +31,9 @@
 
    REQUIRES:
    - action-bar.css included in the page.
-   - filter-panel.js and enquiry-popup.js loaded (load order doesn't
-     matter, only that they've run by the time a button is clicked).
+   - filter-panel.js, enquiry-popup.js and plot-compare.js loaded (load
+     order doesn't matter, only that they've run by the time a button is
+     clicked).
    - gui_fov_kumaran.xml loaded and window.krpano assigned (needed for
      360 Tour — it reads every landmark_<slug>_dot hotspot's live ath
      straight from krpano; those are created automatically by that XML's
@@ -115,7 +121,15 @@
       '<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 3.5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.24 1.02l-2.21 2.2z"/></svg>',
     location:
       '<svg viewBox="0 0 24 24" fill="currentColor">' +
-      '<path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.25 6.24 11.68 6.51 11.95a1.4 1.4 0 0 0 1.98 0c.27-.27 6.51-6.7 6.51-11.95C19.5 5.36 16.14 2 12 2zm0 10.25a2.75 2.75 0 1 1 0-5.5 2.75 2.75 0 0 1 0 5.5z"/></svg>'
+      '<path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.25 6.24 11.68 6.51 11.95a1.4 1.4 0 0 0 1.98 0c.27-.27 6.51-6.7 6.51-11.95C19.5 5.36 16.14 2 12 2zm0 10.25a2.75 2.75 0 1 1 0-5.5 2.75 2.75 0 0 1 0 5.5z"/></svg>',
+    compare:
+      // Two side-by-side panels joined by a short bar -- reads as "compare
+      // A against B" the same way the filter icon (stroke-only, no fill)
+      // does, so it takes the dark active-pill treatment the same way too.
+      '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="3" y="4" width="7" height="16" rx="1.5"/>' +
+      '<rect x="14" y="4" width="7" height="16" rx="1.5"/>' +
+      '<path d="M10.5 9h3M10.5 15h3"/></svg>'
   };
 
   function el(tag, className, html) {
@@ -329,6 +343,35 @@
       window.location.href = "tel:" + CONFIG.callNumber;
     });
     bar.appendChild(callBtn);
+
+    // ---- Compare ----
+    // Opens/closes the side-by-side comparison panel (plot-compare.js).
+    // Plots are added to the list from a "+ Add to Compare" button inside
+    // each plot's own popup (plot-popup.js) -- this pill just shows how
+    // many are queued up (badge, same look as Filter's match-count badge)
+    // and toggles the panel.
+    var compareBtn = makePill("compare", "Compare");
+    var compareBadge = el("span", "plot-action-count-badge");
+    compareBtn.appendChild(compareBadge);
+    compareBtn.addEventListener("click", function () {
+      tourStop(); // don't fight the tour's own view-panning
+      if (window.plotCompare && typeof window.plotCompare.togglePanel === "function") {
+        window.plotCompare.togglePanel();
+        compareBtn.classList.toggle("plot-action-pill--active", window.plotCompare.isPanelOpen());
+      } else {
+        console.error("action-bar: window.plotCompare not available yet");
+      }
+    });
+    document.addEventListener("plotcompare:changed", function (e) {
+      var count = e.detail && e.detail.count != null ? e.detail.count : 0;
+      if (count > 0) {
+        compareBadge.style.display = "flex";
+        compareBadge.textContent = count;
+      } else {
+        compareBadge.style.display = "none";
+      }
+    });
+    bar.appendChild(compareBtn);
 
     // ---- Location ----
     var locationBtn = makePill("location", "Location");

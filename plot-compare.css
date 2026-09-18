@@ -1,0 +1,223 @@
+/* =========================================================================
+   plot-compare.css
+   The "+ Add to Compare" button inside plot-popup.js's own popup, plus
+   the full-screen side-by-side comparison panel plot-compare.js renders
+   into #plotCompareRoot. Visual language matches plot-popup.js's own
+   card (white rounded card, bold dark text) so it reads as part of the
+   same UI, not a bolted-on extra.
+   ========================================================================= */
+
+/* ---- Compare button inside the plot popup ---- */
+.plot-popup-compare-btn {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ECFDF5;
+  color: #0D9488;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.plot-popup-compare-btn:hover {
+  background: #D1FAE5;
+}
+
+.plot-popup-compare-btn--active {
+  background: #0D9488;
+  color: #FFFFFF;
+}
+
+.plot-popup-compare-btn--active:hover {
+  background: #0B7C72;
+}
+
+/* ---- Comparison panel ---- */
+#plotCompareRoot {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000; /* above the action bar (950) and the plot popup */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.plot-compare-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.plot-compare-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  padding: 18px 20px 20px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.plot-compare-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.plot-compare-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.plot-compare-close {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  color: #666666;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.plot-compare-close:hover {
+  color: #1a1a1a;
+}
+
+.plot-compare-empty {
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px 4px 4px;
+}
+
+.plot-compare-hint {
+  color: #0D9488;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* One flat grid: row 1 is the plot headers, every row after is
+   "label | value | value ...". grid-template-columns is set inline per
+   render (it depends on how many plots are being compared). */
+.plot-compare-grid {
+  display: grid;
+  row-gap: 6px;
+  column-gap: 8px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.plot-compare-corner {
+  /* intentionally empty -- keeps column 1 of the header row aligned */
+}
+
+.plot-compare-col-header {
+  position: relative;
+  background: #F8FAFC;
+  border-radius: 10px;
+  padding: 10px 8px 8px;
+  text-align: center;
+}
+
+.plot-compare-remove {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 1;
+  color: #999999;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.plot-compare-remove:hover {
+  color: #E11D2E;
+}
+
+.plot-compare-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.plot-compare-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  color: #0D9488;
+  background: #CCFBF1;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.plot-compare-row-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #666666;
+}
+
+.plot-compare-cell {
+  font-size: 13px;
+  color: #1a1a1a;
+  text-align: center;
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 6px 4px;
+}
+
+.plot-compare-cell--yes {
+  color: #DB2777;
+  font-weight: bold;
+  background: #FBCFE8;
+}
+
+.plot-compare-divider {
+  height: 1px;
+  background: #E5E7EB;
+  margin: 4px 0;
+}
+
+.plot-compare-clear {
+  display: block;
+  margin: 14px auto 0;
+  border: none;
+  background: transparent;
+  color: #999999;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.plot-compare-clear:hover {
+  color: #E11D2E;
+}
+
+/* Small screens: let the grid scroll horizontally instead of squeezing
+   every column unreadably thin, same trick the action bar itself uses
+   for overflow. */
+@media (max-width: 480px) {
+  .plot-compare-card {
+    padding: 14px 12px 16px;
+  }
+}
