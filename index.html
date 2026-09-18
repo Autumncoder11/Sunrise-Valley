@@ -486,6 +486,9 @@
 		(function () {
 			var slider = document.getElementById('labelRzSlider');
 			var valueLabel = document.getElementById('labelRzValue');
+			// Dev-only control: not present in the current markup, so bail
+			// out quietly instead of throwing and killing this script block.
+			if (!slider || !valueLabel) return;
 			function apply(val) {
 				valueLabel.textContent = val;
 				if (window.krpano) {
