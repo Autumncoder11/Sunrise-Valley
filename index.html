@@ -87,6 +87,91 @@
 	<link rel="stylesheet" href="action-bar.css?v=202609170334" />
 	<link rel="stylesheet" href="enquiry-popup.css?v=202609170334" />
 	<link rel="stylesheet" href="plot-compare.css">
+	<script>
+		(function () {
+			"use strict";
+			var STORAGE_KEY = "pp_debug_log"; // reuses the same persistent log as before
+			var lines = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "[]");
+			function persist() {
+				sessionStorage.setItem(STORAGE_KEY, JSON.stringify(lines.slice(-60)));
+				var el = document.getElementById("ppDebugOverlay");
+				if (el) el.textContent = lines.slice(-30).join("\n");
+			}
+			function log(msg) {
+				lines.push(new Date().toISOString().substr(11, 12) + " " + msg);
+				persist();
+			}
+
+			function checkStylesheet(hrefFragment) {
+				var link = null;
+				var links = document.getElementsByTagName("link");
+				for (var i = 0; i < links.length; i++) {
+					if (links[i].rel === "stylesheet" && links[i].href.indexOf(hrefFragment) !== -1) {
+						link = links[i];
+						break;
+					}
+				}
+				if (!link) {
+					log("CSS-CHECK: no <link> tag found for " + hrefFragment);
+					return;
+				}
+				// link.sheet is null if the stylesheet failed to load/parse
+				// (404, blocked, wrong MIME type, CSP violation, etc.)
+				if (!link.sheet) {
+					log("CSS-CHECK: " + hrefFragment + " -> link.sheet is NULL (failed to load)");
+					return;
+				}
+				try {
+					var ruleCount = link.sheet.cssRules.length;
+					var found = false;
+					for (var r = 0; r < ruleCount; r++) {
+						var rule = link.sheet.cssRules[r];
+						if (rule.selectorText && rule.selectorText.indexOf("is-touch-device") !== -1
+							&& rule.selectorText.indexOf("plot-popup-card") !== -1) {
+							found = true;
+							log("CSS-CHECK: " + hrefFragment + " loaded OK, rule found: "
+								+ rule.selectorText + " { " + rule.style.cssText + " }");
+						}
+					}
+					if (!found) {
+						log("CSS-CHECK: " + hrefFragment + " loaded (" + ruleCount
+							+ " rules) but no is-touch-device/.plot-popup-card rule found in it");
+					}
+				} catch (e) {
+					log("CSS-CHECK: " + hrefFragment + " -> cssRules threw (cross-origin?): " + e.message);
+				}
+
+				link.addEventListener("error", function () {
+					log("CSS-CHECK: " + hrefFragment + " fired an ERROR event (failed to load)");
+				});
+			}
+
+			function runChecks() {
+				checkStylesheet("plot-popup.css");
+				checkStylesheet("plot-popup-mobile.css");
+				log("CSS-CHECK: document.documentElement classes = '"
+					+ document.documentElement.className + "'");
+				var card = document.querySelector(".plot-popup-card");
+				if (card) {
+					log("CSS-CHECK: live card computed width = " + getComputedStyle(card).width);
+				} else {
+					log("CSS-CHECK: no .plot-popup-card in DOM right now (open a plot first)");
+				}
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", runChecks);
+			} else {
+				runChecks();
+			}
+
+			// Also re-check right after any orientation change, so we catch it
+			// specifically at the moment landscape kicks in.
+			window.addEventListener("orientationchange", function () {
+				setTimeout(runChecks, 200);
+			});
+		})();
+	</script>
 	<style>
 		html {
 			height: 100%;
