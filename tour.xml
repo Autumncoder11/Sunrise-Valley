@@ -97,7 +97,7 @@
 		<preview url="panos/DJI_20260530023817_0241_D.tiles/preview.jpg" />
 
 		<image>
-			<cube url="panos/DJI_20260530023817_0241_D.tiles/%s/l%l/%0v/l%l_%s_%0v_%0h.jpg" multires="512,640,1280,2560,4864" />
+			<cube url="panos/DJI_20260530023817_0241_D.tiles/%s/l%l/%0v/l%l_%s_%0v_%0h.jpg" multires.mobile="512,640,1280,2560" multires.desktop="512,640,1280,2560,4864" />
 		</image>
 		<events name="roadlabel_align" onviewchange="updateRoadLabels()" />
 		<!-- Fires once the pano's actual image/tiles have finished loading and
