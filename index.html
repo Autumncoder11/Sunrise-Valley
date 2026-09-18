@@ -6,6 +6,25 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
 	<script>
+		(function () {
+			"use strict";
+			// Detect if the page just reloaded shortly after a previous session was alive.
+			var lastAlive = sessionStorage.getItem("pp_alive_ts");
+			if (lastAlive) {
+				alert("Page reloaded! " + (Date.now() - Number(lastAlive)) + "ms since last heartbeat.");
+			}
+			setInterval(function () {
+				sessionStorage.setItem("pp_alive_ts", Date.now());
+			}, 300);
+
+			// GPU context loss is the classic symptom of exceeding mobile GPU
+			// texture memory — this fires just before a WebView-triggered reload.
+			document.addEventListener("webglcontextlost", function () {
+				alert("WebGL context lost — GPU likely ran out of memory.");
+			}, true);
+		})();
+	</script>
+	<script>
 		// Stamps touch capability onto <html> ONCE, before any CSS is
 		// applied. This is the single source of truth the mobile CSS
 		// (action-bar.css / filter-panel.css / plot-popup-mobile.css)
