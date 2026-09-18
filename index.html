@@ -401,13 +401,15 @@
 
 			function onFullscreenChange() {
 				var fsEl = getFullscreenElement();
-				// document.documentElement going fullscreen is harmless --
-				// <body> (and these divs) are still its descendants, so
-				// nothing needs to move. Only an INNER element (like
-				// krpano's pano container) going fullscreen strands
-				// these siblings outside the painted subtree.
 				if (fsEl && fsEl !== document.documentElement) {
-					moveOverlaysInto(fsEl);
+					// Confirm the element actually has real layout (width/height > 0)
+					// before trusting it — a rejected/half-applied fullscreen request
+					// can leave document.fullscreenElement set to something with no
+					// real box yet, which is what seems to trip up Vivo on first rotate.
+					var rect = fsEl.getBoundingClientRect();
+					if (rect.width > 0 && rect.height > 0) {
+						moveOverlaysInto(fsEl);
+					}
 				} else {
 					moveOverlaysBack();
 				}
