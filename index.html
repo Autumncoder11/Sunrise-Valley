@@ -87,7 +87,6 @@
 	<link rel="stylesheet" href="action-bar.css?v=202609170334" />
 	<link rel="stylesheet" href="enquiry-popup.css?v=202609170334" />
 	<link rel="stylesheet" href="plot-compare.css">
-
 	<style>
 		html {
 			height: 100%;
@@ -317,6 +316,34 @@
 			}
 		};
 
+		// Same idea as landmark_measureLabel above, but for the small "time"
+		// flag (e.g. "6 mins") that sits directly under the title flag.
+		// Kept as its own function/canvas font because the subtitle uses a
+		// different font-size/weight than the title (see the subtitle css
+		// in gui_fov_kumaran.xml's landmark_define / landmark_apply_measured_subtitle_width)
+		// — reusing landmark_measureLabel's 13px-bold metrics would measure
+		// the wrong width and the reveal-wipe would stop short or overshoot.
+		window.landmark_measureSubtitle = function (slug, label) {
+			if (!window.__landmarkMeasureCtx) {
+				window.__landmarkMeasureCtx = document.createElement("canvas").getContext("2d");
+			}
+			var ctx = window.__landmarkMeasureCtx;
+			// Must match the subtitle hotspot's css exactly, or the measured
+			// width won't match what actually renders.
+			ctx.font = "bold 12px Arial, Helvetica, sans-serif";
+			var decodeEl = document.createElement("textarea");
+			decodeEl.innerHTML = label;
+			var plainText = decodeEl.value;
+			var textWidth = Math.ceil(ctx.measureText(plainText).width);
+			// padding-left:10px + padding-right:10px (from the subtitle css) + buffer
+			var revealWidth = textWidth + 22;
+			if (window.krpano) {
+				window.krpano.call("landmark_apply_measured_subtitle_width('" + slug + "', " + revealWidth + ");");
+			} else {
+				console.error("landmark_measureSubtitle: window.krpano not set yet for", slug);
+			}
+		};
+
 		// Guards against start_landmark_reveals() firing more than once per
 		// page load — hotspots.xml has multiple internal triggers (its own
 		// onstart + onloadcomplete) as a deliberate belt-and-suspenders, so
@@ -486,9 +513,6 @@
 		(function () {
 			var slider = document.getElementById('labelRzSlider');
 			var valueLabel = document.getElementById('labelRzValue');
-			// Dev-only control: not present in the current markup, so bail
-			// out quietly instead of throwing and killing this script block.
-			if (!slider || !valueLabel) return;
 			function apply(val) {
 				valueLabel.textContent = val;
 				if (window.krpano) {
@@ -502,96 +526,40 @@
 	</script>
 	<div id="ppDebugOverlay" style="position:fixed;top:0;left:0;z-index:999999;
 	background:rgba(0,0,0,0.85);color:#0f0;font:11px monospace;
-	padding:6px 8px;max-width:100vw;max-height:100vh;overflow-y:auto;
-	white-space:pre-wrap;pointer-events:none;"></div>
-	<script>
-		// TEMPORARY debug overlay for the Compare-panel landscape-clipping
-		// bug. Remove this whole <script> block (and the ppDebugOverlay div
-		// above, or just leave it -- it's empty and invisible if this
-		// script isn't running) once the bug is confirmed fixed.
-		//
-		// Shows, live, updated on resize/orientationchange and whenever the
-		// Compare panel opens/closes/re-renders:
-		//   - whether the CSS's own (orientation: landscape) media query
-		//     is actually matching in this browser right now
-		//   - the is-touch-device class plot-compare.css's landscape rule
-		//     for padding/fonts (NOT the flex-start fix, which no longer
-		//     needs this) is gated on
-		//   - actual viewport size
-		//   - once the Compare panel is open: the computed align-items on
-		//     .plot-compare-backdrop (this is the thing that actually
-		//     determines whether the header can clip), the card's computed
-		//     max-height, and -- the real test -- the header's on-screen
-		//     top position. If that's negative, the header/close button
-		//     really is off-screen and unreachable; if it's >= 0, the fix
-		//     is working, whatever the panel looks like.
+	padding:6px 8px;max-width:100vw;white-space:pre-wrap;pointer-events:none;"></div>
+	<!-- <script>
 		(function () {
 			"use strict";
 			var el = document.getElementById("ppDebugOverlay");
-			if (!el) return;
 
-			function fmtPx(n) { return Math.round(n) + "px"; }
-
-			function compareInfo() {
-				var root = document.getElementById("plotCompareRoot");
-				var open = root && getComputedStyle(root).display !== "none";
-				if (!open) return "Compare panel: closed";
-
-				var backdrop = root.querySelector(".plot-compare-backdrop");
-				var card = root.querySelector(".plot-compare-card");
-				var header = root.querySelector(".plot-compare-header");
-				var closeBtn = root.querySelector(".plot-compare-close");
-				if (!backdrop || !card || !header) return "Compare panel: open, but markup not found (empty state?)";
-
-				var alignItems = getComputedStyle(backdrop).alignItems;
-				var maxHeight = getComputedStyle(card).maxHeight;
-				var cardRect = card.getBoundingClientRect();
-				var headerRect = header.getBoundingClientRect();
-				var closeRect = closeBtn ? closeBtn.getBoundingClientRect() : null;
-				var headerFullyVisible = headerRect.top >= 0 && headerRect.bottom <= window.innerHeight;
-				var closeReachable = closeRect ? (closeRect.top >= 0 && closeRect.bottom <= window.innerHeight) : "n/a";
-
-				return "Compare panel: OPEN\n" +
-					"  backdrop align-items: " + alignItems + "\n" +
-					"  card computed max-height: " + maxHeight + "\n" +
-					"  card rect: top=" + fmtPx(cardRect.top) + " bottom=" + fmtPx(cardRect.bottom) + " height=" + fmtPx(cardRect.height) + "\n" +
-					"  header rect top: " + fmtPx(headerRect.top) + (headerRect.top < 0 ? "  <-- NEGATIVE = clipped off-screen, unreachable" : "  (>= 0, OK)") + "\n" +
-					"  header fully visible: " + headerFullyVisible + "\n" +
-					"  close (x) button reachable: " + closeReachable;
+			function getFsEl() {
+				return document.fullscreenElement || document.webkitFullscreenElement ||
+					document.mozFullScreenElement || document.msFullscreenElement || null;
 			}
 
 			function update(label) {
-				var lines =
-					"[debug: " + label + "]\n" +
-					"CSS (orientation: landscape) matches: " + window.matchMedia("(orientation: landscape)").matches + "\n" +
-					"is-touch-device class on <html>: " + document.documentElement.classList.contains("is-touch-device") + "\n" +
-					"window innerWidth x innerHeight: " + window.innerWidth + " x " + window.innerHeight + "\n" +
-					"screen.orientation.type: " + (screen.orientation ? screen.orientation.type : window.orientation) + "\n\n" +
-					compareInfo();
-				el.textContent = lines;
-				console.log(lines);
+				var card = document.querySelector(".plot-popup-card");
+				var cardWidth = card ? getComputedStyle(card).width : "(no popup open)";
+				var fs = getFsEl();
+				el.textContent =
+					"[" + label + "]\n" +
+					"is-touch-device class: " + document.documentElement.classList.contains("is-touch-device") + "\n" +
+					"orientation: " + (screen.orientation ? screen.orientation.type : window.orientation) + "\n" +
+					"innerWidth x innerHeight: " + window.innerWidth + " x " + window.innerHeight + "\n" +
+					"fullscreenElement: " + (fs ? (fs.id || fs.tagName) : "none") + "\n" +
+					".plot-popup-card width: " + cardWidth;
 			}
 
 			["resize", "orientationchange"].forEach(function (evt) {
 				window.addEventListener(evt, function () { update(evt); });
 			});
-
-			// Compare panel dispatches this on every add/remove/clear, and
-			// plot-compare.js's openPanel()/closePanel() also change/clear
-			// #plotCompareRoot's innerHTML, which the MutationObserver below
-			// also catches (covers open/close even without a selection
-			// change firing plotcompare:changed).
-			document.addEventListener("plotcompare:changed", function () { update("plotcompare:changed"); });
-
-			var root = document.getElementById("plotCompareRoot");
-			if (root) {
-				new MutationObserver(function () { update("plotCompareRoot mutated"); })
-					.observe(root, { attributes: true, attributeFilter: ["style"], childList: true });
-			}
+			["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "MSFullscreenChange"].forEach(function (evt) {
+				document.addEventListener(evt, function () { update(evt); });
+			});
 
 			update("initial");
 		})();
-	</script>
+	</script> -->
 </body>
 
 </html>

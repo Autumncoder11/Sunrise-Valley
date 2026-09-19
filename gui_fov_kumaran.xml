@@ -6,10 +6,12 @@
 
 		TO ADD ANOTHER LANDMARK (exactly 2 lines, both one-liners):
 		1. In landmark_setup(), add:
-		     landmark_define(<slug>, '<label>', <ath>, <height>);
-		   Get these 4 values straight from a title hotspot in this shape:
+		     landmark_define(<slug>, '<label>', <ath>, <height>, '<time>');
+		   Get the first 4 values straight from a title hotspot in this shape:
 		     name="landmark_<slug>_title" html="<label>" ath="<ath>" oy="-(height+6)"
 		   i.e. height = -oy - 6.
+		   <time> is the small purple flag under the title, e.g. '6 mins' —
+		   pass '' to skip it for a given landmark (no subtitle is shown).
 		2. In gui_master_tick(), add:
 		     landmark_tick(<slug>);
 		   (this one stays manual so dragging the view updates instantly instead
@@ -74,14 +76,22 @@
 	       bgcolor="0x14181D" bgalpha="0.72" bgroundedge="10" zorder="1000" />
 
 	<!-- ========== LANDMARK FACTORY — the one function to call for a new landmark ========== -->
-	<!-- landmark_define(slug, label, ath, height)
+	<!-- landmark_define(slug, label, ath, height, time)
 	       slug   = unique id, e.g. alchemy_public_school
 	       label  = display text, e.g. 'Alchemy Public School'
 	       ath    = compass bearing, e.g. -50.30403
 	       height = vertical guide-line length in px, e.g. 110
-	     Builds the dot/ripple/line/title hotspots, the GUI status row, sizes the
-	     GUI panel, and kicks off the ripple animation — nothing else to write. -->
+	       time   = small purple "time" flag text under the title, e.g. '6 mins'
+	                (pass '' to leave this landmark without a time flag)
+	     Builds the dot/ripple/line/title/subtitle hotspots, the GUI status row,
+	     sizes the GUI panel, and kicks off the ripple animation — nothing else
+	     to write. -->
 	<action name="landmark_define">
+		<!-- height (px) of the purple "time" flag stacked under the title
+		     flag. Constant across all landmarks; set once here (cheap to
+		     repeat) rather than requiring a separate global-setup step. -->
+		set(landmark_subtitle_h, 22);
+
 		addhotspot(landmark_%1_dot);
 		set(hotspot[landmark_%1_dot].type, text);
 		set(hotspot[landmark_%1_dot].html, '');
@@ -135,9 +145,12 @@
 		set(hotspot[landmark_%1_title].atv, 0.0);
 		<!-- FLAG STYLE: anchor the label's bottom-LEFT corner to the top of the
 		     pole (was edge=bottom, which centered the label on the line). The
-		     label now extends to the RIGHT of the pole like a flag. -->
+		     label now extends to the RIGHT of the pole like a flag.
+		     Sits directly on top of the purple "time" subtitle flag (added
+		     below), so its bottom is raised by landmark_subtitle_h instead of
+		     landing right on the 6px pole gap. -->
 		set(hotspot[landmark_%1_title].edge, leftbottom);
-		set(hotspot[landmark_%1_title].oy, calc(0-(%4+6)));
+		set(hotspot[landmark_%1_title].oy, calc(0-(%4+6+landmark_subtitle_h)));
 		<!-- Width starts at a collapsed 1px sliver, not 0/auto. krpano's own
 		     "auto" text-layout measurement (pixelwidth) turned out to be
 		     unreliable — depending on timing/css it could report a
@@ -163,6 +176,37 @@
 		set(hotspot[landmark_%1_title].zorder, 600);
 		set(hotspot[landmark_%1_title].enabled, false);
 		js(landmark_measureLabel('%1', '%2'));
+
+		<!-- ===== TIME FLAG (purple, e.g. "6 mins") — sits directly under
+		     the title flag, same left edge, and wipes in/out together with
+		     it (see landmark_reveal_label / landmark_hide_label below).
+		     Same collapsed-1px / measured-width-via-JS trick as the title,
+		     using landmark_measureSubtitle in tour.html so short strings
+		     like "6 mins" still hug their own text instead of the title's
+		     width. If %5 is empty, it's simply never revealed (width stays
+		     1px, alpha stays 0) — harmless, so landmarks can opt out. -->
+		addhotspot(landmark_%1_subtitle);
+		set(hotspot[landmark_%1_subtitle].type, text);
+		set(hotspot[landmark_%1_subtitle].html, '%5');
+		set(hotspot[landmark_%1_subtitle].ath, %3);
+		set(hotspot[landmark_%1_subtitle].atv, 0.0);
+		set(hotspot[landmark_%1_subtitle].edge, leftbottom);
+		set(hotspot[landmark_%1_subtitle].oy, calc(0-(%4+6)));
+		set(hotspot[landmark_%1_subtitle].width, 1);
+		set(hotspot[landmark_%1_subtitle].height, landmark_subtitle_h);
+		set(hotspot[landmark_%1_subtitle].wordwrap, false);
+		set(hotspot[landmark_%1_subtitle].bg, true);
+		set(hotspot[landmark_%1_subtitle].bgcolor, 0x6E6DA8);
+		set(hotspot[landmark_%1_subtitle].bgalpha, 0.95);
+		set(hotspot[landmark_%1_subtitle].css, 'font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#FFFFFF; font-weight:bold; text-align:left; line-height:22px; padding-left:10px; padding-right:10px; white-space:nowrap; overflow:hidden;');
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
+		set(hotspot[landmark_%1_subtitle].zorder, 600);
+		set(hotspot[landmark_%1_subtitle].enabled, false);
+		if(%5 != '',
+			js(landmark_measureSubtitle('%1', '%5'));
+		,
+			set(hotspot[landmark_%1_subtitle].revealwidth, 1);
+		);
 
 		set(row_y, calc(8 + landmark_count*46));
 
@@ -234,6 +278,15 @@
 		set(hotspot[landmark_%1_title].css, 'font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#FFFFFF; font-weight:bold; text-align:left; line-height:30px; padding-left:10px; padding-right:10px; white-space:nowrap; overflow:hidden;');
 	</action>
 
+	<!-- Subtitle counterpart of landmark_apply_measured_width above — called
+	     from landmark_measureSubtitle in tour.html once the "6 mins"-style
+	     text's true width is measured. -->
+	<action name="landmark_apply_measured_subtitle_width">
+		set(hotspot[landmark_%1_subtitle].revealwidth, %2);
+		set(hotspot[landmark_%1_subtitle].width, 1);
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
+	</action>
+
 	<!-- Left-to-right reveal: wipe width 1px -> measured full width.
 	     wordwrap=false + overflow:hidden (applied once the true width was
 	     captured, see landmark_apply_measured_width) keep the text on one
@@ -250,14 +303,22 @@
 	     speed matches the pole line's growth speed so the two segments of
 	     the reveal feel like one continuous motion. -->
 	<action name="landmark_reveal_label">
-		if(hotspot[landmark_%1_title].revealwidth == null,
+		if(hotspot[landmark_%1_title].revealwidth == null OR hotspot[landmark_%1_subtitle].revealwidth == null,
 			delayedcall(0.1, landmark_reveal_label(%1));
 		,
 			stoptween(hotspot[landmark_%1_title].width);
+			stoptween(hotspot[landmark_%1_subtitle].width);
 			set(hotspot[landmark_%1_title].width, 1);
+			set(hotspot[landmark_%1_subtitle].width, 1);
 			set(hotspot[landmark_%1_title].alpha, 1);
+			<!-- subtitle only turns visible if it actually has text —
+			     an empty '' time flag stays alpha 0/1px forever -->
+			if(hotspot[landmark_%1_subtitle].html != '',
+				set(hotspot[landmark_%1_subtitle].alpha, 1);
+			);
 			set(landmark_%1_label_dur, calc(max(0.25, min(1.1, get(hotspot[landmark_%1_title].revealwidth) / 260))));
 			tween(hotspot[landmark_%1_title].width, get(hotspot[landmark_%1_title].revealwidth), landmark_%1_label_dur, easeOutQuad);
+			tween(hotspot[landmark_%1_subtitle].width, get(hotspot[landmark_%1_subtitle].revealwidth), landmark_%1_label_dur, easeOutQuad);
 		);
 	</action>
 
@@ -273,12 +334,15 @@
 	     just as consistent regardless of label length. -->
 	<action name="landmark_hide_label">
 		stoptween(hotspot[landmark_%1_title].width);
+		stoptween(hotspot[landmark_%1_subtitle].width);
 		set(landmark_%1_label_dur, calc(max(0.2, min(0.9, get(hotspot[landmark_%1_title].revealwidth) / 300))));
 		tween(hotspot[landmark_%1_title].width, 1, landmark_%1_label_dur, easeInQuad, landmark_finish_hide(%1));
+		tween(hotspot[landmark_%1_subtitle].width, 1, landmark_%1_label_dur, easeInQuad);
 	</action>
 
 	<action name="landmark_finish_hide">
 		set(hotspot[landmark_%1_title].alpha, 0);
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
 		landmark_retract_line(%1);
 	</action>
 
@@ -323,6 +387,9 @@
 				stoptween(hotspot[landmark_%1_title].width);
 				hotspot[landmark_%1_title].width = 1;
 				set(hotspot[landmark_%1_title].alpha, 0);
+				stoptween(hotspot[landmark_%1_subtitle].width);
+				hotspot[landmark_%1_subtitle].width = 1;
+				set(hotspot[landmark_%1_subtitle].alpha, 0);
 				stoptween(hotspot[landmark_%1_line].height);
 				hotspot[landmark_%1_line].height = 0;
 				set(landmark_%1_line_dur, calc(max(0.25, min(1.1, get(hotspot[landmark_%1_line].revealheight) / 260))));
@@ -349,22 +416,25 @@
 
 	<!-- ========== LANDMARK ROSTER — add ONE line here per new landmark ========== -->
 	<action name="landmark_setup">
+		<!-- 5th arg is the purple "time" flag text (e.g. '6 mins'), or ''
+		     to leave a landmark without one. The values below are PLACEHOLDERS
+		     — swap them for real drive/walk times to each place before going live. -->
 		set(landmark_count, 0);
-		landmark_define(brainykids_international_preschool_day_care, 'Brainykids International Preschool &amp; Day Care', -70.50087, 40);
-		landmark_define(dobbs_public_school_senior_secondary, 'DOBBS Public School Senior Secondary', -98.04701, 250);
-		landmark_define(ruby_matric_higher_secondary_school, 'Ruby Matric Higher Secondary School', 146.58107, 110);
-		landmark_define(swathanthra_nursery_primary_school, 'Swathanthra Nursery &amp; Primary School', 88.96324, 110);
-		landmark_define(samashti_international_school, 'Samashti International School', 77.95533, 40);
-		landmark_define(vimal_jyothi_hospital, 'Vimal Jyothi Hospital', 133.95969, 40);
-		landmark_define(cri_trust_healthcare, 'CRI Trust Healthcare', 169.73406, 40);
-		landmark_define(dr_muthus_multispeciality_hospital, 'Dr. Muthus MultiSpeciality Hospital', -170.56755, 40);
-		landmark_define(kumaran_medical_center, 'Kumaran Medical Center', 44.82688, 40);
-		landmark_define(kmch_specialty_hospital_kovilpalayam, 'KMCH Specialty Hospital (Kovilpalayam)', 97.45676, 180);
-		landmark_define(kgisl_sez_it_park, 'KGiSL SEZ IT Park', -110.34122, 180);
-		landmark_define(india_land_tech_park, 'India Land Tech Park', -111.54424, 110);
-		landmark_define(kct_tech_park, 'KCT Tech Park', -119.32147, 40);
-		landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 98.67786, 250);
-		landmark_define(alchemy_public_school, 'Alchemy Public School', -50.30403, 110);
+		landmark_define(brainykids_international_preschool_day_care, 'Brainykids International Preschool &amp; Day Care', -70.50087, 40, '5 mins');
+		landmark_define(dobbs_public_school_senior_secondary, 'DOBBS Public School Senior Secondary', -98.04701, 250, '8 mins');
+		landmark_define(ruby_matric_higher_secondary_school, 'Ruby Matric Higher Secondary School', 146.58107, 110, '6 mins');
+		landmark_define(swathanthra_nursery_primary_school, 'Swathanthra Nursery &amp; Primary School', 88.96324, 110, '6 mins');
+		landmark_define(samashti_international_school, 'Samashti International School', 77.95533, 40, '4 mins');
+		landmark_define(vimal_jyothi_hospital, 'Vimal Jyothi Hospital', 133.95969, 40, '5 mins');
+		landmark_define(cri_trust_healthcare, 'CRI Trust Healthcare', 169.73406, 40, '5 mins');
+		landmark_define(dr_muthus_multispeciality_hospital, 'Dr. Muthus MultiSpeciality Hospital', -170.56755, 40, '7 mins');
+		landmark_define(kumaran_medical_center, 'Kumaran Medical Center', 44.82688, 40, '4 mins');
+		landmark_define(kmch_specialty_hospital_kovilpalayam, 'KMCH Specialty Hospital (Kovilpalayam)', 97.45676, 180, '10 mins');
+		landmark_define(kgisl_sez_it_park, 'KGiSL SEZ IT Park', -110.34122, 180, '9 mins');
+		landmark_define(india_land_tech_park, 'India Land Tech Park', -111.54424, 110, '9 mins');
+		landmark_define(kct_tech_park, 'KCT Tech Park', -119.32147, 40, '7 mins');
+		landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 98.67786, 250, '3 mins');
+		landmark_define(alchemy_public_school, 'Alchemy Public School', -50.30403, 110, '6 mins');
 	</action>
 
 	<!-- ========== MASTER TICK — add ONE line here per new landmark (for instant drag-response) ========== -->
