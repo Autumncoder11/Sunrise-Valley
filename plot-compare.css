@@ -134,7 +134,11 @@
   margin: 0;
   font-size: 18px;
   font-weight: bold;
-  color: #1a1a1a;
+  color: #000000;
+  /* Faint light glow behind the text -- keeps it readable now that the
+     panel is true glass with a busy pano/map showing through, without
+     having to make the panel itself less transparent. */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
 }
 
 .plot-compare-close {
@@ -216,7 +220,8 @@
 .plot-compare-name {
   font-weight: bold;
   font-size: 14px;
-  color: #1a1a1a;
+  color: #000000;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
   margin-bottom: 4px;
   word-break: break-word;
 }
@@ -235,7 +240,8 @@
 .plot-compare-row-label {
   font-size: 12px;
   font-weight: bold;
-  color: #444444;
+  color: #000000;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
   /* No boxed chip anymore -- plain label sitting on the card's own
      glass surface, with just a thin separator under each row. */
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
@@ -244,7 +250,9 @@
 
 .plot-compare-cell {
   font-size: 13px;
-  color: #1a1a1a;
+  font-weight: 600;
+  color: #000000;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   padding: 6px 4px;
@@ -252,9 +260,11 @@
 
 .plot-compare-cell--yes {
   /* Called out by color alone now instead of a solid pink box, matching
-     the rest of the grid's flat look. */
-  color: #DB2777;
+     the rest of the grid's flat look. Slightly deeper pink than before
+     for contrast now that there's no background chip behind it. */
+  color: #C2185B;
   font-weight: bold;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
 }
 
 .plot-compare-divider {
