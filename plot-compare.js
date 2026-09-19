@@ -34,21 +34,6 @@
   var selected = [];      // ordered array of hotspotName strings
   var panelOpen = false;
 
-  // Tracks "we just rotated" so openPanel() can hang back briefly rather
-  // than racing krpano's own orientationchange/resize handling. Debug
-  // logging on this project found krpano's own overlay painting on top
-  // of our panel specifically right after a rotation (not on a fresh
-  // landscape load) -- the same family of Android rotation/compositing
-  // bug this project's action-bar.css already documents fighting once
-  // before (a layer getting stuck at its pre-rotation state/order until
-  // something forces a fresh repaint).
-  var recentlyRotatedUntil = 0;
-  ["orientationchange", "resize"].forEach(function (evt) {
-    window.addEventListener(evt, function () {
-      recentlyRotatedUntil = Date.now() + 400;
-    });
-  });
-
   function dataFor(hotspotName) {
     return window.plotPopup && typeof window.plotPopup.getPlotData === "function"
       ? window.plotPopup.getPlotData(hotspotName)
@@ -153,21 +138,19 @@
       return;
     }
 
-    // "Portal" the panel to be a direct child of <body> every time it
-    // opens. Debug logging showed krpano's own overlay (an absolutely
-    // positioned <svg>) painting ON TOP of this panel despite the
-    // panel's z-index of 2000 -- which means #plotCompareRoot's WINNING
-    // z-index only applies within whatever stacking context it happens
-    // to be nested in wherever it sits in your HTML. If that ancestor
-    // itself has position+z-index set, it creates its own stacking
-    // context, and our z-index:2000 only gets compared against other
-    // things INSIDE that context -- it never gets compared against
-    // krpano's layer at all. Moving the node to be a direct child of
-    // <body> guarantees it participates in the top-level stacking
-    // context, where z-index:2000 actually means something.
-    if (root.parentElement !== document.body) {
-      document.body.appendChild(root);
-    }
+    // NOTE: this used to forcibly reparent root to document.body on every
+    // render. Root cause of the "works on direct load, breaks after
+    // rotating" bug turned out to be krpano's use of the native
+    // Fullscreen API on Android landscape -- per spec, ONLY the
+    // fullscreened element and its descendants are painted, so no
+    // z-index (however large) helps once that's active. index.html's own
+    // fullscreenchange handler already rescues plotPopupRoot,
+    // plotActionBarRoot, plotFilterRoot and enquiryPopupRoot by moving
+    // them into the fullscreen element while it's active (plotCompareRoot
+    // is now in that same list). Forcibly moving root back to <body> here
+    // would undo that rescue the moment this panel opens during
+    // fullscreen -- so this file no longer touches root's parent at all
+    // and defers entirely to index.html's mechanism.
 
     var plots = selected.map(dataFor).filter(Boolean);
     var cells = [];
@@ -404,18 +387,7 @@
     // are full-detail cards competing for the same screen space.
     if (typeof window.closePlotPopup === "function") window.closePlotPopup();
     panelOpen = true;
-
-    if (Date.now() < recentlyRotatedUntil) {
-      // We rotated less than 400ms ago -- give krpano's own resize/
-      // orientationchange handling a moment to finish its own re-layout
-      // first instead of racing it immediately, which is exactly the
-      // scenario where its overlay was seen winning the stacking fight.
-      setTimeout(function () {
-        if (panelOpen) renderPanel();
-      }, 350);
-    } else {
-      renderPanel();
-    }
+    renderPanel();
   }
 
   function closePanel() {
