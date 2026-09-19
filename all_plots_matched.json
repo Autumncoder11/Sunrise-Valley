@@ -7796,12 +7796,14 @@
     ]
   },
   "kml_poly_22": {
+    "displayName": "Plot 23",
     "status": "AVAILABLE",
     "category": "TBD",
+    "facing": "North East",
     "sides": [
       {
         "side": "C",
-        "length": "31' 9\"",
+        "length": "31' 9",
         "from": [
           42.25254,
           34.13628
@@ -7813,7 +7815,7 @@
       },
       {
         "side": "B",
-        "length": "20' 9\"",
+        "length": "20' 9",
         "from": [
           40.40861,
           34.76838
@@ -7825,7 +7827,7 @@
       },
       {
         "side": "A",
-        "length": "36' 9\"",
+        "length": "36' 9",
         "from": [
           42.53938,
           36.14136
@@ -7837,7 +7839,7 @@
       },
       {
         "side": "E",
-        "length": "7' 0\"",
+        "length": "7' 0",
         "from": [
           43.36933,
           36.19357
@@ -7849,7 +7851,7 @@
       },
       {
         "side": "D",
-        "length": "15' 9\"",
+        "length": "15' 9",
         "from": [
           44.79496,
           35.64404
@@ -7859,7 +7861,9 @@
           34.13628
         ]
       }
-    ]
+    ],
+    "sideOffsets": null,
+    "needsReview": false
   },
   "kml_poly_220": {
     "status": "AVAILABLE",
