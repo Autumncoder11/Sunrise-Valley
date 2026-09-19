@@ -177,11 +177,14 @@
     return obj;
   }
 
-  // "kml_poly_12" -> "Plot 12". Adjust this if your hotspot names encode
-  // the actual plot number differently.
+  // "kml_poly_12" -> "Plot 13". +1 because the hotspot index is 0-based
+  // (kml_poly_0 is the first plot) but the site's own plot numbering
+  // starts at 1 — this keeps the popup title matching the plot number
+  // already printed on the map itself. Adjust/remove the "+ 1" if your
+  // hotspot names ever encode the actual plot number directly instead.
   function deriveDisplayName(hotspotName) {
     var m = /(\d+)\s*$/.exec(hotspotName);
-    return m ? ("Plot " + m[1]) : hotspotName;
+    return m ? ("Plot " + (parseInt(m[1], 10) + 1)) : hotspotName;
   }
 
   function cadPointDist(a, b) {
