@@ -84,18 +84,20 @@
 }
 
 .plot-compare-card {
-  /* Same frosted-glass recipe as the action bar's pills
-     (action-bar.css .plot-action-pill), not its own heavier/whiter
-     blend, so the compare panel visually matches the pills instead of
-     reading as a separate, more opaque "modal" style. */
-  background: rgba(255, 255, 255, 0.55);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  backdrop-filter: blur(14px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Brighter, glossier glass than the flat action-bar-pill match from
+     before -- that recipe reads fine on a small pill but washes out
+     dull on a panel this large, since so much more busy pano/plot-grid
+     shows through at the same transparency. A top-to-bottom gradient
+     plus a stronger saturate/brightness boost keeps the frosted-glass
+     language but reads as bright glossy glass instead of dull haze. */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.52) 100%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%) brightness(1.08);
+  backdrop-filter: blur(20px) saturate(200%) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    0 8px 28px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   padding: 18px 20px 20px;
   width: 100%;
   max-width: 640px;
@@ -192,7 +194,7 @@
   /* No boxed background anymore -- sits straight on the card's own
      glass surface. A bottom border is enough to separate the header
      row from the data rows below it. */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 10px 8px 8px;
   text-align: center;
 }
@@ -244,7 +246,7 @@
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
   /* No boxed chip anymore -- plain label sitting on the card's own
      glass surface, with just a thin separator under each row. */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 6px 8px;
 }
 
@@ -254,7 +256,7 @@
   color: #000000;
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 6px 4px;
 }
 

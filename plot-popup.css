@@ -9,11 +9,10 @@
 #plotPopupRoot {
   display: none;
   position: fixed;
-  /* Was 84px -- too close to the action bar (Filter/WhatsApp/.../Compare
-     pills), which visually merges with the popup's top edge on portrait
-     phones where the action bar keeps its full labeled height. Bumped
-     for real clearance underneath it. */
-  top: 100px;
+  /* Bumped again -- 100px still wasn't enough clearance under the
+     action bar on some screens. Landscape gets its own smaller offset
+     below, since the action bar itself shrinks there. */
+  top: 132px;
   right: 16px;
   z-index: 10000;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
@@ -28,13 +27,19 @@
   box-sizing: border-box;
   padding: 18px 18px 20px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.62);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  /* Brighter top-to-bottom gradient (instead of one flat tint) plus a
+     stronger saturate/brightness boost on the blur -- reads as a bright,
+     glossy pane of glass rather than a plain translucent overlay. The
+     gradient lives in `background`, not a separate overlay, so it's
+     naturally clipped to the card's own border-radius and unaffected by
+     the internal scroll (overflow-y above). */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.6) 100%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(1.08);
+  backdrop-filter: blur(30px) saturate(200%) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   box-shadow:
     0 20px 44px rgba(0, 0, 0, 0.16),
-    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
     0 0 0 0.5px rgba(0, 0, 0, 0.04);
   color: #1C1C1E;
   animation: plotPopupIn 0.32s cubic-bezier(0.2, 0.9, 0.25, 1);
@@ -239,14 +244,26 @@
 
 @media (max-width: 480px) {
   #plotPopupRoot {
-    /* Was 76px -- same clearance fix as the base rule above, scaled down
-       slightly since the action bar's pills shrink a bit on touch
-       devices too. */
-    top: 92px;
+    /* Bumped again alongside the base rule -- 92px still wasn't enough
+       clearance under the action bar. */
+    top: 116px;
     right: 10px;
   }
 
   .plot-popup-card {
     width: 260px;
+  }
+}
+
+/* Landscape phones: the action bar itself shrinks here (top:8px,
+   icon-only pills -- see action-bar.css's own landscape rule), so the
+   portrait offset above is overkill and just wastes scarce vertical
+   space. Gated on html.is-touch-device for the same reason
+   action-bar.css and plot-compare.css gate their landscape rules on it
+   -- (orientation: landscape) alone can misreport mid-rotation on some
+   Android browsers if combined with hover/pointer media features. */
+@media (orientation: landscape) {
+  html.is-touch-device #plotPopupRoot {
+    top: 68px;
   }
 }
