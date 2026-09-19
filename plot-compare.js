@@ -280,6 +280,52 @@
       if (!foundContainingBlockBreaker) {
         console.log("[plot-compare] no ancestor transform/filter/perspective/will-change/contain found -- containing block should be the real viewport.");
       }
+
+      // Root's box is correct, so check what's actually painted on top at
+      // its center point -- if some other element (very plausibly
+      // krpano's own pano/plugin container, which some skins give an
+      // enormous z-index like 999999 for fullscreen mode) is stacked
+      // above this panel WITHOUT being an ancestor of it, z-index alone
+      // won't fix that from here; we'd need to know what it is first.
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var topEl = document.elementFromPoint(cx, cy);
+      console.log("[plot-compare] element actually painted at panel center:", topEl,
+        "| is it #plotCompareRoot or inside it?", !!(topEl && root.contains(topEl)));
+      if (topEl && !root.contains(topEl)) {
+        var topCs = window.getComputedStyle(topEl);
+        console.warn("[plot-compare] something else is stacked ON TOP of the panel:", topEl,
+          "-- its z-index:", topCs.zIndex, "| position:", topCs.position);
+      }
+
+      // Check the backdrop and card too -- confirms whether the overlay
+      // itself is the full box we expect, or whether IT has collapsed /
+      // gone transparent / been pushed off-screen even though the outer
+      // #plotCompareRoot measured correctly above.
+      var backdropEl = root.querySelector(".plot-compare-backdrop");
+      var cardEl = root.querySelector(".plot-compare-card");
+      if (backdropEl) {
+        var bRect = backdropEl.getBoundingClientRect();
+        var bCs = window.getComputedStyle(backdropEl);
+        console.log("[plot-compare] .plot-compare-backdrop rect:", bRect,
+          "| background:", bCs.backgroundColor, "| display:", bCs.display, "| opacity:", bCs.opacity);
+      } else {
+        console.warn("[plot-compare] .plot-compare-backdrop not found inside root -- innerHTML may not have rendered as expected.");
+      }
+      if (cardEl) {
+        var cRect = cardEl.getBoundingClientRect();
+        var cCs = window.getComputedStyle(cardEl);
+        console.log("[plot-compare] .plot-compare-card rect:", cRect,
+          "| display:", cCs.display, "| opacity:", cCs.opacity, "| maxHeight:", cCs.maxHeight);
+        if (cRect.width === 0 || cRect.height === 0) {
+          console.warn("[plot-compare] .plot-compare-card has zero width or height.");
+        }
+        if (cRect.top < 0 || cRect.bottom > window.innerHeight) {
+          console.warn("[plot-compare] .plot-compare-card extends outside the visible viewport vertically:", cRect.top, cRect.bottom, "vs viewport height", window.innerHeight);
+        }
+      } else {
+        console.warn("[plot-compare] .plot-compare-card not found inside root.");
+      }
       console.groupEnd();
     } catch (err) {
       console.error("[plot-compare] debug logging failed:", err);
