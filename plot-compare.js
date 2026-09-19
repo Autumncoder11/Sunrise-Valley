@@ -211,8 +211,7 @@
 
     root.style.display = "block";
 
-    var backdrop = root.querySelector(".plot-compare-backdrop");
-    backdrop.addEventListener("click", function (e) {
+    var backdrop = root.querySelector(".plot-compare-backdrop");    backdrop.addEventListener("click", function (e) {
       if (e.target === backdrop) closePanel(); // click outside the card
     });
     root.querySelector(".plot-compare-close").addEventListener("click", closePanel);
@@ -223,6 +222,68 @@
         removePlot(btn.getAttribute("data-hotspot"));
       });
     });
+
+    debugLogCompareVisibility(root);
+  }
+
+  // Diagnostic only -- logs everything needed to tell "the panel didn't
+  // render" apart from "the panel rendered but something is making it
+  // invisible / zero-size / off-screen", which look identical to the eye
+  // but need very different fixes. Runs every time the panel opens; it's
+  // cheap and console-only, so safe to leave in permanently. The
+  // ancestor walk specifically looks for anything that would give
+  // position:fixed a containing block OTHER than the real viewport
+  // (transform / filter / perspective / will-change:transform / contain
+  // on any ancestor all do this) -- a very common reason a full-screen
+  // fixed overlay works in one layout and silently vanishes in another.
+  function debugLogCompareVisibility(root) {
+    try {
+      var rect = root.getBoundingClientRect();
+      var cs = window.getComputedStyle(root);
+      var isLandscape = window.matchMedia && window.matchMedia("(orientation: landscape)").matches;
+
+      console.group("[plot-compare] visibility debug");
+      console.log("viewport:", window.innerWidth + "x" + window.innerHeight,
+        "| orientation:", isLandscape ? "landscape" : "portrait",
+        "| is-touch-device class:", document.documentElement.classList.contains("is-touch-device"));
+      console.log("#plotCompareRoot rect:", rect);
+      console.log("#plotCompareRoot computed style -- display:", cs.display,
+        "| position:", cs.position, "| zIndex:", cs.zIndex,
+        "| width:", cs.width, "| height:", cs.height);
+
+      if (rect.width === 0 || rect.height === 0) {
+        console.warn("[plot-compare] root has zero width or height -- it's in the DOM but occupying no visible space.");
+      }
+
+      var node = root.parentElement;
+      var depth = 0;
+      var foundContainingBlockBreaker = false;
+      while (node && depth < 15) {
+        var ncs = window.getComputedStyle(node);
+        var suspects = [];
+        if (ncs.transform && ncs.transform !== "none") suspects.push("transform: " + ncs.transform);
+        if (ncs.filter && ncs.filter !== "none") suspects.push("filter: " + ncs.filter);
+        if (ncs.perspective && ncs.perspective !== "none") suspects.push("perspective: " + ncs.perspective);
+        if (ncs.willChange && ncs.willChange.indexOf("transform") !== -1) suspects.push("will-change: " + ncs.willChange);
+        if (ncs.contain && ncs.contain !== "none") suspects.push("contain: " + ncs.contain);
+        if (suspects.length) {
+          foundContainingBlockBreaker = true;
+          console.warn(
+            "[plot-compare] ancestor at depth " + depth + " changes position:fixed's containing block " +
+            "(so the overlay is confined to THIS element's box, not the real viewport):",
+            node, "-- " + suspects.join(", ")
+          );
+        }
+        node = node.parentElement;
+        depth++;
+      }
+      if (!foundContainingBlockBreaker) {
+        console.log("[plot-compare] no ancestor transform/filter/perspective/will-change/contain found -- containing block should be the real viewport.");
+      }
+      console.groupEnd();
+    } catch (err) {
+      console.error("[plot-compare] debug logging failed:", err);
+    }
   }
 
   function openPanel() {
