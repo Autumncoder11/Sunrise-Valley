@@ -19,8 +19,8 @@
   // Labels show when view.fov is at or below this (smaller = more zoomed in).
   // Zoomed out is about 140, max zoom is about 12.
   // Raise it to show labels earlier, lower it to show them only closer in.
-  var SHOW_BELOW_FOV = 40;
-  var HIDE_ABOVE_FOV = 43; // small gap so they don't flicker
+  var SHOW_BELOW_FOV = 60;
+  var HIDE_ABOVE_FOV = 63; // small gap so they don't flicker
 
   var ready = false, shown = false, lastCount = -1, timer = null;
 
