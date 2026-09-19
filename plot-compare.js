@@ -49,6 +49,20 @@
     }));
   }
 
+  // Separate from fireChanged() -- panelOpen can change WITHOUT the
+  // selection changing (e.g. tapping the Compare pill to close the panel
+  // without clearing anything) and the selection can change WITHOUT the
+  // panel's open/closed state changing (e.g. clear() while it's already
+  // open just re-renders it as the empty state). action-bar.js listens to
+  // this specifically so the pill's pressed/active look always reflects
+  // the panel's REAL state regardless of what closed it -- Clear All, the
+  // panel's own X, tapping the backdrop, or the pill itself.
+  function firePanelChanged() {
+    document.dispatchEvent(new CustomEvent("plotcompare:panelchanged", {
+      detail: { open: panelOpen }
+    }));
+  }
+
   function isSelected(hotspotName) {
     return selected.indexOf(hotspotName) !== -1;
   }
@@ -387,11 +401,13 @@
     // are full-detail cards competing for the same screen space.
     if (typeof window.closePlotPopup === "function") window.closePlotPopup();
     panelOpen = true;
+    firePanelChanged();
     renderPanel();
   }
 
   function closePanel() {
     panelOpen = false;
+    firePanelChanged();
     var root = document.getElementById("plotCompareRoot");
     if (root) {
       root.style.display = "none";

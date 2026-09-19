@@ -357,7 +357,12 @@
       tourStop(); // don't fight the tour's own view-panning
       if (window.plotCompare && typeof window.plotCompare.togglePanel === "function") {
         window.plotCompare.togglePanel();
-        compareBtn.classList.toggle("plot-action-pill--active", window.plotCompare.isPanelOpen());
+        // Pressed/active look is NOT set here -- see the
+        // "plotcompare:panelchanged" listener below. Setting it directly
+        // from this click only handled the pill closing itself; it never
+        // reset when the panel was closed some other way (Clear All, the
+        // panel's own X, tapping outside it), leaving the pill looking
+        // permanently pressed.
       } else {
         console.error("action-bar: window.plotCompare not available yet");
       }
@@ -370,6 +375,13 @@
       } else {
         compareBadge.style.display = "none";
       }
+    });
+    // Single source of truth for the pill's pressed look: fires from
+    // plot-compare.js on every actual open/close, regardless of what
+    // triggered it (this pill, Clear All, the panel's own X, or tapping
+    // its backdrop).
+    document.addEventListener("plotcompare:panelchanged", function (e) {
+      compareBtn.classList.toggle("plot-action-pill--active", !!(e.detail && e.detail.open));
     });
     bar.appendChild(compareBtn);
 
