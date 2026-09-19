@@ -145,10 +145,13 @@
   color: #666666;
   cursor: pointer;
   padding: 0 4px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .plot-compare-close:hover {
   color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .plot-compare-empty {
@@ -202,10 +205,13 @@
   color: #999999;
   cursor: pointer;
   padding: 2px 4px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .plot-compare-remove:hover {
   color: #E11D2E;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .plot-compare-name {
@@ -230,7 +236,16 @@
 .plot-compare-row-label {
   font-size: 12px;
   font-weight: bold;
-  color: #666666;
+  color: #444444;
+  /* Now a small glass chip of its own, matching the value cells beside
+     it, instead of bare floating text -- keeps the whole row reading as
+     one consistent frosted-glass strip. */
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  padding: 6px 8px;
 }
 
 .plot-compare-cell {
@@ -254,24 +269,29 @@
 
 .plot-compare-divider {
   height: 1px;
-  background: #E5E7EB;
+  background: rgba(255, 255, 255, 0.5);
   margin: 4px 0;
 }
 
 .plot-compare-clear {
   display: block;
   margin: 14px auto 0;
-  border: none;
-  background: transparent;
-  color: #999999;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #666666;
   font-size: 12px;
   font-weight: bold;
-  text-decoration: underline;
+  border-radius: 999px;
+  padding: 6px 16px;
+  text-decoration: none;
   cursor: pointer;
 }
 
 .plot-compare-clear:hover {
   color: #E11D2E;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Small screens: let the grid scroll horizontally instead of squeezing
