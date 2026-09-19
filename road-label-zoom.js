@@ -56,7 +56,11 @@
   };
   var DEFAULT_COLOR = "#ffffff"; // any width not listed above
 
-  var ROAD_LABEL_RE = /^roadlabel\d+$/;
+  // Only these road labels get the "show only when zoomed in" behaviour
+  // and the width colour. Every other roadlabelN is left completely
+  // alone (always visible, keeps its own css from the XML).
+  // To add more later, e.g. roadlabel20:  /^roadlabel(16|17|18|20)$/
+  var ROAD_LABEL_RE = /^roadlabel(16|17|18)$/;
 
   // Used only if the view doesn't define view.fovmin / view.fovmax.
   var FALLBACK_FOV_MIN = 10;
@@ -141,7 +145,13 @@
     // Re-scan only if the number of hotspots changed (scene reload etc.)
     var count = parseInt(kr.get("hotspot.count"), 10);
     if (count !== lastCount) setupLabels();
-    if (!labelNames.length) return;
+    if (!labelNames.length) {
+      if (DEBUG && Date.now() - lastLog > 1500) {
+        lastLog = Date.now();
+        console.log("road-label-zoom: running, but found 0 roadlabel hotspots (hotspot.count=" + count + ")");
+      }
+      return;
+    }
 
     var fov = parseFloat(kr.get("view.fov"));
     if (!isFinite(fov)) return;
