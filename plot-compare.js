@@ -138,6 +138,22 @@
       return;
     }
 
+    // "Portal" the panel to be a direct child of <body> every time it
+    // opens. Debug logging showed krpano's own overlay (an absolutely
+    // positioned <svg>) painting ON TOP of this panel despite the
+    // panel's z-index of 2000 -- which means #plotCompareRoot's WINNING
+    // z-index only applies within whatever stacking context it happens
+    // to be nested in wherever it sits in your HTML. If that ancestor
+    // itself has position+z-index set, it creates its own stacking
+    // context, and our z-index:2000 only gets compared against other
+    // things INSIDE that context -- it never gets compared against
+    // krpano's layer at all. Moving the node to be a direct child of
+    // <body> guarantees it participates in the top-level stacking
+    // context, where z-index:2000 actually means something.
+    if (root.parentElement !== document.body) {
+      document.body.appendChild(root);
+    }
+
     var plots = selected.map(dataFor).filter(Boolean);
     var cells = [];
 
