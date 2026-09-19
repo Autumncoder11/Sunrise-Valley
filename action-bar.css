@@ -47,24 +47,45 @@
   align-items: center;
   gap: 8px;
   flex: 0 0 auto;
-  background: #FFFFFF;
+  /* Frosted-glass pill: translucent white so the pano shows through,
+     blurred so it stays readable over busy map colors, with a subtle
+     top-lit border and inset highlight to sell the "glass edge" look
+     rather than reading as plain flat transparency. */
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
   color: #1a1a1a;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 999px;
   padding: 9px 18px 9px 10px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   white-space: nowrap;
   /* Smooths the padding/font-size change across the touch/width
      breakpoint and the landscape-specific rule below, instead of an
      abrupt snap mid-rotation. */
-  transition: padding 0.15s ease, font-size 0.15s ease;
+  transition: padding 0.15s ease, font-size 0.15s ease, background 0.15s ease;
+}
+
+/* Browsers without backdrop-filter support (older Android WebViews, some
+   in-app browsers) would otherwise show a washed-out, hard-to-read pill
+   with no blur to compensate for the transparency -- bump opacity up so
+   labels/icons stay legible even without the frosted effect. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .plot-action-pill {
+    background: rgba(255, 255, 255, 0.92);
+  }
 }
 
 .plot-action-pill:hover {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .plot-action-pill:active {
@@ -116,11 +137,23 @@
 
 /* Highlight the Filter/Compare pill while its panel is open. Grouped
    together (rather than duplicated per-pill) since both use the same
-   stroke-only icon style and the same dark "active" treatment. */
+   stroke-only icon style and the same dark "active" treatment. Dark
+   frosted glass rather than flat black, to stay in the same visual
+   language as the pill's own resting state. */
 .plot-action-pill--filter.plot-action-pill--active,
 .plot-action-pill--compare.plot-action-pill--active {
-  background: #1a1a1a;
+  background: rgba(20, 20, 20, 0.6);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.18);
   color: #FFFFFF;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .plot-action-pill--filter.plot-action-pill--active,
+  .plot-action-pill--compare.plot-action-pill--active {
+    background: rgba(20, 20, 20, 0.9);
+  }
 }
 
 .plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg,

@@ -2,9 +2,10 @@
    plot-compare.css
    The "+ Add to Compare" button inside plot-popup.js's own popup, plus
    the full-screen side-by-side comparison panel plot-compare.js renders
-   into #plotCompareRoot. Visual language matches plot-popup.js's own
-   card (white rounded card, bold dark text) so it reads as part of the
-   same UI, not a bolted-on extra.
+   into #plotCompareRoot. Frosted-glass visual language: translucent,
+   blurred surfaces over a dimmed/blurred backdrop, so the pano stays
+   faintly visible through everything rather than being hidden behind
+   flat opaque panels.
    ========================================================================= */
 
 /* ---- Compare button inside the plot popup ---- */
@@ -13,9 +14,11 @@
   width: 100%;
   margin: 8px 0 0;
   padding: 9px 12px;
-  border: none;
+  border: 1px solid rgba(13, 148, 136, 0.35);
   border-radius: 10px;
-  background: #ECFDF5;
+  background: rgba(236, 253, 245, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   color: #0D9488;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
@@ -25,16 +28,17 @@
 }
 
 .plot-popup-compare-btn:hover {
-  background: #D1FAE5;
+  background: rgba(209, 250, 229, 0.85);
 }
 
 .plot-popup-compare-btn--active {
-  background: #0D9488;
+  background: rgba(13, 148, 136, 0.85);
+  border-color: rgba(13, 148, 136, 0.85);
   color: #FFFFFF;
 }
 
 .plot-popup-compare-btn--active:hover {
-  background: #0B7C72;
+  background: rgba(11, 124, 114, 0.9);
 }
 
 /* ---- Comparison panel ---- */
@@ -59,7 +63,12 @@
 .plot-compare-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.4);
+  /* Blurs the pano/map behind the dim overlay too, so the whole panel
+     reads as one frosted-glass layer rather than a flat dark scrim with
+     a separate glass card floating on top of it. */
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,9 +84,18 @@
 }
 
 .plot-compare-card {
-  background: #FFFFFF;
+  /* Frosted glass card: translucent white + blur, with a soft light
+     border and inset top highlight so the "glass" edge reads clearly
+     against the dark backdrop, rather than just looking like a faded
+     white box. */
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   padding: 18px 20px 20px;
   width: 100%;
   max-width: 640px;
@@ -94,6 +112,15 @@
   /* Margin (not just centering) so a tall card still gets breathing room
      top and bottom when the backdrop itself has to scroll. */
   margin: auto;
+}
+
+/* Browsers without backdrop-filter support would otherwise show a
+   washed-out, low-contrast card with no blur to compensate -- bump
+   opacity up so it stays readable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .plot-compare-card {
+    background: rgba(255, 255, 255, 0.96);
+  }
 }
 
 .plot-compare-header {
@@ -155,7 +182,10 @@
 
 .plot-compare-col-header {
   position: relative;
-  background: #F8FAFC;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   padding: 10px 8px 8px;
   text-align: center;
@@ -192,7 +222,7 @@
   font-weight: bold;
   letter-spacing: 0.03em;
   color: #0D9488;
-  background: #CCFBF1;
+  background: rgba(204, 251, 241, 0.7);
   border-radius: 999px;
   padding: 2px 8px;
 }
@@ -207,7 +237,10 @@
   font-size: 13px;
   color: #1a1a1a;
   text-align: center;
-  background: #F8FAFC;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   padding: 6px 4px;
 }
@@ -215,7 +248,8 @@
 .plot-compare-cell--yes {
   color: #DB2777;
   font-weight: bold;
-  background: #FBCFE8;
+  background: rgba(251, 207, 232, 0.6);
+  border-color: rgba(251, 207, 232, 0.9);
 }
 
 .plot-compare-divider {
