@@ -26,7 +26,7 @@
   // On mobile, every roadlabelN font-size from the XML is multiplied by
   // this once (12px -> 9px at 0.75). Desktop is left unchanged.
   // Lower = smaller text on phones, 1 = no change.
-  var MOBILE_SCALE = 0.75;
+  var MOBILE_SCALE = 0.6;
   var MOBILE_MIN_PX = 6;
   var ALL_ROADS_RE = /^roadlabel\d+$/;
 
