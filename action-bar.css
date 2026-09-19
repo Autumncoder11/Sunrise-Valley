@@ -24,7 +24,7 @@
      layer. */
   z-index: 950;
   /* above the filter bar and pano, below the plot/enquiry popups */
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
 .plot-action-bar {
@@ -59,7 +59,7 @@
   border-radius: 999px;
   padding: 9px 18px 9px 10px;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 800;
   cursor: pointer;
   box-shadow:
     0 4px 18px rgba(0, 0, 0, 0.18),
@@ -137,23 +137,20 @@
 
 /* Highlight the Filter/Compare pill while its panel is open. Grouped
    together (rather than duplicated per-pill) since both use the same
-   stroke-only icon style and the same dark "active" treatment. Dark
-   frosted glass rather than flat black, to stay in the same visual
-   language as the pill's own resting state. */
+   stroke-only icon style and the same "active" treatment. Solid vivid
+   gradient chip -- not glass -- deliberately borrowed from the Yummy
+   Nest Kitchen app's selected filter pill ("New") and its promo-banner
+   gradient, since that's the clearest "selected" visual language to
+   carry over: a resting pill is quiet frosted glass, a SELECTED one is
+   a bold solid color, exactly like that reference's chip row. */
 .plot-action-pill--filter.plot-action-pill--active,
 .plot-action-pill--compare.plot-action-pill--active {
-  background: rgba(20, 20, 20, 0.6);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  backdrop-filter: blur(14px) saturate(180%);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, #EC1E79, #7C3AED);
+  border-color: rgba(255, 255, 255, 0.35);
   color: #FFFFFF;
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .plot-action-pill--filter.plot-action-pill--active,
-  .plot-action-pill--compare.plot-action-pill--active {
-    background: rgba(20, 20, 20, 0.9);
-  }
+  box-shadow:
+    0 6px 20px rgba(236, 30, 121, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .plot-action-pill--filter.plot-action-pill--active .plot-action-icon svg,
