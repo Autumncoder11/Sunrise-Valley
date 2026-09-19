@@ -1,15 +1,14 @@
 /* =========================================================================
-   road-label-zoom.js  (minimal version)
+   road-label-zoom.js  (visibility only)
 
-   Only roadlabel16, roadlabel17 and roadlabel18 are handled:
-   they stay hidden until the user zooms in a bit closer to max zoom,
-   and hide again when zooming out. All other road labels are untouched
-   (always visible).
+   roadlabel16, roadlabel17 and roadlabel18 stay hidden until the user
+   zooms in closer, and hide again when zooming out.
 
-   No font scaling, no colours, no per-frame work: a tiny check runs
-   every 200 ms and only touches krpano when the state flips.
+   Nothing else is changed: font size, colour and text stay exactly as
+   set in your XML. All other road labels are untouched.
 
-   Requires window.krpano (same as plot-popup.js).
+   A tiny check runs every 200 ms and only touches krpano when the state
+   flips. Requires window.krpano (same as plot-popup.js).
    ========================================================================= */
 
 (function () {
@@ -18,19 +17,16 @@
   var NAMES = ["roadlabel16", "roadlabel17", "roadlabel18"];
 
   // Labels show when view.fov is at or below this (smaller = more zoomed in).
-  // Your tour's max zoom is about fov 12, zoomed out is 140.
-  // Raise this number to show labels EARLIER (less zoom needed),
-  // lower it to show them only closer to max zoom.
+  // Zoomed out is about 140, max zoom is about 12.
+  // Raise it to show labels earlier, lower it to show them only closer in.
   var SHOW_BELOW_FOV = 40;
   var HIDE_ABOVE_FOV = 43; // small gap so they don't flicker
-
-  // Font size once visible (your XML has 100px, which is far too big).
-  var FONT_PX = 15;
 
   var ready = false, shown = false, lastCount = -1, timer = null;
 
   function K() { return window.krpano; }
 
+  // Start hidden (only sets visibility, nothing else).
   function setup() {
     var kr = K();
     lastCount = parseInt(kr.get("hotspot.count"), 10);
@@ -38,11 +34,6 @@
     for (var i = 0; i < NAMES.length; i++) {
       var base = "hotspot[" + NAMES[i] + "]";
       if (!kr.get(base + ".name")) continue;
-      var css = kr.get(base + ".css") || "";
-      css = /font-size\s*:[^;]*;*/i.test(css)
-        ? css.replace(/font-size\s*:[^;]*;*/i, "font-size:" + FONT_PX + "px;")
-        : css + "; font-size:" + FONT_PX + "px;";
-      kr.set(base + ".css", css.replace(/;{2,}/g, ";"));
       kr.set(base + ".visible", false);
       found++;
     }
