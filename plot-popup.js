@@ -235,6 +235,18 @@
   }
 
   function loadPlotData(url) {
+    // Fix the capture-blocks-drag issue for the Roads hotspot RIGHT NOW,
+    // synchronously, instead of waiting for disableHotspotCapture() below
+    // (which only runs once the all_plots_matched.json fetch resolves).
+    // "Roads" is a fixed name defined directly in tour.xml, not something
+    // that depends on this JSON, so there is no reason to make it wait on
+    // a network round-trip. Without this, any drag/swipe that starts on
+    // the road surface -- which is one huge polygon covering most of the
+    // visible ground -- fails to pan the view during that window (page
+    // just opened, slow/mobile connection, etc.), which is exactly the
+    // "sometimes it doesn't work" behavior this was reported as.
+    disableRoadsCapture();
+
     url = url || PLOT_DATA_URL;
     var resolvedUrl = url;
     fetch(url)
@@ -335,8 +347,19 @@
     Object.keys(PLOT_DATA).forEach(function (hotspotName) {
       kset("hotspot[" + hotspotName + "].capture", "false");
     });
-    // The road surface is its own hotspot too ("Roads"), not part of
-    // PLOT_DATA -- same capture-blocks-drag issue, same fix.
+    // Also re-assert Roads here (cheap/idempotent) in case this runs
+    // before krpano has actually created the hotspot the first time
+    // disableRoadsCapture() was called from loadPlotData().
+    disableRoadsCapture();
+  }
+
+  // The road surface is its own hotspot ("Roads", defined in tour.xml),
+  // not part of PLOT_DATA loaded from JSON -- so unlike the plot
+  // polygons, there's no reason this has to wait on that fetch. Split out
+  // so it can be called immediately, synchronously, as soon as krpano is
+  // ready (see loadPlotData() above), instead of only after
+  // all_plots_matched.json resolves.
+  function disableRoadsCapture() {
     kset("hotspot[Roads].capture", "false");
   }
 
