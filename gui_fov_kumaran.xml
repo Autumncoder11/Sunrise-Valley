@@ -202,9 +202,19 @@
 		set(hotspot[landmark_%1_subtitle].alpha, 0);
 		set(hotspot[landmark_%1_subtitle].zorder, 600);
 		set(hotspot[landmark_%1_subtitle].enabled, false);
-		if(%5 != '',
+		<!-- %5 is raw macro-substituted text (not a typed get()), so it MUST
+		     be quoted here — comparing it unquoted (%5 != '') breaks krpano's
+		     expression parser the moment %5 contains a space, e.g. "5 mins"
+		     tokenizes as two separate words and throws "Invalid expression".
+		     Stash the true/false result in hastime (a plain boolean custom
+		     property) so nothing downstream has to re-compare the raw string
+		     again — see landmark_reveal_label, which hits the exact same
+		     trap if it compares hotspot[...].html to '' directly. -->
+		if('%5' != '',
+			set(hotspot[landmark_%1_subtitle].hastime, true);
 			js(landmark_measureSubtitle('%1', '%5'));
 		,
+			set(hotspot[landmark_%1_subtitle].hastime, false);
 			set(hotspot[landmark_%1_subtitle].revealwidth, 1);
 		);
 
@@ -311,9 +321,12 @@
 			set(hotspot[landmark_%1_title].width, 1);
 			set(hotspot[landmark_%1_subtitle].width, 1);
 			set(hotspot[landmark_%1_title].alpha, 1);
-			<!-- subtitle only turns visible if it actually has text —
-			     an empty '' time flag stays alpha 0/1px forever -->
-			if(hotspot[landmark_%1_subtitle].html != '',
+			<!-- subtitle only turns visible if it actually has time text —
+			     use the hastime boolean set in landmark_define, NOT a raw
+			     string compare against hotspot[...].html (that hits the
+			     same "Invalid expression" trap as the %5 check above the
+			     moment the text contains a space). -->
+			if(hotspot[landmark_%1_subtitle].hastime == true,
 				set(hotspot[landmark_%1_subtitle].alpha, 1);
 			);
 			set(landmark_%1_label_dur, calc(max(0.25, min(1.1, get(hotspot[landmark_%1_title].revealwidth) / 260))));
