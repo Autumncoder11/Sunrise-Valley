@@ -312,6 +312,34 @@
         var topCs = window.getComputedStyle(topEl);
         console.warn("[plot-compare] something else is stacked ON TOP of the panel:", topEl,
           "-- its z-index:", topCs.zIndex, "| position:", topCs.position);
+
+        // The winning element's OWN z-index is often "auto" (as seen in
+        // testing) -- that's not a contradiction, it just means the
+        // element that actually wins the stacking fight is one of ITS
+        // ancestors, not this element itself. Walk up from the winning
+        // element (not from our own root -- a different chain) looking
+        // for the first ancestor with an explicit position + z-index,
+        // since THAT is the stacking context actually beating ours.
+        var winnerNode = topEl.parentElement;
+        var winnerDepth = 0;
+        var foundWinningContext = false;
+        while (winnerNode && winnerDepth < 20) {
+          var wcs = window.getComputedStyle(winnerNode);
+          if (wcs.position !== "static" && wcs.zIndex !== "auto") {
+            foundWinningContext = true;
+            console.warn(
+              "[plot-compare] found the actual competing stacking context at depth " + winnerDepth +
+              " above the winning element -- THIS is what needs to be beaten:",
+              winnerNode, "-- position:", wcs.position, "| z-index:", wcs.zIndex,
+              "| id:", winnerNode.id || "(none)", "| class:", winnerNode.className || "(none)"
+            );
+          }
+          winnerNode = winnerNode.parentElement;
+          winnerDepth++;
+        }
+        if (!foundWinningContext) {
+          console.warn("[plot-compare] no positioned+z-indexed ancestor found above the winning element either -- stacking order may be coming from raw DOM order among z-index:auto siblings instead.");
+        }
       }
 
       // Check the backdrop and card too -- confirms whether the overlay
