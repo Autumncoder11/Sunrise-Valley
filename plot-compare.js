@@ -34,6 +34,21 @@
   var selected = [];      // ordered array of hotspotName strings
   var panelOpen = false;
 
+  // Tracks "we just rotated" so openPanel() can hang back briefly rather
+  // than racing krpano's own orientationchange/resize handling. Debug
+  // logging on this project found krpano's own overlay painting on top
+  // of our panel specifically right after a rotation (not on a fresh
+  // landscape load) -- the same family of Android rotation/compositing
+  // bug this project's action-bar.css already documents fighting once
+  // before (a layer getting stuck at its pre-rotation state/order until
+  // something forces a fresh repaint).
+  var recentlyRotatedUntil = 0;
+  ["orientationchange", "resize"].forEach(function (evt) {
+    window.addEventListener(evt, function () {
+      recentlyRotatedUntil = Date.now() + 400;
+    });
+  });
+
   function dataFor(hotspotName) {
     return window.plotPopup && typeof window.plotPopup.getPlotData === "function"
       ? window.plotPopup.getPlotData(hotspotName)
@@ -226,6 +241,13 @@
       '</div>';
 
     root.style.display = "block";
+    // Force a synchronous reflow/repaint before wiring up listeners.
+    // Reading offsetHeight forces the browser to flush pending layout,
+    // which can be enough to make it re-evaluate paint/stacking order
+    // fresh rather than reusing a compositor snapshot taken mid-rotation
+    // (the same class of staleness action-bar.css's own comments
+    // describe for the fixed action bar on Android).
+    void root.offsetHeight;
 
     var backdrop = root.querySelector(".plot-compare-backdrop");    backdrop.addEventListener("click", function (e) {
       if (e.target === backdrop) closePanel(); // click outside the card
@@ -382,7 +404,18 @@
     // are full-detail cards competing for the same screen space.
     if (typeof window.closePlotPopup === "function") window.closePlotPopup();
     panelOpen = true;
-    renderPanel();
+
+    if (Date.now() < recentlyRotatedUntil) {
+      // We rotated less than 400ms ago -- give krpano's own resize/
+      // orientationchange handling a moment to finish its own re-layout
+      // first instead of racing it immediately, which is exactly the
+      // scenario where its overlay was seen winning the stacking fight.
+      setTimeout(function () {
+        if (panelOpen) renderPanel();
+      }, 350);
+    } else {
+      renderPanel();
+    }
   }
 
   function closePanel() {
