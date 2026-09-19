@@ -35,7 +35,14 @@
    ============================================================ */
 
 html.is-touch-device #plotPopupRoot {
-  top: calc(56px + env(safe-area-inset-top, 0px));
+  /* Was 56px -- with the action bar's real height on touch devices,
+     that left only a couple of pixels of clearance, which is the
+     overlap seen in testing. This is the rule that was actually
+     controlling the popup's position on phones/tablets all along --
+     plot-popup.css's own top values only apply on non-touch (mouse)
+     devices, since this selector's extra html.is-touch-device class
+     wins the cascade over that plainer #plotPopupRoot rule. */
+  top: calc(88px + env(safe-area-inset-top, 0px));
   right: calc(10px + env(safe-area-inset-right, 0px));
   left: auto;
   bottom: auto;
@@ -102,7 +109,9 @@ html.is-touch-device #plotPopupRoot .plot-popup-card.pp-collapsed {
    combine directly with the touch class here. */
 @media (orientation: landscape) {
   html.is-touch-device #plotPopupRoot {
-    top: calc(46px + env(safe-area-inset-top, 0px));
+    /* Was 46px -- same fix as the base rule above, scaled down to
+       match the shorter landscape action bar. */
+    top: calc(62px + env(safe-area-inset-top, 0px));
   }
 
   html.is-touch-device .plot-popup-card {
