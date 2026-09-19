@@ -32,6 +32,18 @@
   // Hide again only when zoom drops below this (gap avoids flicker).
   var HIDE_BELOW = 0.85;
 
+  // OPTIONAL: show labels when view.fov is at or below this value
+  // (smaller fov = more zoomed in). If set (a number), it is used INSTEAD
+  // of SHOW_AT / HIDE_BELOW. Leave as null to use the percentage method.
+  // Turn DEBUG on, zoom in fully, read the logged fov, then set this to
+  // a bit above that number (e.g. logged 30 -> set 35).
+  var SHOW_BELOW_FOV = null;
+  var HIDE_ABOVE_FOV_EXTRA = 3; // hysteresis for the fov method
+
+  // Logs fov / bounds / label count to the console every ~1.5s.
+  var DEBUG = true;
+  var lastLog = 0;
+
   // How often (ms) to check the zoom. Cheap (one krpano.get), so 150ms is fine.
   var CHECK_INTERVAL_MS = 150;
 
@@ -139,9 +151,28 @@
     if (t < 0) t = 0;
     if (t > 1) t = 1;
 
+    if (DEBUG) {
+      var now = Date.now();
+      if (now - lastLog > 1500) {
+        lastLog = now;
+        console.log("road-label-zoom: labels=" + labelNames.length +
+          " fov=" + fov.toFixed(2) + " fovmin=" + b.min + " fovmax=" + b.max +
+          " t=" + t.toFixed(2) + " shown=" + shown);
+      }
+    }
+
+    var wantShow, wantHide;
+    if (typeof SHOW_BELOW_FOV === "number") {
+      wantShow = fov <= SHOW_BELOW_FOV;
+      wantHide = fov > SHOW_BELOW_FOV + HIDE_ABOVE_FOV_EXTRA;
+    } else {
+      wantShow = t >= SHOW_AT;
+      wantHide = t < HIDE_BELOW;
+    }
+
     // Only touch krpano when the state actually changes.
-    if (!shown && t >= SHOW_AT) setVisible(true);
-    else if (shown && t < HIDE_BELOW) setVisible(false);
+    if (!shown && wantShow) setVisible(true);
+    else if (shown && wantHide) setVisible(false);
   }
 
   function start() {
@@ -164,6 +195,8 @@
   window.roadLabelZoom = {
     start: start,
     stop: stop,
-    refresh: function () { setupLabels(); }
+    refresh: function () { setupLabels(); },
+    // Console test: roadLabelZoom.show(true) forces labels on, (false) off.
+    show: function (v) { setVisible(!!v); }
   };
 })();
