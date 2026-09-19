@@ -1667,6 +1667,30 @@
   window.plotPopup = {
     init: loadPlotData,
 
+    // Re-disables capture on Roads + every known plot polygon. Meant to
+    // be called from krpano's own onloadcomplete event in tour.xml
+    // (see the scene's <events name="loading_events" onloadcomplete="..."/>),
+    // NOT just relied on via loadPlotData()'s own timing. output_hotspots.xml
+    // -- which actually defines the Roads/plot <hotspot> tags -- loads via
+    // an async <include>, same as the road-label comment in tour.xml
+    // already explains for a different bug. If disableRoadsCapture() runs
+    // BEFORE that include has finished, it sets capture=false on a
+    // hotspot that doesn't fully exist yet -- and when the include's own
+    // <hotspot name="Roads" .../> tag is then parsed, krpano applies that
+    // tag's attributes (capture defaults back to true, since the XML tag
+    // never sets it) and silently overwrites the capture=false we set
+    // earlier. Because it depends on which finishes first (script timing
+    // vs. network/include timing), it looks "occasional" rather than
+    // consistently broken. krpano's onloadcomplete only fires once
+    // everything -- including included files -- has actually finished,
+    // so calling this from there instead is timing-proof. It's cheap and
+    // idempotent, so it's safe to also leave the existing calls from
+    // loadPlotData() as a second layer of defense.
+    disableCaptureNow: function () {
+      disableRoadsCapture();
+      if (dataReady) disableHotspotCapture();
+    },
+
     // True once all_plots_matched.json has been fetched and processed
     // (buildCadRing etc.) into PLOT_DATA.
     isDataReady: function () { return dataReady; },
