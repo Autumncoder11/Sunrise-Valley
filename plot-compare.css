@@ -84,17 +84,17 @@
 }
 
 .plot-compare-card {
-  /* Frosted glass card: translucent white + blur, with a soft light
-     border and inset top highlight so the "glass" edge reads clearly
-     against the dark backdrop, rather than just looking like a faded
-     white box. */
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  backdrop-filter: blur(22px) saturate(180%);
+  /* Same frosted-glass recipe as the action bar's pills
+     (action-bar.css .plot-action-pill), not its own heavier/whiter
+     blend, so the compare panel visually matches the pills instead of
+     reading as a separate, more opaque "modal" style. */
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 16px;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 4px 18px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
   padding: 18px 20px 20px;
   width: 100%;
@@ -119,7 +119,7 @@
    opacity up so it stays readable. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .plot-compare-card {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.92);
   }
 }
 
@@ -185,11 +185,10 @@
 
 .plot-compare-col-header {
   position: relative;
-  background: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 10px;
+  /* No boxed background anymore -- sits straight on the card's own
+     glass surface. A bottom border is enough to separate the header
+     row from the data rows below it. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   padding: 10px 8px 8px;
   text-align: center;
 }
@@ -237,14 +236,9 @@
   font-size: 12px;
   font-weight: bold;
   color: #444444;
-  /* Now a small glass chip of its own, matching the value cells beside
-     it, instead of bare floating text -- keeps the whole row reading as
-     one consistent frosted-glass strip. */
-  background: rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 8px;
+  /* No boxed chip anymore -- plain label sitting on the card's own
+     glass surface, with just a thin separator under each row. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   padding: 6px 8px;
 }
 
@@ -252,19 +246,15 @@
   font-size: 13px;
   color: #1a1a1a;
   text-align: center;
-  background: rgba(255, 255, 255, 0.4);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   padding: 6px 4px;
 }
 
 .plot-compare-cell--yes {
+  /* Called out by color alone now instead of a solid pink box, matching
+     the rest of the grid's flat look. */
   color: #DB2777;
   font-weight: bold;
-  background: rgba(251, 207, 232, 0.6);
-  border-color: rgba(251, 207, 232, 0.9);
 }
 
 .plot-compare-divider {

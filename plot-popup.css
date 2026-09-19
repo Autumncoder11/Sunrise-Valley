@@ -9,7 +9,11 @@
 #plotPopupRoot {
   display: none;
   position: fixed;
-  top: 84px;
+  /* Was 84px -- too close to the action bar (Filter/WhatsApp/.../Compare
+     pills), which visually merges with the popup's top edge on portrait
+     phones where the action bar keeps its full labeled height. Bumped
+     for real clearance underneath it. */
+  top: 100px;
   right: 16px;
   z-index: 10000;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
@@ -235,7 +239,10 @@
 
 @media (max-width: 480px) {
   #plotPopupRoot {
-    top: 76px;
+    /* Was 76px -- same clearance fix as the base rule above, scaled down
+       slightly since the action bar's pills shrink a bit on touch
+       devices too. */
+    top: 92px;
     right: 10px;
   }
 
