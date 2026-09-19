@@ -19,8 +19,16 @@
   // Labels show when view.fov is at or below this (smaller = more zoomed in).
   // Zoomed out is about 140, max zoom is about 12.
   // Raise it to show labels earlier, lower it to show them only closer in.
-  var SHOW_BELOW_FOV = 80;
-  var HIDE_ABOVE_FOV = 83; // small gap so they don't flicker
+  var SHOW_BELOW_FOV = 40;
+  var HIDE_ABOVE_FOV = 43; // small gap so they don't flicker
+
+  // ---- Mobile font size (one-time, no zoom scaling) -------------------
+  // On mobile, every roadlabelN font-size from the XML is multiplied by
+  // this once (12px -> 9px at 0.75). Desktop is left unchanged.
+  // Lower = smaller text on phones, 1 = no change.
+  var MOBILE_SCALE = 0.75;
+  var MOBILE_MIN_PX = 6;
+  var ALL_ROADS_RE = /^roadlabel\d+$/;
 
   var ready = false, shown = false, lastCount = -1, timer = null;
 
@@ -49,9 +57,39 @@
     shown = v;
   }
 
+  var mobileCount = -1, mobileApplied = {};
+
+  function isMobile(kr) {
+    return String(kr.get("device.mobile")) === "true" ||
+      (window.matchMedia && window.matchMedia("(max-width: 768px)").matches);
+  }
+
+  // Runs only when the number of hotspots changes (i.e. on load / scene
+  // change), never per frame. Skips labels already shrunk.
+  function applyMobileSize(kr) {
+    var count = parseInt(kr.get("hotspot.count"), 10);
+    if (!count || count === mobileCount) return;
+    mobileCount = count;
+    if (!isMobile(kr)) return;
+    for (var i = 0; i < count; i++) {
+      var name = kr.get("hotspot[" + i + "].name");
+      if (!name || !ALL_ROADS_RE.test(name)) continue;
+      var css = kr.get("hotspot[" + name + "].css") || "";
+      var m = /font-size\s*:\s*([\d.]+)px/i.exec(css);
+      if (!m) continue;
+      var cur = parseFloat(m[1]);
+      if (mobileApplied[name] === cur) continue; // already shrunk
+      var px = Math.max(MOBILE_MIN_PX, Math.round(cur * MOBILE_SCALE * 10) / 10);
+      kr.set("hotspot[" + name + "].css",
+        css.replace(/font-size\s*:\s*[\d.]+px;*/i, "font-size:" + px + "px;"));
+      mobileApplied[name] = px;
+    }
+  }
+
   function check() {
     var kr = K();
     if (!kr) return;
+    applyMobileSize(kr);
     // (Re)run setup if not done yet or if hotspots were reloaded.
     if (!ready || parseInt(kr.get("hotspot.count"), 10) !== lastCount) setup();
     if (!ready) return;
