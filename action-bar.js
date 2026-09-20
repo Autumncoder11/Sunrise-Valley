@@ -132,6 +132,47 @@
       '<path d="M10.5 9h3M10.5 15h3"/></svg>'
   };
 
+  // ---- 360 Tour click chime ----------------------------------------------
+  // A tiny synthesized two-note "ding" (Web Audio API), not an MP3 asset --
+  // keeps this file dependency-free (nothing to host/license) and plays
+  // instantly on click with zero network/decode latency. Reused AudioContext
+  // (created lazily on first click, most browsers block creating one before
+  // any user gesture anyway) instead of a fresh one per click.
+  var tourChimeCtx = null;
+
+  function playTourChime() {
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      if (!tourChimeCtx) tourChimeCtx = new Ctx();
+      // Some browsers create the context in a "suspended" state until a
+      // gesture resumes it -- this click IS that gesture, so resume() is
+      // safe to call unconditionally.
+      if (tourChimeCtx.state === "suspended") tourChimeCtx.resume();
+
+      var now = tourChimeCtx.currentTime;
+      playTone(880, now, 0.09, 0.05);            // A5
+      playTone(1174.66, now + 0.06, 0.14, 0.045); // D6, slightly softer
+    } catch (e) {
+      console.warn("action-bar: tour chime playback failed", e);
+    }
+
+    function playTone(freq, startTime, duration, peakGain) {
+      var osc = tourChimeCtx.createOscillator();
+      var gain = tourChimeCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(peakGain, startTime + 0.008); // quick attack
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration); // smooth decay
+
+      osc.connect(gain).connect(tourChimeCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.02);
+    }
+  }
+
   function el(tag, className, html) {
     var e = document.createElement(tag);
     if (className) e.className = className;
@@ -313,6 +354,7 @@
     var tourBtn = makePill("tour", "360 Tour");
     TOUR.btn = tourBtn;
     tourBtn.addEventListener("click", function () {
+      playTourChime();
       if (TOUR.active) {
         tourStop();
       } else {
