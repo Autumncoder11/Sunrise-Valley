@@ -135,23 +135,52 @@
   background: currentColor;
 }
 
-/* Retinted to match the map's plot-fill palette (#78BE8C / #CE6E64 /
-   #E6A550 / #28282C border) instead of the brighter default iOS system
-   colors, so the popup badge and the map fill read as the same status
-   language. */
+/* Retinted to match the production SVG page's exact status palette
+   (dcfce7/22c55e available, fee2e2/ef4444 sold, fef3c7/f59e0b reserved,
+   dbeafe/3b82f6 booked, d9f99d/84cc16 park, f3e8ff/a855f7 commercial,
+   fef08a/eab308 special), so the popup badge, the map fill, and any
+   legend all speak the same status language. */
 .plot-popup-badge--available {
-  background: rgba(120, 190, 140, 0.18);
-  color: #4B8C63;
+  background: rgba(34, 197, 94, 0.14);
+  color: #15803D;
 }
 
 .plot-popup-badge--sold {
-  background: rgba(206, 110, 100, 0.16);
-  color: #A8534A;
+  background: rgba(239, 68, 68, 0.14);
+  color: #B91C1C;
 }
 
+.plot-popup-badge--reserved {
+  background: rgba(245, 158, 11, 0.16);
+  color: #92400E;
+}
+
+.plot-popup-badge--booked {
+  background: rgba(59, 130, 246, 0.14);
+  color: #1D4ED8;
+}
+
+.plot-popup-badge--park {
+  background: rgba(132, 204, 22, 0.18);
+  color: #4D7C0F;
+}
+
+.plot-popup-badge--commercial {
+  background: rgba(168, 85, 247, 0.14);
+  color: #7E22CE;
+}
+
+.plot-popup-badge--special {
+  background: rgba(234, 179, 8, 0.16);
+  color: #A16207;
+}
+
+/* kept as an alias so any markup still using the old "--hold" class
+   name doesn't silently lose its color; points at the same values as
+   --reserved above, which is the closer match to what "hold" meant. */
 .plot-popup-badge--hold {
-  background: rgba(230, 165, 80, 0.18);
-  color: #B5762E;
+  background: rgba(245, 158, 11, 0.16);
+  color: #92400E;
 }
 
 /* ---- Plain key/value rows (Area, Corner Plot) -------------------------- */
@@ -178,7 +207,7 @@
 }
 
 .plot-popup-corner-value--yes {
-  color: #4B8C63;
+  color: #15803D;
   font-weight: 600;
 }
 
@@ -190,20 +219,20 @@
   margin: 10px 0 4px;
   padding: 12px 14px;
   border-radius: 16px;
-  background: rgba(230, 165, 80, 0.14);
-  border: 1px solid rgba(230, 165, 80, 0.32);
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.32);
 }
 
 .plot-popup-facing-label {
   font-size: 13px;
   font-weight: 600;
-  color: #B5762E;
+  color: #92400E;
 }
 
 .plot-popup-facing-value {
   font-size: 16px;
   font-weight: 700;
-  color: #B5762E;
+  color: #92400E;
 }
 
 .plot-popup-divider {

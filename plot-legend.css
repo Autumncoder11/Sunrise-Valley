@@ -7,19 +7,17 @@
    Usage: place this markup once in the page, outside #plotPopupRoot:
 
    <div id="plotLegend" class="plot-legend">
-     <div class="plot-legend-row">
-       <span class="plot-legend-dot plot-legend-dot--available"></span>
-       Available
-     </div>
-     <div class="plot-legend-row">
-       <span class="plot-legend-dot plot-legend-dot--hold"></span>
-       On Hold
-     </div>
-     <div class="plot-legend-row">
-       <span class="plot-legend-dot plot-legend-dot--sold"></span>
-       Sold
-     </div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--available"></span>Available</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--sold"></span>Sold</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--reserved"></span>Reserved</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--booked"></span>Booked</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--park"></span>Park</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--commercial"></span>Commercial</div>
+     <div class="plot-legend-row"><span class="plot-legend-dot plot-legend-dot--special"></span>Special</div>
    </div>
+
+   Only show the rows that are actually present in a given layout --
+   e.g. drop the Park/Commercial rows on a purely residential block.
    ========================================================================= */
 
 .plot-legend {
@@ -64,20 +62,36 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  border: 1px solid rgba(40, 40, 44, 0.35); /* echoes the map's #28282C border */
+  border: 1px solid rgba(0, 0, 0, 0.15);
   flex: 0 0 auto;
 }
 
 .plot-legend-dot--available {
-  background: #78BE8C;
-}
-
-.plot-legend-dot--hold {
-  background: #E6A550;
+  background: #22C55E;
 }
 
 .plot-legend-dot--sold {
-  background: #CE6E64;
+  background: #EF4444;
+}
+
+.plot-legend-dot--reserved {
+  background: #F59E0B;
+}
+
+.plot-legend-dot--booked {
+  background: #3B82F6;
+}
+
+.plot-legend-dot--park {
+  background: #84CC16;
+}
+
+.plot-legend-dot--commercial {
+  background: #A855F7;
+}
+
+.plot-legend-dot--special {
+  background: #EAB308;
 }
 
 /* Mobile: sit above the safe area, slightly smaller, so it doesn't
