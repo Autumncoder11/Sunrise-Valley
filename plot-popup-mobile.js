@@ -31,21 +31,9 @@
     card.classList.toggle("pp-collapsed");
   }
 
-  // The "View Location" button (added in plot-popup.js) has an inline
-  // display:block, so it would stay visible when the sheet is collapsed.
-  // !important in a stylesheet beats a non-important inline style, so this
-  // hides it along with the rest of the collapsed content.
-  function addCollapseStyle() {
-    var st = document.createElement("style");
-    st.textContent =
-      ".plot-popup-card.pp-collapsed .plot-popup-location-btn { display: none !important; }";
-    document.head.appendChild(st);
-  }
-
   function attach() {
     var root = document.getElementById("plotPopupRoot");
     if (!root) return;
-    addCollapseStyle();
     root.addEventListener("click", onRootClick);
   }
 

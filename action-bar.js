@@ -60,6 +60,10 @@
     locationLat: "11.12801342",
     locationLng: "77.00365839",
 
+    // Google Maps share link opened by the Location button. If left empty
+    // (""), the button falls back to the lat/lng above.
+    locationUrl: "https://maps.app.goo.gl/Ms5j6VEPhzwR2Mo2A",
+
     // Deliberately a RELATIVE path (no leading slash): this resolves
     // against the current page's own folder. A leading slash resolves
     // from the actual domain root instead, which breaks the moment the
@@ -527,7 +531,8 @@
     // ---- Location ----
     var locationBtn = makePill("location", "Location");
     locationBtn.addEventListener("click", function () {
-      var url = "https://www.google.com/maps?q=" + CONFIG.locationLat + "," + CONFIG.locationLng;
+      var url = CONFIG.locationUrl ||
+        "https://www.google.com/maps?q=" + CONFIG.locationLat + "," + CONFIG.locationLng;
       window.open(url, "_blank", "noopener");
     });
     bar.appendChild(locationBtn);
