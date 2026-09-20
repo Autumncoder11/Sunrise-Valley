@@ -89,7 +89,28 @@
     // than swept through first. Must match a slug from landmark_define()
     // in gui_fov_kumaran.xml, e.g. "alchemy_public_school" for
     // landmark_alchemy_public_school_dot.
-    tourStartLandmarkSlug: "alchemy_public_school"
+    tourStartLandmarkSlug: "alchemy_public_school",
+
+    // ---- 360 Tour background music -----------------------------------
+    // Path to your own audio file, played on loop for exactly the tour's
+    // duration (fades in on start, fades out on stop/natural end). Same
+    // relative-path rule as brochureUrl above -- resolves against this
+    // page's own folder, so it survives being hosted in a subfolder
+    // (e.g. GitHub Pages project sites). TODO: point this at your file,
+    // e.g. "assets/tour-music.mp3".
+    tourMusicUrl: "tour-music.mp3",
+
+    // 0.0 (silent) to 1.0 (the file's native volume). This is the ONE
+    // number to change if the music is too loud/quiet -- try 0.5-0.7 for
+    // a typical royalty-free ambient/piano track; the previous synthesized
+    // pad was intentionally much quieter (0.035) since a raw tone at full
+    // volume is harsh, but a real music track doesn't have that problem.
+    tourMusicVolume: 0.6,
+
+    // How long the fade in/out takes, in seconds. Keep this instead of an
+    // abrupt start/stop -- it also gives the browser a moment to actually
+    // begin playback before it's at full volume.
+    tourMusicFadeSeconds: 1.2
   };
 
   var ICONS = {
@@ -178,102 +199,73 @@
     }
   }
 
-  // Soft, open ambient pad -- root/fifth/octave (no third, so it stays
-  // calm/neutral rather than reading as "musical" or melodic) built from six
-  // gently detuned sine oscillators (two per note, +/-4 cents apart, for a
-  // slow natural chorus-y beating instead of a static, obviously-synthetic
-  // tone) run through a lowpass filter whose cutoff drifts slowly via an
-  // LFO, so the pad quietly "breathes" for as long as the tour runs instead
-  // of sitting perfectly static. Kept well under the click chime in volume
-  // -- it's a bed, not a melody -- and always faded in/out rather than
-  // started/stopped abruptly, to avoid audible clicks.
-  var AMBIENCE_NOTES_HZ = [130.81, 196.00, 261.63]; // C3, G3, C4
-  var AMBIENCE_PEAK_GAIN = 0.035;
-  var AMBIENCE_FADE_IN_S = 1.4;
-  var AMBIENCE_FADE_OUT_S = 1.6;
+  // Background music for the tour's duration -- plays CONFIG.tourMusicUrl
+  // on loop, faded in/out over CONFIG.tourMusicFadeSeconds so there's no
+  // audible click at start/stop. A plain HTMLAudioElement (not the Web
+  // Audio graph the chime uses above) -- much simpler for "just loop this
+  // file and set its volume," and .volume can be ramped directly without
+  // needing gain nodes at all.
+  var tourMusicEl = null;
+  var tourMusicFadeTimer = null;
 
-  var tourAmbience = null; // { oscillators, filter, lfo, lfoGain, masterGain }
-  var tourAmbienceStopTimer = null;
-
-  function startTourAmbience() {
-    var ctx = getTourAudioCtx();
-    if (!ctx) return;
-
-    // If a fade-out from a just-stopped tour is still pending, cancel it and
-    // reuse/rebuild cleanly rather than layering a second pad on top.
-    if (tourAmbienceStopTimer) {
-      window.clearTimeout(tourAmbienceStopTimer);
-      tourAmbienceStopTimer = null;
+  function getTourMusicEl() {
+    if (!tourMusicEl) {
+      tourMusicEl = new Audio(CONFIG.tourMusicUrl);
+      tourMusicEl.loop = true;
+      tourMusicEl.preload = "auto";
     }
-    if (tourAmbience) return; // already running
-
-    var now = ctx.currentTime;
-
-    var filter = ctx.createBiquadFilter();
-    filter.type = "lowpass";
-    filter.frequency.value = 900;
-    filter.Q.value = 0.7;
-
-    var masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(0, now);
-    masterGain.gain.linearRampToValueAtTime(AMBIENCE_PEAK_GAIN, now + AMBIENCE_FADE_IN_S);
-
-    filter.connect(masterGain).connect(ctx.destination);
-
-    // Slow LFO drifting the filter cutoff +/-150Hz over ~9s, so the pad's
-    // tone color moves gently instead of droning unchanged.
-    var lfo = ctx.createOscillator();
-    lfo.type = "sine";
-    lfo.frequency.value = 1 / 9;
-    var lfoGain = ctx.createGain();
-    lfoGain.gain.value = 150;
-    lfo.connect(lfoGain).connect(filter.frequency);
-    lfo.start(now);
-
-    var oscillators = [];
-    AMBIENCE_NOTES_HZ.forEach(function (freq) {
-      [-4, 4].forEach(function (detuneCents) {
-        var osc = ctx.createOscillator();
-        osc.type = "sine";
-        osc.frequency.value = freq;
-        osc.detune.value = detuneCents;
-        osc.connect(filter);
-        osc.start(now);
-        oscillators.push(osc);
-      });
-    });
-
-    tourAmbience = {
-      oscillators: oscillators,
-      filter: filter,
-      lfo: lfo,
-      lfoGain: lfoGain,
-      masterGain: masterGain
-    };
+    return tourMusicEl;
   }
 
-  function stopTourAmbience() {
-    if (!tourAmbience || !tourAudioCtx) return;
-    var ctx = tourAudioCtx;
-    var now = ctx.currentTime;
-    var current = tourAmbience;
+  // Ramps audio.volume from its current value to targetVolume over
+  // durationSeconds using small timed steps (HTMLMediaElement.volume has no
+  // built-in scheduling the way Web Audio gain nodes do). Cancels any fade
+  // already in progress so rapid start/stop clicks don't fight each other.
+  function fadeAudioVolume(audio, targetVolume, durationSeconds, onDone) {
+    if (tourMusicFadeTimer) {
+      window.clearInterval(tourMusicFadeTimer);
+      tourMusicFadeTimer = null;
+    }
+    var steps = 30;
+    var stepMs = (durationSeconds * 1000) / steps;
+    var startVolume = audio.volume;
+    var stepCount = 0;
 
-    // Fade out smoothly (cancel any in-flight ramp first), then actually
-    // stop/disconnect the nodes once the fade has finished.
-    current.masterGain.gain.cancelScheduledValues(now);
-    current.masterGain.gain.setValueAtTime(current.masterGain.gain.value, now);
-    current.masterGain.gain.linearRampToValueAtTime(0, now + AMBIENCE_FADE_OUT_S);
+    tourMusicFadeTimer = window.setInterval(function () {
+      stepCount++;
+      var t = stepCount / steps;
+      audio.volume = startVolume + (targetVolume - startVolume) * t;
+      if (stepCount >= steps) {
+        window.clearInterval(tourMusicFadeTimer);
+        tourMusicFadeTimer = null;
+        audio.volume = targetVolume; // land exactly on target, no rounding drift
+        if (onDone) onDone();
+      }
+    }, stepMs);
+  }
 
-    tourAmbienceStopTimer = window.setTimeout(function () {
-      current.oscillators.forEach(function (osc) { osc.stop(); });
-      current.lfo.stop();
-      current.masterGain.disconnect();
-      current.filter.disconnect();
-      current.lfoGain.disconnect();
-      tourAmbienceStopTimer = null;
-    }, AMBIENCE_FADE_OUT_S * 1000 + 50);
+  function startTourMusic() {
+    var audio = getTourMusicEl();
+    audio.volume = 0;
+    audio.currentTime = 0; // tour always starts from the top of the track
+    var playPromise = audio.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function (err) {
+        // Autoplay-with-sound is occasionally blocked even after a click,
+        // on some in-app/webview browsers -- not fatal, the tour itself
+        // still runs fine without music.
+        console.warn("action-bar: tour music playback failed", err);
+      });
+    }
+    fadeAudioVolume(audio, CONFIG.tourMusicVolume, CONFIG.tourMusicFadeSeconds);
+  }
 
-    tourAmbience = null; // free to start a fresh pad on the next tourStart()
+  function stopTourMusic() {
+    if (!tourMusicEl) return;
+    var audio = tourMusicEl;
+    fadeAudioVolume(audio, 0, CONFIG.tourMusicFadeSeconds, function () {
+      audio.pause();
+    });
   }
 
   function el(tag, className, html) {
@@ -361,7 +353,7 @@
 
     TOUR.active = true;
     if (TOUR.btn) TOUR.btn.classList.add("plot-action-pill--active");
-    startTourAmbience();
+    startTourMusic();
 
     // Phase 1: ease from wherever the camera is right now over to the
     // leftmost landmark, a bit quicker than the main sweep so it reads as
@@ -399,7 +391,7 @@
       TOUR.timer = null;
     }
     if (TOUR.btn) TOUR.btn.classList.remove("plot-action-pill--active");
-    stopTourAmbience();
+    stopTourMusic();
   }
 
   function init() {
