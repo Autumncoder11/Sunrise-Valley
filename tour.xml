@@ -68,6 +68,18 @@
 	               design_text_shadow="1"
 	               />
 
+	<!-- hide the whole vtourskin (control bar, title, thumbnails) -->
+	<events name="hide_skin"
+	        onloadcomplete="hide_skin_now();"
+	        onresize="hide_skin_now();"
+	        keep="true" />
+
+	<action name="hide_skin_now">
+		set(layer[skin_layer].visible, false);
+		set(layer[skin_layer].enabled, false);
+	</action>
+
+
 	<!--
 	    For an alternative skin design either change the <skin_settings> values 
 	    from above or optionally include one of the predefined designs from below.
