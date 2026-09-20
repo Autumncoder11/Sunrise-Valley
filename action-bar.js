@@ -132,25 +132,30 @@
       '<path d="M10.5 9h3M10.5 15h3"/></svg>'
   };
 
-  // ---- 360 Tour click chime ----------------------------------------------
-  // A tiny synthesized two-note "ding" (Web Audio API), not an MP3 asset --
-  // keeps this file dependency-free (nothing to host/license) and plays
-  // instantly on click with zero network/decode latency. Reused AudioContext
-  // (created lazily on first click, most browsers block creating one before
-  // any user gesture anyway) instead of a fresh one per click.
-  var tourChimeCtx = null;
+  // ---- 360 Tour audio: click chime + ambient bed --------------------------
+  // Everything here is synthesized with the Web Audio API -- no MP3/WAV
+  // asset to host or license. One shared AudioContext (created lazily on
+  // first click; most browsers block creating one before any user gesture
+  // anyway) backs both the short click chime and the looping ambient pad
+  // that runs for the tour's full duration.
+  var tourAudioCtx = null;
+
+  function getTourAudioCtx() {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!tourAudioCtx) tourAudioCtx = new Ctx();
+    // Some browsers create the context "suspended" until a gesture resumes
+    // it -- the click that got us here IS that gesture, so this is safe to
+    // call unconditionally every time.
+    if (tourAudioCtx.state === "suspended") tourAudioCtx.resume();
+    return tourAudioCtx;
+  }
 
   function playTourChime() {
     try {
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) return;
-      if (!tourChimeCtx) tourChimeCtx = new Ctx();
-      // Some browsers create the context in a "suspended" state until a
-      // gesture resumes it -- this click IS that gesture, so resume() is
-      // safe to call unconditionally.
-      if (tourChimeCtx.state === "suspended") tourChimeCtx.resume();
-
-      var now = tourChimeCtx.currentTime;
+      var ctx = getTourAudioCtx();
+      if (!ctx) return;
+      var now = ctx.currentTime;
       playTone(880, now, 0.09, 0.05);            // A5
       playTone(1174.66, now + 0.06, 0.14, 0.045); // D6, slightly softer
     } catch (e) {
@@ -158,8 +163,8 @@
     }
 
     function playTone(freq, startTime, duration, peakGain) {
-      var osc = tourChimeCtx.createOscillator();
-      var gain = tourChimeCtx.createGain();
+      var osc = tourAudioCtx.createOscillator();
+      var gain = tourAudioCtx.createGain();
       osc.type = "sine";
       osc.frequency.value = freq;
 
@@ -167,10 +172,108 @@
       gain.gain.linearRampToValueAtTime(peakGain, startTime + 0.008); // quick attack
       gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration); // smooth decay
 
-      osc.connect(gain).connect(tourChimeCtx.destination);
+      osc.connect(gain).connect(tourAudioCtx.destination);
       osc.start(startTime);
       osc.stop(startTime + duration + 0.02);
     }
+  }
+
+  // Soft, open ambient pad -- root/fifth/octave (no third, so it stays
+  // calm/neutral rather than reading as "musical" or melodic) built from six
+  // gently detuned sine oscillators (two per note, +/-4 cents apart, for a
+  // slow natural chorus-y beating instead of a static, obviously-synthetic
+  // tone) run through a lowpass filter whose cutoff drifts slowly via an
+  // LFO, so the pad quietly "breathes" for as long as the tour runs instead
+  // of sitting perfectly static. Kept well under the click chime in volume
+  // -- it's a bed, not a melody -- and always faded in/out rather than
+  // started/stopped abruptly, to avoid audible clicks.
+  var AMBIENCE_NOTES_HZ = [130.81, 196.00, 261.63]; // C3, G3, C4
+  var AMBIENCE_PEAK_GAIN = 0.035;
+  var AMBIENCE_FADE_IN_S = 1.4;
+  var AMBIENCE_FADE_OUT_S = 1.6;
+
+  var tourAmbience = null; // { oscillators, filter, lfo, lfoGain, masterGain }
+  var tourAmbienceStopTimer = null;
+
+  function startTourAmbience() {
+    var ctx = getTourAudioCtx();
+    if (!ctx) return;
+
+    // If a fade-out from a just-stopped tour is still pending, cancel it and
+    // reuse/rebuild cleanly rather than layering a second pad on top.
+    if (tourAmbienceStopTimer) {
+      window.clearTimeout(tourAmbienceStopTimer);
+      tourAmbienceStopTimer = null;
+    }
+    if (tourAmbience) return; // already running
+
+    var now = ctx.currentTime;
+
+    var filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 900;
+    filter.Q.value = 0.7;
+
+    var masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0, now);
+    masterGain.gain.linearRampToValueAtTime(AMBIENCE_PEAK_GAIN, now + AMBIENCE_FADE_IN_S);
+
+    filter.connect(masterGain).connect(ctx.destination);
+
+    // Slow LFO drifting the filter cutoff +/-150Hz over ~9s, so the pad's
+    // tone color moves gently instead of droning unchanged.
+    var lfo = ctx.createOscillator();
+    lfo.type = "sine";
+    lfo.frequency.value = 1 / 9;
+    var lfoGain = ctx.createGain();
+    lfoGain.gain.value = 150;
+    lfo.connect(lfoGain).connect(filter.frequency);
+    lfo.start(now);
+
+    var oscillators = [];
+    AMBIENCE_NOTES_HZ.forEach(function (freq) {
+      [-4, 4].forEach(function (detuneCents) {
+        var osc = ctx.createOscillator();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        osc.detune.value = detuneCents;
+        osc.connect(filter);
+        osc.start(now);
+        oscillators.push(osc);
+      });
+    });
+
+    tourAmbience = {
+      oscillators: oscillators,
+      filter: filter,
+      lfo: lfo,
+      lfoGain: lfoGain,
+      masterGain: masterGain
+    };
+  }
+
+  function stopTourAmbience() {
+    if (!tourAmbience || !tourAudioCtx) return;
+    var ctx = tourAudioCtx;
+    var now = ctx.currentTime;
+    var current = tourAmbience;
+
+    // Fade out smoothly (cancel any in-flight ramp first), then actually
+    // stop/disconnect the nodes once the fade has finished.
+    current.masterGain.gain.cancelScheduledValues(now);
+    current.masterGain.gain.setValueAtTime(current.masterGain.gain.value, now);
+    current.masterGain.gain.linearRampToValueAtTime(0, now + AMBIENCE_FADE_OUT_S);
+
+    tourAmbienceStopTimer = window.setTimeout(function () {
+      current.oscillators.forEach(function (osc) { osc.stop(); });
+      current.lfo.stop();
+      current.masterGain.disconnect();
+      current.filter.disconnect();
+      current.lfoGain.disconnect();
+      tourAmbienceStopTimer = null;
+    }, AMBIENCE_FADE_OUT_S * 1000 + 50);
+
+    tourAmbience = null; // free to start a fresh pad on the next tourStart()
   }
 
   function el(tag, className, html) {
@@ -258,6 +361,7 @@
 
     TOUR.active = true;
     if (TOUR.btn) TOUR.btn.classList.add("plot-action-pill--active");
+    startTourAmbience();
 
     // Phase 1: ease from wherever the camera is right now over to the
     // leftmost landmark, a bit quicker than the main sweep so it reads as
@@ -295,6 +399,7 @@
       TOUR.timer = null;
     }
     if (TOUR.btn) TOUR.btn.classList.remove("plot-action-pill--active");
+    stopTourAmbience();
   }
 
   function init() {
