@@ -135,19 +135,23 @@
   background: currentColor;
 }
 
+/* Retinted to match the map's plot-fill palette (#78BE8C / #CE6E64 /
+   #E6A550 / #28282C border) instead of the brighter default iOS system
+   colors, so the popup badge and the map fill read as the same status
+   language. */
 .plot-popup-badge--available {
-  background: rgba(48, 209, 88, 0.16);
-  color: #248A3D;
+  background: rgba(120, 190, 140, 0.18);
+  color: #4B8C63;
 }
 
 .plot-popup-badge--sold {
-  background: rgba(255, 69, 58, 0.14);
-  color: #D70015;
+  background: rgba(206, 110, 100, 0.16);
+  color: #A8534A;
 }
 
 .plot-popup-badge--hold {
-  background: rgba(255, 159, 10, 0.16);
-  color: #C93400;
+  background: rgba(230, 165, 80, 0.18);
+  color: #B5762E;
 }
 
 /* ---- Plain key/value rows (Area, Corner Plot) -------------------------- */
@@ -174,7 +178,7 @@
 }
 
 .plot-popup-corner-value--yes {
-  color: #248A3D;
+  color: #4B8C63;
   font-weight: 600;
 }
 
@@ -186,20 +190,20 @@
   margin: 10px 0 4px;
   padding: 12px 14px;
   border-radius: 16px;
-  background: rgba(255, 159, 10, 0.12);
-  border: 1px solid rgba(255, 159, 10, 0.28);
+  background: rgba(230, 165, 80, 0.14);
+  border: 1px solid rgba(230, 165, 80, 0.32);
 }
 
 .plot-popup-facing-label {
   font-size: 13px;
   font-weight: 600;
-  color: #C93400;
+  color: #B5762E;
 }
 
 .plot-popup-facing-value {
   font-size: 16px;
   font-weight: 700;
-  color: #C93400;
+  color: #B5762E;
 }
 
 .plot-popup-divider {
