@@ -1552,7 +1552,7 @@
   // back to parsing plot.area (e.g. "2400 sqft", "2,400") if areaSqft is absent.
   var FILTER_DIM_FILLALPHA = "0.12";
 
-  var activeFilter = null; // { facing: string|null, minSqft: number|null, maxSqft: number|null }
+  var activeFilter = null; // { facing: string|null, status: string|null, minSqft: number|null, maxSqft: number|null }
 
   function getAreaSqft(plot) {
     if (typeof plot[AREA_FIELD] === "number" && isFinite(plot[AREA_FIELD])) {
@@ -1618,6 +1618,14 @@
 
   function plotMatchesFilter(plot, filter) {
     if (!filter) return true;
+    if (filter.status) {
+      // normalizeStatus() also folds HOLD / ON HOLD into RESERVED and
+      // treats a missing status as AVAILABLE, same as the map colors
+      // and popup badge, so the filter can never disagree with them.
+      if (normalizeStatus(plot.status) !== normalizeStatus(filter.status)) {
+        return false;
+      }
+    }
     if (filter.facing) {
       if (normalizeFacing(plot[FACING_FIELD]) !== normalizeFacing(filter.facing)) {
         return false;
@@ -1774,7 +1782,7 @@
     getPolygonPoints: getPolygonPoints,
 
     // Called by filter-panel.js when the user hits SEARCH. `filter` is
-    // { facing: string|null, minSqft: number|null, maxSqft: number|null }.
+    // { facing: string|null, status: string|null, minSqft: number|null, maxSqft: number|null }.
     // Returns the number of matching plots so the panel can show a count.
     applyFilter: function (filter) {
       activeFilter = filter;

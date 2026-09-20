@@ -1,6 +1,6 @@
 /* =========================================================================
    filter-panel.js
-   Facing + Property size (min/max sqft) filter bar, with Search / Reset /
+   Facing + Status + Property size (min/max sqft) filter bar, with Search / Reset /
    Close. Delegates plot dim/highlight to window.plotPopup.applyFilter() /
    clearFilter() (see plot-popup.js).
 
@@ -35,6 +35,16 @@
     "South", "South West", "West", "North West"
   ];
 
+  // label shown in the dropdown -> status key matched in plot-popup.js
+  // (normalizeStatus there maps HOLD / ON HOLD to RESERVED, so "Hold"
+  // catches plots stored under either name).
+  var STATUS_OPTIONS = [
+    { label: "Available", value: "AVAILABLE" },
+    { label: "Sold", value: "SOLD" },
+    { label: "Hold", value: "RESERVED" },
+    { label: "Booked", value: "BOOKED" }
+  ];
+
   var panelOpen = false;
   var barEl = null;
 
@@ -56,6 +66,17 @@
     });
   }
 
+  function buildStatusOptions(select) {
+    var allOpt = el("option", null, "All statuses");
+    allOpt.value = "";
+    select.appendChild(allOpt);
+    STATUS_OPTIONS.forEach(function (o) {
+      var opt = el("option", null, o.label);
+      opt.value = o.value;
+      select.appendChild(opt);
+    });
+  }
+
   function render(root) {
     root.innerHTML = "";
 
@@ -70,6 +91,14 @@
     buildFacingOptions(facingSelect);
     facingField.appendChild(facingSelect);
     bar.appendChild(facingField);
+
+    // Status field
+    var statusField = el("div", "plot-filter-field");
+    statusField.appendChild(el("label", "plot-filter-label", "Status"));
+    var statusSelect = el("select", "plot-filter-select");
+    buildStatusOptions(statusSelect);
+    statusField.appendChild(statusSelect);
+    bar.appendChild(statusField);
 
     // Property size field
     var sizeField = el("div", "plot-filter-field");
@@ -126,17 +155,19 @@
     // ---- Wiring ----
     function currentFilter() {
       var facing = facingSelect.value || null;
+      var status = statusSelect.value || null;
       var minVal = minInput.value !== "" ? parseFloat(minInput.value) : null;
       var maxVal = maxInput.value !== "" ? parseFloat(maxInput.value) : null;
       return {
         facing: facing,
+        status: status,
         minSqft: (minVal != null && isFinite(minVal)) ? minVal : null,
         maxSqft: (maxVal != null && isFinite(maxVal)) ? maxVal : null
       };
     }
 
     function hasAnyCriteria(filter) {
-      return !!(filter.facing || filter.minSqft != null || filter.maxSqft != null);
+      return !!(filter.facing || filter.status || filter.minSqft != null || filter.maxSqft != null);
     }
 
     function showCount(n) {
@@ -170,6 +201,7 @@
 
     resetBtn.addEventListener("click", function () {
       facingSelect.value = "";
+      statusSelect.value = "";
       minInput.value = "";
       maxInput.value = "";
       hideCount();
