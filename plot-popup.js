@@ -59,6 +59,22 @@
     BOOKED:    { fill: "0xDBEAFE", border: "0x3B82F6" },
     UNKNOWN:   { fill: "0xF3E8FF", border: "0xA855F7" }
   };
+
+  // Older/alternate spellings that mean the same thing as a canonical
+  // status above. Resolved through here FIRST so styleForPlot() (map
+  // fill) and statusClass() (popup badge) can never disagree about what
+  // "HOLD" means -- before this existed, statusClass() aliased HOLD to
+  // reserved but STATUS_COLOR had no HOLD entry, so the map would show
+  // purple (unrecognized) while the badge showed amber "reserved".
+  var STATUS_ALIASES = {
+    "HOLD": "RESERVED",
+    "ON HOLD": "RESERVED"
+  };
+
+  function normalizeStatus(status) {
+    var key = (status || "AVAILABLE").toUpperCase();
+    return STATUS_ALIASES[key] || key;
+  }
   var CATEGORY_BORDERWIDTH = 3;
   var DEFAULT_BORDERWIDTH = 1;
   var ACTIVE_BORDERWIDTH = 3;
@@ -991,7 +1007,7 @@
   // border for EB/LB/PARK/CORNER). Runs once when plot data finishes loading,
   // and again (per-plot) whenever a plot is deselected.
   function styleForPlot(hotspotName, plot) {
-    var statusKey = (plot.status || "AVAILABLE").toUpperCase();
+    var statusKey = normalizeStatus(plot.status);
     var statusColors = STATUS_COLOR[statusKey] || STATUS_COLOR.UNKNOWN;
     var category = plot.category ? plot.category.toString().toUpperCase() : null; // "EB" | "LB" | "PARK" | "CORNER" | null
 
@@ -1266,14 +1282,11 @@
   }
 
   function statusClass(status) {
-    switch ((status || "").toUpperCase()) {
+    switch (normalizeStatus(status)) {
       case "SOLD": return "plot-popup-badge--sold";
-      case "RESERVED": return "plot-popup-badge--reserved";
+      case "RESERVED": return "plot-popup-badge--reserved"; // covers HOLD/ON HOLD via normalizeStatus()
       case "BOOKED": return "plot-popup-badge--booked";
-      case "HOLD":
-      case "ON HOLD": return "plot-popup-badge--reserved"; // kept as an alias of reserved
       case "AVAILABLE": return "plot-popup-badge--available";
-      case "": return "plot-popup-badge--available"; // no status set yet -- treat as available, not an error
       default: return "plot-popup-badge--unknown"; // an unrecognized/typo'd status -- flag it instead of silently showing "available"
     }
   }
