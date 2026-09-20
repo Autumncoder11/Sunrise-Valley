@@ -26,6 +26,10 @@
   var MAX_SIDE_LABELS = 8;      // pool size; covers any polygon up to 8 sides
   var LABEL_PREFIX = "sidelabel_";
 
+  // Google Maps link for the layout, shown as a "View Location" button at
+  // the bottom of every plot popup. Change the URL here if it ever moves.
+  var LOCATION_URL = "https://maps.app.goo.gl/Ms5j6VEPhzwR2Mo2A";
+
   // Colors lifted directly from the reference flat-map (index.html) so the
   // krpano hotspots match the legend exactly.
   var COLOR = {
@@ -1370,6 +1374,15 @@
         '</button>';
     }
 
+    var locationHtml = LOCATION_URL
+      ? '<a class="plot-popup-location-btn" href="' + LOCATION_URL + '" ' +
+        'target="_blank" rel="noopener noreferrer" ' +
+        'style="display:block;margin-top:12px;padding:10px 12px;text-align:center;' +
+        'background:#2563EB;color:#fff;font-weight:600;font-size:14px;' +
+        'text-decoration:none;border-radius:8px;">' +
+        '&#128205; View Location on Google Maps</a>'
+      : '';
+
     root.innerHTML =
       '<div class="plot-popup-card">' +
       '<div class="plot-popup-header">' +
@@ -1399,6 +1412,7 @@
         '<div class="plot-popup-section-label">Side Dimensions:</div>' +
         '<div class="plot-popup-side-grid">' + sideBoxes + '</div>'
         : '') +
+      locationHtml +
       '</div>';
 
     root.style.display = "block";
