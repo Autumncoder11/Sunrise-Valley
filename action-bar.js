@@ -47,14 +47,14 @@
 
   // ---- CONFIG: replace with your real details ---------------------------
   var CONFIG = {
-    propertyName: "Balaji Parcelaa",
+    propertyName: "Sunrise Valley",
 
     // Digits only, with country code, no "+", spaces, or dashes (wa.me format).
-    whatsappNumber: "91XXXXXXXXXX", // TODO: replace with the real WhatsApp number
-    whatsappMessage: "Hi, I'm interested in Balaji Parcelaa. Please share more details.",
+    whatsappNumber: "919087380808", // TODO: replace with the real WhatsApp number
+    whatsappMessage: "Hi, I'm interested in Sunrise Valley. Please share more details.",
 
     // Any tel:-compatible format, e.g. "+919999999999".
-    callNumber: "+91XXXXXXXXXX", // TODO: replace with the real phone number
+    callNumber: "+919087380808", // TODO: replace with the real phone number
 
     // Defaults to the pano's own geotag (tour.xml scene lat/lng).
     locationLat: "11.12801342",
