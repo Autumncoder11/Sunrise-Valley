@@ -183,6 +183,14 @@
   color: #92400E;
 }
 
+/* Fallback for a status that isn't recognized (typo, blank, a future
+   status nobody's wired a color for yet) -- shown as purple so it's
+   obviously a data issue rather than silently reading as "available". */
+.plot-popup-badge--unknown {
+  background: rgba(168, 85, 247, 0.14);
+  color: #7E22CE;
+}
+
 /* ---- Plain key/value rows (Area, Corner Plot) -------------------------- */
 .plot-popup-row {
   display: flex;

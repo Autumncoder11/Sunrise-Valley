@@ -29,10 +29,7 @@
   // Colors lifted directly from the reference flat-map (index.html) so the
   // krpano hotspots match the legend exactly.
   var COLOR = {
-    availableFill: "0x00FF00",
-    soldFill: "0xFED7AA",
     activeFill: "0xFDE68A",     // click highlight, same as the reference's .active
-    defaultBorder: "0x000000",
     categoryBorder: {
       EB: "0x2563EB",
       LB: "0x9333EA",
@@ -45,6 +42,22 @@
       PARK: "0xA7F3D0",
       CORNER: "0xFBCFE8"
     }
+  };
+
+  // fill/border per plot.status, keyed by the upper-cased status string.
+  // UNKNOWN is the fallback used whenever a plot's status is missing or
+  // doesn't match any key here (a typo, a not-yet-supported status like
+  // a future "BLOCKED", etc.) -- it renders purple specifically so a data
+  // problem is visually obvious on the map instead of silently rendering
+  // as "available" green, which is what happened before this fix (the
+  // old code only ever checked `status === "SOLD"`, so RESERVED/BOOKED/
+  // anything else all fell into the same green "available" bucket).
+  var STATUS_COLOR = {
+    AVAILABLE: { fill: "0xDCFCE7", border: "0x22C55E" },
+    SOLD:      { fill: "0xFEE2E2", border: "0xEF4444" },
+    RESERVED:  { fill: "0xFEF3C7", border: "0xF59E0B" },
+    BOOKED:    { fill: "0xDBEAFE", border: "0x3B82F6" },
+    UNKNOWN:   { fill: "0xF3E8FF", border: "0xA855F7" }
   };
   var CATEGORY_BORDERWIDTH = 3;
   var DEFAULT_BORDERWIDTH = 1;
@@ -978,18 +991,24 @@
   // border for EB/LB/PARK/CORNER). Runs once when plot data finishes loading,
   // and again (per-plot) whenever a plot is deselected.
   function styleForPlot(hotspotName, plot) {
-    var isSold = (plot.status || "").toUpperCase() === "SOLD";
+    var statusKey = (plot.status || "AVAILABLE").toUpperCase();
+    var statusColors = STATUS_COLOR[statusKey] || STATUS_COLOR.UNKNOWN;
     var category = plot.category ? plot.category.toString().toUpperCase() : null; // "EB" | "LB" | "PARK" | "CORNER" | null
 
-    var fill = isSold
-      ? COLOR.soldFill
-      : (category && COLOR.categoryFillAvailable[category])
-        ? COLOR.categoryFillAvailable[category]
-        : COLOR.availableFill;
+    // A category's own distinct "available" fill (EB/LB/PARK/CORNER) only
+    // applies when the plot is actually AVAILABLE -- a SOLD/RESERVED/etc.
+    // corner plot still needs to show its real status color, or a sold
+    // corner plot would be visually indistinguishable from an available one.
+    var fill = (statusKey === "AVAILABLE" && category && COLOR.categoryFillAvailable[category])
+      ? COLOR.categoryFillAvailable[category]
+      : statusColors.fill;
 
+    // Border stays category-driven when a category applies (unchanged from
+    // before -- EB/LB/PARK/CORNER always get their own border regardless of
+    // status), otherwise falls back to the status's own border color.
     var border = (category && COLOR.categoryBorder[category])
       ? COLOR.categoryBorder[category]
-      : COLOR.defaultBorder;
+      : statusColors.border;
     // Same condition as `border` above -- a truthy-but-unrecognized
     // category (e.g. the "TBD" placeholder default) must NOT get the
     // thick category border width; only a real EB/LB/PARK/CORNER match
@@ -1249,10 +1268,13 @@
   function statusClass(status) {
     switch ((status || "").toUpperCase()) {
       case "SOLD": return "plot-popup-badge--sold";
+      case "RESERVED": return "plot-popup-badge--reserved";
+      case "BOOKED": return "plot-popup-badge--booked";
       case "HOLD":
-      case "ON HOLD": return "plot-popup-badge--hold";
-      case "AVAILABLE":
-      default: return "plot-popup-badge--available";
+      case "ON HOLD": return "plot-popup-badge--reserved"; // kept as an alias of reserved
+      case "AVAILABLE": return "plot-popup-badge--available";
+      case "": return "plot-popup-badge--available"; // no status set yet -- treat as available, not an error
+      default: return "plot-popup-badge--unknown"; // an unrecognized/typo'd status -- flag it instead of silently showing "available"
     }
   }
 
