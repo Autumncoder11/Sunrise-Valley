@@ -3,12 +3,15 @@
    General "Enquiry" lead-capture modal, opened via window.enquiryPopup.open()
    (wired to the action bar's Enquiry icon in action-bar.js).
 
-   >>> No backend was specified, so submission is LOCAL-ONLY by default: <<<
-   it validates the fields, logs the enquiry to the console, and shows the
-   "we will get back to you" confirmation. Set ENQUIRY_SUBMIT_URL below to
-   a real endpoint (your CRM, a serverless function, etc.) to actually send
-   the lead somewhere — the fetch() call is already wired up, just needs a
-   URL.
+   Submissions are emailed to you through Web3Forms (free plan: 250 per
+   month). Paste your Web3Forms access key into WEB3FORMS_ACCESS_KEY below
+   and every enquiry arrives in your inbox. While that key is empty the form
+   is LOCAL-ONLY: it validates, logs the enquiry to the console and shows
+   the "we will get back to you" message, but nothing is sent anywhere.
+
+   (ENQUIRY_SUBMIT_URL is still here as an alternative -- point it at your
+   own CRM / serverless endpoint instead. Web3Forms is used first if both
+   are set.)
 
    REQUIRES:
    - enquiry-popup.css included in the page.
@@ -22,6 +25,13 @@
   // "https://your-api.example.com/enquiries". Left null = local-only
   // (validates + shows the confirmation message, but doesn't send anywhere).
   var ENQUIRY_SUBMIT_URL = null;
+
+  // Get a free key at https://web3forms.com (enter the email address that
+  // should receive the enquiries; the key is emailed to you). The key is
+  // meant to be public -- it only lets people send mail TO your inbox, it
+  // can't read anything -- so it's fine that it sits in this file.
+  var WEB3FORMS_ACCESS_KEY = "82f2e49a-0047-4edd-9a98-07a3dbca9e70";
+  var WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
   var els = {};
 
@@ -92,6 +102,17 @@
     mobileField.appendChild(mobileError);
     form.appendChild(mobileField);
 
+    // Honeypot: invisible to people, but simple spam bots fill in every
+    // field they find. A filled-in value means "bot" -- see the submit handler.
+    var trapInput = el("input");
+    trapInput.type = "text";
+    trapInput.name = "website";
+    trapInput.tabIndex = -1;
+    trapInput.autocomplete = "off";
+    trapInput.setAttribute("aria-hidden", "true");
+    trapInput.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;opacity:0;";
+    form.appendChild(trapInput);
+
     var submitBtn = el("button", "enquiry-popup-submit", "Submit Enquiry");
     submitBtn.type = "submit";
     form.appendChild(submitBtn);
@@ -108,7 +129,7 @@
       nameInput: nameInput, nameError: nameError,
       emailInput: emailInput, emailError: emailError,
       mobileInput: mobileInput, mobileError: mobileError,
-      submitBtn: submitBtn, statusEl: statusEl,
+      submitBtn: submitBtn, statusEl: statusEl, trapInput: trapInput,
       subtitleEl: header.querySelector(".enquiry-popup-subtitle")
     };
 
@@ -137,9 +158,34 @@
   }
 
   function submitEnquiry(payload) {
+    if (WEB3FORMS_ACCESS_KEY) {
+      return fetch(WEB3FORMS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New enquiry - " + payload.property,
+          from_name: payload.property + " website",
+          replyto: payload.email,   // hitting Reply in your inbox writes to the lead
+          name: payload.name,
+          email: payload.email,
+          mobile: payload.mobile,
+          property: payload.property,
+          enquiry_type: payload.type,
+          submitted_at: payload.submittedAt
+        })
+      }).then(function (res) {
+        return res.json().then(function (data) {
+          // Web3Forms reports most problems inside the JSON, not the HTTP code.
+          if (!res.ok || !data || !data.success) {
+            throw new Error((data && data.message) || ("Server responded with " + res.status));
+          }
+        });
+      });
+    }
     if (!ENQUIRY_SUBMIT_URL) {
       // No backend configured — treat as a successful local capture.
-      console.log("enquiry-popup: (local only, no ENQUIRY_SUBMIT_URL set) enquiry:", payload);
+      console.warn("enquiry-popup: NOT SENT -- no WEB3FORMS_ACCESS_KEY / ENQUIRY_SUBMIT_URL set. Enquiry:", payload);
       return Promise.resolve();
     }
     return fetch(ENQUIRY_SUBMIT_URL, {
@@ -163,6 +209,14 @@
     els.form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validate()) return;
+
+      // Bot caught by the honeypot: look successful, send nothing.
+      if (els.trapInput.value) {
+        setStatus("Thanks! We will get back to you soon.", "success");
+        els.statusEl.style.display = "block";
+        els.form.reset();
+        return;
+      }
 
       var payload = {
         property: propertyName(),
