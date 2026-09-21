@@ -7802,7 +7802,7 @@
   "kml_poly_22": {
     "displayName": "Plot 23",
     "status": "AVAILABLE",
-    "category": "TBD",
+    "category": "CORNER",
     "facing": "North East",
     "sides": [
       {
