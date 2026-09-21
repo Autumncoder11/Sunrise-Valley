@@ -184,8 +184,8 @@
     <!-- All real plot click events (styled sidebar card via show_plot_details) live in this file -->
     <include url="output_hotspots.xml?v=2" />
     <!-- <include url="hotspots.xml" /> -->
-    <!-- FOV/zoom control panel + Kumaran Medical Center on/off-screen checker -->
-    <include url="gui_fov_kumaran.xml" />
+    <!-- Landmark flags (schools, hospitals, tech parks...) + on/off-screen reveal logic + hidden FOV/zoom debug panel -->
+    <include url="landmarks.xml?v=1" />
 	<!-- removed the extra "<events onloadcomplete="start_landmark_reveals();" />"
 	     that used to be here — hotspots.xml already triggers its own startup
 	     internally, so this was a redundant 3rd trigger on top of that. -->

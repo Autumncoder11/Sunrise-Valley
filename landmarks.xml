@@ -1,0 +1,491 @@
+<krpano>
+	<!--
+		landmarks.xml — FUNCTION-DRIVEN VERSION
+		Every landmark is now created at runtime by ONE call to landmark_define().
+		There is no more per-landmark hotspot XML or GUI-row XML to hand-write.
+
+		TO ADD ANOTHER LANDMARK (exactly 2 lines, both one-liners):
+		1. In landmark_setup(), add:
+		     landmark_define(<slug>, '<label>', <ath>, <height>, '<time>');
+		   Get the first 4 values straight from a title hotspot in this shape:
+		     name="landmark_<slug>_title" html="<label>" ath="<ath>" oy="-(height+6)"
+		   i.e. height = -oy - 6.
+		   <time> is the small purple flag under the title, e.g. '6 mins' —
+		   pass '' to skip it for a given landmark (no subtitle is shown).
+		2. In gui_master_tick(), add:
+		     landmark_tick(<slug>);
+		   (this one stays manual so dragging the view updates instantly instead
+		   of waiting for the 0.25s poll — everything else is automatic.)
+	-->
+
+	<!-- ========== FOV GUI PANEL ========== -->
+	<!-- DEBUG ONLY: hidden per request. Set visible="true" again to bring back
+	     the on-screen zoom controls / FOV readout. -->
+	<layer name="fov_gui_panel" keep="true" type="container" align="rightbottom"
+	       x="20" y="130" width="228" height="96" visible="false"
+	       bgcolor="0x14181D" bgalpha="0.72" bgroundedge="10" zorder="1000">
+
+		<layer name="fov_gui_title" type="text" align="lefttop" x="12" y="10" width="204" height="16"
+		       html="ZOOM / FIELD OF VIEW"
+		       css="color:#9FB3C8;font-family:Arial;font-size:10px;font-weight:bold;letter-spacing:0.5px;" />
+
+		<layer name="fov_gui_value" type="text" align="lefttop" x="12" y="30" width="204" height="20"
+		       html="FOV 140°"
+		       css="color:#FFFFFF;font-family:Arial;font-size:16px;font-weight:bold;" />
+
+		<layer name="fov_btn_out2" type="text" align="lefttop" x="12"  y="58" width="36" height="28"
+		       bg="true" bgcolor="0xFFFFFF" bgalpha="0.12" bgroundedge="6" handcursor="true"
+		       html="minus minus" css="color:#FFFFFF;font-family:Arial;font-size:11px;text-align:center;line-height:28px;"
+		       onclick="gui_zoom_by(10);" />
+
+		<layer name="fov_btn_out1" type="text" align="lefttop" x="54"  y="58" width="36" height="28"
+		       bg="true" bgcolor="0xFFFFFF" bgalpha="0.12" bgroundedge="6" handcursor="true"
+		       html="minus" css="color:#FFFFFF;font-family:Arial;font-size:15px;text-align:center;line-height:28px;"
+		       onclick="gui_zoom_by(3);" />
+
+		<layer name="fov_btn_reset" type="text" align="lefttop" x="96"  y="58" width="36" height="28"
+		       bg="true" bgcolor="0xFFFFFF" bgalpha="0.12" bgroundedge="6" handcursor="true"
+		       html="reset" css="color:#FFFFFF;font-family:Arial;font-size:10px;text-align:center;line-height:28px;"
+		       onclick="gui_zoom_reset();" />
+
+		<layer name="fov_btn_in1" type="text" align="lefttop" x="138" y="58" width="36" height="28"
+		       bg="true" bgcolor="0xFFFFFF" bgalpha="0.12" bgroundedge="6" handcursor="true"
+		       html="plus" css="color:#FFFFFF;font-family:Arial;font-size:15px;text-align:center;line-height:28px;"
+		       onclick="gui_zoom_by(-3);" />
+
+		<layer name="fov_btn_in2" type="text" align="lefttop" x="180" y="58" width="36" height="28"
+		       bg="true" bgcolor="0xFFFFFF" bgalpha="0.12" bgroundedge="6" handcursor="true"
+		       html="plus plus" css="color:#FFFFFF;font-family:Arial;font-size:11px;text-align:center;line-height:28px;"
+		       onclick="gui_zoom_by(-10);" />
+	</layer>
+
+	<action name="gui_zoom_by">
+		set(gui_target_fov, calc(max(view.fovmin, min(view.fovmax, view.fov + %1))));
+		tween(view.fov, get(gui_target_fov), 0.3, easeOutQuad);
+	</action>
+
+	<action name="gui_zoom_reset">
+		tween(view.fov, 140, 0.4, easeOutQuad);
+	</action>
+
+	<!-- ========== STATUS PANEL (rows are added at runtime by landmark_define) ========== -->
+	<!-- DEBUG ONLY: hidden now that landmark FOV detection is confirmed working.
+	     Set visible="true" again if you need to debug on/off-screen detection. -->
+	<layer name="landmarks_gui_panel" keep="true" type="container" align="lefttop"
+	       x="16" y="70" width="240" height="8" visible="false"
+	       bgcolor="0x14181D" bgalpha="0.72" bgroundedge="10" zorder="1000" />
+
+	<!-- ========== LANDMARK FACTORY — the one function to call for a new landmark ========== -->
+	<!-- landmark_define(slug, label, ath, height, time)
+	       slug   = unique id, e.g. alchemy_public_school
+	       label  = display text, e.g. 'Alchemy Public School'
+	       ath    = compass bearing, e.g. -50.30403
+	       height = vertical guide-line length in px, e.g. 110
+	       time   = small purple "time" flag text under the title, e.g. '6 mins'
+	                (pass '' to leave this landmark without a time flag)
+	     Builds the dot/ripple/line/title/subtitle hotspots, the GUI status row,
+	     sizes the GUI panel, and kicks off the ripple animation — nothing else
+	     to write. -->
+	<action name="landmark_define">
+		<!-- height (px) of the purple "time" flag stacked under the title
+		     flag. Constant across all landmarks; set once here (cheap to
+		     repeat) rather than requiring a separate global-setup step. -->
+		set(landmark_subtitle_h, 22);
+
+		addhotspot(landmark_%1_dot);
+		set(hotspot[landmark_%1_dot].type, text);
+		set(hotspot[landmark_%1_dot].html, '');
+		set(hotspot[landmark_%1_dot].ath, %3);
+		set(hotspot[landmark_%1_dot].atv, 0.0);
+		set(hotspot[landmark_%1_dot].edge, center);
+		set(hotspot[landmark_%1_dot].width, 12);
+		set(hotspot[landmark_%1_dot].height, 12);
+		set(hotspot[landmark_%1_dot].bg, true);
+		set(hotspot[landmark_%1_dot].bgcolor, 0xFF1483);
+		set(hotspot[landmark_%1_dot].bgalpha, 1);
+		set(hotspot[landmark_%1_dot].bgroundedge, 6);
+		set(hotspot[landmark_%1_dot].zorder, 600);
+		set(hotspot[landmark_%1_dot].enabled, false);
+
+		addhotspot(landmark_%1_ripple);
+		set(hotspot[landmark_%1_ripple].type, text);
+		set(hotspot[landmark_%1_ripple].html, '');
+		set(hotspot[landmark_%1_ripple].ath, %3);
+		set(hotspot[landmark_%1_ripple].atv, 0.0);
+		set(hotspot[landmark_%1_ripple].edge, center);
+		set(hotspot[landmark_%1_ripple].width, 12);
+		set(hotspot[landmark_%1_ripple].height, 12);
+		set(hotspot[landmark_%1_ripple].bg, true);
+		set(hotspot[landmark_%1_ripple].bgcolor, 0xFF1483);
+		set(hotspot[landmark_%1_ripple].bgalpha, 0.6);
+		set(hotspot[landmark_%1_ripple].bgroundedge, 6);
+		set(hotspot[landmark_%1_ripple].zorder, 599);
+		set(hotspot[landmark_%1_ripple].enabled, false);
+
+		addhotspot(landmark_%1_line);
+		set(hotspot[landmark_%1_line].type, text);
+		set(hotspot[landmark_%1_line].html, '');
+		set(hotspot[landmark_%1_line].ath, %3);
+		set(hotspot[landmark_%1_line].atv, 0.0);
+		set(hotspot[landmark_%1_line].edge, bottom);
+		set(hotspot[landmark_%1_line].oy, 0);
+		set(hotspot[landmark_%1_line].width, 2);
+		set(hotspot[landmark_%1_line].height, 0);
+		set(hotspot[landmark_%1_line].revealheight, %4);
+		set(hotspot[landmark_%1_line].bg, true);
+		set(hotspot[landmark_%1_line].bgcolor, 0xFF1483);
+		set(hotspot[landmark_%1_line].bgalpha, 1);
+		set(hotspot[landmark_%1_line].zorder, 598);
+		set(hotspot[landmark_%1_line].enabled, false);
+
+		addhotspot(landmark_%1_title);
+		set(hotspot[landmark_%1_title].type, text);
+		set(hotspot[landmark_%1_title].html, '%2');
+		set(hotspot[landmark_%1_title].ath, %3);
+		set(hotspot[landmark_%1_title].atv, 0.0);
+		<!-- FLAG STYLE: anchor the label's bottom-LEFT corner to the top of the
+		     pole (was edge=bottom, which centered the label on the line). The
+		     label now extends to the RIGHT of the pole like a flag.
+		     Sits directly on top of the purple "time" subtitle flag (added
+		     below), so its bottom is raised by landmark_subtitle_h instead of
+		     landing right on the 6px pole gap. -->
+		set(hotspot[landmark_%1_title].edge, leftbottom);
+		set(hotspot[landmark_%1_title].oy, calc(0-(%4+6+landmark_subtitle_h)));
+		<!-- Width starts at a collapsed 1px sliver, not 0/auto. krpano's own
+		     "auto" text-layout measurement (pixelwidth) turned out to be
+		     unreliable — depending on timing/css it could report a
+		     mid-layout or overflow-clipped size instead of the true
+		     rendered width, permanently locking the reveal animation to a
+		     too-small target (labels stuck after 1-2 letters). Instead, the
+		     real width is measured in JavaScript via canvas measureText()
+		     (see landmark_measureLabel in tour.html) — a reliable browser
+		     API with no layout race — and handed back into
+		     landmark_apply_measured_width below. That per-label measured
+		     width is what the left-to-right wipe tweens up to, so every
+		     flag hugs its text (like the reference pic) instead of using
+		     one fixed width for all. -->
+		set(hotspot[landmark_%1_title].width, 1);
+		set(hotspot[landmark_%1_title].height, 30);
+		set(hotspot[landmark_%1_title].wordwrap, false);
+		set(hotspot[landmark_%1_title].bg, true);
+		set(hotspot[landmark_%1_title].bgcolor, 0x1D7A3C);
+		set(hotspot[landmark_%1_title].bgalpha, 0.95);
+		<!-- text-align:left + padding = flag look from the reference image -->
+		set(hotspot[landmark_%1_title].css, 'font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#FFFFFF; font-weight:bold; text-align:left; line-height:30px; padding-left:10px; padding-right:10px; white-space:nowrap;');
+		set(hotspot[landmark_%1_title].alpha, 0);
+		set(hotspot[landmark_%1_title].zorder, 600);
+		set(hotspot[landmark_%1_title].enabled, false);
+		js(landmark_measureLabel('%1', '%2'));
+
+		<!-- ===== TIME FLAG (purple, e.g. "6 mins") — sits directly under
+		     the title flag, same left edge, and wipes in/out together with
+		     it (see landmark_reveal_label / landmark_hide_label below).
+		     Same collapsed-1px / measured-width-via-JS trick as the title,
+		     using landmark_measureSubtitle in tour.html so short strings
+		     like "6 mins" still hug their own text instead of the title's
+		     width. If %5 is empty, it's simply never revealed (width stays
+		     1px, alpha stays 0) — harmless, so landmarks can opt out. -->
+		addhotspot(landmark_%1_subtitle);
+		set(hotspot[landmark_%1_subtitle].type, text);
+		set(hotspot[landmark_%1_subtitle].html, '%5');
+		set(hotspot[landmark_%1_subtitle].ath, %3);
+		set(hotspot[landmark_%1_subtitle].atv, 0.0);
+		set(hotspot[landmark_%1_subtitle].edge, leftbottom);
+		set(hotspot[landmark_%1_subtitle].oy, calc(0-(%4+6)));
+		set(hotspot[landmark_%1_subtitle].width, 1);
+		set(hotspot[landmark_%1_subtitle].height, landmark_subtitle_h);
+		set(hotspot[landmark_%1_subtitle].wordwrap, false);
+		set(hotspot[landmark_%1_subtitle].bg, true);
+		set(hotspot[landmark_%1_subtitle].bgcolor, 0x6E6DA8);
+		set(hotspot[landmark_%1_subtitle].bgalpha, 0.95);
+		set(hotspot[landmark_%1_subtitle].css, 'font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#FFFFFF; font-weight:bold; text-align:left; line-height:22px; padding-left:10px; padding-right:10px; white-space:nowrap; overflow:hidden;');
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
+		set(hotspot[landmark_%1_subtitle].zorder, 600);
+		set(hotspot[landmark_%1_subtitle].enabled, false);
+		<!-- %5 is raw macro-substituted text (not a typed get()), so it MUST
+		     be quoted here — comparing it unquoted (%5 != '') breaks krpano's
+		     expression parser the moment %5 contains a space, e.g. "5 mins"
+		     tokenizes as two separate words and throws "Invalid expression".
+		     Stash the true/false result in hastime (a plain boolean custom
+		     property) so nothing downstream has to re-compare the raw string
+		     again — see landmark_reveal_label, which hits the exact same
+		     trap if it compares hotspot[...].html to '' directly. -->
+		if('%5' != '',
+			set(hotspot[landmark_%1_subtitle].hastime, true);
+			js(landmark_measureSubtitle('%1', '%5'));
+		,
+			set(hotspot[landmark_%1_subtitle].hastime, false);
+			set(hotspot[landmark_%1_subtitle].revealwidth, 1);
+		);
+
+		set(row_y, calc(8 + landmark_count*46));
+
+		addlayer(landmark_%1_gui_dot);
+		set(layer[landmark_%1_gui_dot].parent, landmarks_gui_panel);
+		set(layer[landmark_%1_gui_dot].type, text);
+		set(layer[landmark_%1_gui_dot].align, lefttop);
+		set(layer[landmark_%1_gui_dot].x, 14);
+		set(layer[landmark_%1_gui_dot].y, calc(row_y+5));
+		set(layer[landmark_%1_gui_dot].width, 14);
+		set(layer[landmark_%1_gui_dot].height, 14);
+		set(layer[landmark_%1_gui_dot].bg, true);
+		set(layer[landmark_%1_gui_dot].bgcolor, 0x8A93A0);
+		set(layer[landmark_%1_gui_dot].bgroundedge, 7);
+
+		addlayer(landmark_%1_gui_label);
+		set(layer[landmark_%1_gui_label].parent, landmarks_gui_panel);
+		set(layer[landmark_%1_gui_label].type, text);
+		set(layer[landmark_%1_gui_label].align, lefttop);
+		set(layer[landmark_%1_gui_label].x, 38);
+		set(layer[landmark_%1_gui_label].y, calc(row_y-1));
+		set(layer[landmark_%1_gui_label].width, 190);
+		set(layer[landmark_%1_gui_label].height, 18);
+		set(layer[landmark_%1_gui_label].html, '%2');
+		set(layer[landmark_%1_gui_label].css, 'color:#FFFFFF;font-family:Arial;font-size:12px;font-weight:bold;');
+
+		addlayer(landmark_%1_gui_status);
+		set(layer[landmark_%1_gui_status].parent, landmarks_gui_panel);
+		set(layer[landmark_%1_gui_status].type, text);
+		set(layer[landmark_%1_gui_status].align, lefttop);
+		set(layer[landmark_%1_gui_status].x, 38);
+		set(layer[landmark_%1_gui_status].y, calc(row_y+18));
+		set(layer[landmark_%1_gui_status].width, 190);
+		set(layer[landmark_%1_gui_status].height, 18);
+		set(layer[landmark_%1_gui_status].html, 'checking');
+		set(layer[landmark_%1_gui_status].css, 'color:#9FB3C8;font-family:Arial;font-size:11px;');
+
+		set(landmark_count, calc(landmark_count+1));
+		set(layer[landmarks_gui_panel].height, calc(8 + landmark_count*46));
+
+		set(landmark_%1_revealed, false);
+		landmark_pulse_ripple(%1);
+	</action>
+
+	<!-- ========== GENERIC LANDMARK LOGIC (shared by every landmark) ========== -->
+	<action name="landmark_pulse_ripple">
+		hotspot[landmark_%1_ripple].scale = 1;
+		hotspot[landmark_%1_ripple].alpha = 0.6;
+		tween(hotspot[landmark_%1_ripple].scale|hotspot[landmark_%1_ripple].alpha, 2.2|0, 3.0, easeOutQuad, landmark_pulse_ripple(%1));
+	</action>
+
+	<!-- Called from JS (landmark_measureLabel in tour.html) once the true
+	     label width has been measured via canvas measureText() — a
+	     reliable browser API with no layout-timing race, unlike krpano's
+	     own auto-size/pixelwidth measurement which kept locking onto
+	     mid-layout or overflow-clipped values and permanently stuck labels
+	     after 1-2 letters. %2 here is that measured width in px (already
+	     includes left/right padding + a small buffer, computed in JS).
+	     The label collapses to a 1px sliver and stays at alpha 0 (fully
+	     invisible, not just narrow) — alpha only turns on once
+	     landmark_reveal_label actually starts the wipe. overflow:hidden is
+	     added only now, once there's a real fixed width to clip against —
+	     applying it any earlier (while width was still auto) was what
+	     caused the mis-measurement in the first place. -->
+	<action name="landmark_apply_measured_width">
+		set(hotspot[landmark_%1_title].revealwidth, %2);
+		set(hotspot[landmark_%1_title].width, 1);
+		set(hotspot[landmark_%1_title].alpha, 0);
+		set(hotspot[landmark_%1_title].css, 'font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#FFFFFF; font-weight:bold; text-align:left; line-height:30px; padding-left:10px; padding-right:10px; white-space:nowrap; overflow:hidden;');
+	</action>
+
+	<!-- Subtitle counterpart of landmark_apply_measured_width above — called
+	     from landmark_measureSubtitle in tour.html once the "6 mins"-style
+	     text's true width is measured. -->
+	<action name="landmark_apply_measured_subtitle_width">
+		set(hotspot[landmark_%1_subtitle].revealwidth, %2);
+		set(hotspot[landmark_%1_subtitle].width, 1);
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
+	</action>
+
+	<!-- Left-to-right reveal: wipe width 1px -> measured full width.
+	     wordwrap=false + overflow:hidden (applied once the true width was
+	     captured, see landmark_apply_measured_width) keep the text on one
+	     line and clip it, so the growing width really does reveal it
+	     letter by letter from the left, instead of the text just being
+	     rendered at full size the whole time. alpha only turns on right
+	     here, at the start of the wipe — not earlier — so nothing is visible while
+	     the line is still growing.
+	     Duration is proportional to the label's own pixel width at a fixed
+	     ANIM_PX_PER_SEC rate — the SAME rate landmark_tick's line-grow uses
+	     — clamped to a sane range. A short "CRI Trust Healthcare" flag and
+	     a long "KMCH Specialty Hospital (Kovilpalayam)" flag now wipe in at
+	     the same visual speed instead of the same fixed time, and that
+	     speed matches the pole line's growth speed so the two segments of
+	     the reveal feel like one continuous motion. -->
+	<action name="landmark_reveal_label">
+		if(hotspot[landmark_%1_title].revealwidth == null OR hotspot[landmark_%1_subtitle].revealwidth == null,
+			delayedcall(0.1, landmark_reveal_label(%1));
+		,
+			stoptween(hotspot[landmark_%1_title].width);
+			stoptween(hotspot[landmark_%1_subtitle].width);
+			set(hotspot[landmark_%1_title].width, 1);
+			set(hotspot[landmark_%1_subtitle].width, 1);
+			set(hotspot[landmark_%1_title].alpha, 1);
+			<!-- subtitle only turns visible if it actually has time text —
+			     use the hastime boolean set in landmark_define, NOT a raw
+			     string compare against hotspot[...].html (that hits the
+			     same "Invalid expression" trap as the %5 check above the
+			     moment the text contains a space). -->
+			if(hotspot[landmark_%1_subtitle].hastime == true,
+				set(hotspot[landmark_%1_subtitle].alpha, 1);
+			);
+			set(landmark_%1_label_dur, calc(max(0.25, min(1.1, get(hotspot[landmark_%1_title].revealwidth) / 260))));
+			tween(hotspot[landmark_%1_title].width, get(hotspot[landmark_%1_title].revealwidth), landmark_%1_label_dur, easeOutQuad);
+			tween(hotspot[landmark_%1_subtitle].width, get(hotspot[landmark_%1_subtitle].revealwidth), landmark_%1_label_dur, easeOutQuad);
+		);
+	</action>
+
+	<!-- Mirror of the reveal, run in reverse order: the label un-wipes
+	     right-to-left first (same clipped-width trick, just shrinking),
+	     and only once that finishes does the pole line retract. Because
+	     the line hotspot is edge="bottom" (anchored at the ground point),
+	     shrinking its height pulls the TOP edge down toward the anchor —
+	     i.e. it visually disappears top-to-bottom, not by vanishing
+	     instantly. Alpha turns off once the un-wipe finishes, so the
+	     result is truly invisible again (not a hairline sliver). Same
+	     proportional-duration treatment as the reveal, so hiding feels
+	     just as consistent regardless of label length. -->
+	<action name="landmark_hide_label">
+		stoptween(hotspot[landmark_%1_title].width);
+		stoptween(hotspot[landmark_%1_subtitle].width);
+		set(landmark_%1_label_dur, calc(max(0.2, min(0.9, get(hotspot[landmark_%1_title].revealwidth) / 300))));
+		tween(hotspot[landmark_%1_title].width, 1, landmark_%1_label_dur, easeInQuad, landmark_finish_hide(%1));
+		tween(hotspot[landmark_%1_subtitle].width, 1, landmark_%1_label_dur, easeInQuad);
+	</action>
+
+	<action name="landmark_finish_hide">
+		set(hotspot[landmark_%1_title].alpha, 0);
+		set(hotspot[landmark_%1_subtitle].alpha, 0);
+		landmark_retract_line(%1);
+	</action>
+
+	<action name="landmark_retract_line">
+		stoptween(hotspot[landmark_%1_line].height);
+		set(landmark_%1_line_dur, calc(max(0.2, min(0.9, get(hotspot[landmark_%1_line].revealheight) / 300))));
+		tween(hotspot[landmark_%1_line].height, 0, landmark_%1_line_dur, easeInQuad);
+	</action>
+
+	<action name="landmark_tick">
+		set(landmark_%1_diff,  calc(abs(adjust360(view.hlookat - hotspot[landmark_%1_dot].ath))));
+		set(landmark_%1_vdiff, calc(abs(view.vlookat - hotspot[landmark_%1_dot].atv)));
+
+		<!-- Central "trigger box": a zone smaller than the full FOV, sitting
+		     in the middle of the screen (tall and narrow — see reference
+		     screenshot). Reveal happens once the landmark enters this box;
+		     hide happens once it leaves — from EITHER side, since this is a
+		     fixed zone rather than tracking which way the camera is
+		     panning. That also sidesteps needing to know krpano's left/right
+		     angle-sign convention at all, and since the box sits well
+		     inside the true FOV edges, there's still plenty of on-screen
+		     room left for the hide animation to fully play before the
+		     landmark actually scrolls past the visible edge of the pano.
+		     Tune TRIGGER_H_FRACTION / TRIGGER_V_FRACTION to resize the box
+		     (1.0 would mean the box reaches all the way to the FOV edge). -->
+		set(landmark_%1_trigger_h, calc(view.fov * 0.5 * 0.28));
+		set(landmark_%1_trigger_v, calc(view.vfov * 0.5 * 0.75));
+
+		<!-- small hysteresis around the box edge so a landmark sitting right
+		     on the boundary doesn't flicker in/out on tiny view jitter -->
+		if(landmark_%1_revealed == true,
+			set(landmark_%1_onscreen, calc((landmark_%1_diff LT (landmark_%1_trigger_h + 2)) AND (landmark_%1_vdiff LT (landmark_%1_trigger_v + 2))));
+		,
+			set(landmark_%1_onscreen, calc((landmark_%1_diff LT (landmark_%1_trigger_h - 2)) AND (landmark_%1_vdiff LT (landmark_%1_trigger_v - 2))));
+		);
+
+		if(landmark_%1_onscreen == true,
+			if(landmark_%1_revealed != true,
+				set(landmark_%1_revealed, true);
+
+				<!-- cancel any in-flight hide and start clean: line hidden, label hidden -->
+				stoptween(hotspot[landmark_%1_title].width);
+				hotspot[landmark_%1_title].width = 1;
+				set(hotspot[landmark_%1_title].alpha, 0);
+				stoptween(hotspot[landmark_%1_subtitle].width);
+				hotspot[landmark_%1_subtitle].width = 1;
+				set(hotspot[landmark_%1_subtitle].alpha, 0);
+				stoptween(hotspot[landmark_%1_line].height);
+				hotspot[landmark_%1_line].height = 0;
+				set(landmark_%1_line_dur, calc(max(0.25, min(1.1, get(hotspot[landmark_%1_line].revealheight) / 260))));
+				tween(hotspot[landmark_%1_line].height, get(hotspot[landmark_%1_line].revealheight), landmark_%1_line_dur, easeOutQuad, landmark_reveal_label(%1));
+			);
+
+			set(layer[landmark_%1_gui_dot].bgcolor, 0x34C759);
+			set(layer[landmark_%1_gui_status].html, calc('On screen, FOV ' + roundval(view.fov, 0)));
+			set(layer[landmark_%1_gui_status].css, 'color:#34C759;font-family:Arial;font-size:11px;font-weight:bold;');
+		,
+			if(landmark_%1_revealed != false,
+				set(landmark_%1_revealed, false);
+
+				<!-- cancel any in-flight reveal and start the reverse sequence -->
+				stoptween(hotspot[landmark_%1_line].height);
+				landmark_hide_label(%1);
+			);
+
+			set(layer[landmark_%1_gui_dot].bgcolor, 0x8A93A0);
+			set(layer[landmark_%1_gui_status].html, calc('Off screen, FOV ' + roundval(view.fov, 0)));
+			set(layer[landmark_%1_gui_status].css, 'color:#9FB3C8;font-family:Arial;font-size:11px;');
+		);
+	</action>
+
+	<!-- ========== LANDMARK ROSTER — add ONE line here per new landmark ========== -->
+	<action name="landmark_setup">
+		<!-- 5th arg is the purple "time" flag text (e.g. '6 mins'), or ''
+		     to leave a landmark without one. The values below are PLACEHOLDERS
+		     — swap them for real drive/walk times to each place before going live. -->
+		set(landmark_count, 0);
+		landmark_define(brainykids_international_preschool_day_care, 'Brainykids International Preschool &amp; Day Care', -70.50087, 40, '5 mins');
+		landmark_define(dobbs_public_school_senior_secondary, 'DOBBS Public School Senior Secondary', -98.04701, 250, '8 mins');
+		landmark_define(ruby_matric_higher_secondary_school, 'Ruby Matric Higher Secondary School', 146.58107, 110, '6 mins');
+		landmark_define(swathanthra_nursery_primary_school, 'Swathanthra Nursery &amp; Primary School', 88.96324, 110, '6 mins');
+		landmark_define(samashti_international_school, 'Samashti International School', 77.95533, 40, '4 mins');
+		landmark_define(vimal_jyothi_hospital, 'Vimal Jyothi Hospital', 133.95969, 40, '5 mins');
+		landmark_define(cri_trust_healthcare, 'CRI Trust Healthcare', 169.73406, 40, '5 mins');
+		landmark_define(dr_muthus_multispeciality_hospital, 'Dr. Muthus MultiSpeciality Hospital', -170.56755, 40, '7 mins');
+		landmark_define(kumaran_medical_center, 'Kumaran Medical Center', 44.82688, 40, '4 mins');
+		landmark_define(kmch_specialty_hospital_kovilpalayam, 'KMCH Specialty Hospital (Kovilpalayam)', 97.45676, 180, '10 mins');
+		landmark_define(kgisl_sez_it_park, 'KGiSL SEZ IT Park', -110.34122, 180, '9 mins');
+		landmark_define(india_land_tech_park, 'India Land Tech Park', -111.54424, 110, '9 mins');
+		landmark_define(kct_tech_park, 'KCT Tech Park', -119.32147, 40, '7 mins');
+		landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 98.67786, 250, '3 mins');
+		landmark_define(alchemy_public_school, 'Alchemy Public School', -50.30403, 110, '6 mins');
+	</action>
+
+	<!-- ========== MASTER TICK — add ONE line here per new landmark (for instant drag-response) ========== -->
+	<action name="gui_master_tick">
+		landmark_tick(brainykids_international_preschool_day_care);
+		landmark_tick(dobbs_public_school_senior_secondary);
+		landmark_tick(ruby_matric_higher_secondary_school);
+		landmark_tick(swathanthra_nursery_primary_school);
+		landmark_tick(samashti_international_school);
+		landmark_tick(vimal_jyothi_hospital);
+		landmark_tick(cri_trust_healthcare);
+		landmark_tick(dr_muthus_multispeciality_hospital);
+		landmark_tick(kumaran_medical_center);
+		landmark_tick(kmch_specialty_hospital_kovilpalayam);
+		landmark_tick(kgisl_sez_it_park);
+		landmark_tick(india_land_tech_park);
+		landmark_tick(kct_tech_park);
+		landmark_tick(kovilpalayam_bus_stop);
+		landmark_tick(alchemy_public_school);
+		set(layer[fov_gui_value].html, calc('FOV ' + roundval(view.fov, 0)));
+	</action>
+
+	<action name="gui_master_loop">
+		gui_master_tick();
+		delayedcall(gui_master_timer, 0.25, gui_master_loop);
+	</action>
+
+	<!-- ========== EVENTS ========== -->
+	<events name="gui_master_viewchange" onviewchange="gui_master_tick();" keep="true" />
+
+	<action name="gui_master_startup">
+		if(gui_master_started != true,
+			set(gui_master_started, true);
+			landmark_setup();
+			gui_master_loop();
+		);
+	</action>
+
+	<events name="gui_master_startup_evt" keep="true" onloadcomplete="gui_master_startup();" />
+
+</krpano>

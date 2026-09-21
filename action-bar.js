@@ -11,8 +11,10 @@
                   panel (plot-compare.js) and shows a running count badge.
                   Plots are queued for comparison via a "+ Add to Compare"
                   button inside each plot's own popup (plot-popup.js).
-   - 360 Tour  -> eases the camera from its current view over to the
-                  leftmost landmark hotspot defined in gui_fov_kumaran.xml
+   - 360 Tour  -> opens with a "little planet" intro (the view curls into a
+                  tiny planet, then unwinds back to the normal default
+                  view), then eases the camera from there over to the
+                  first landmark hotspot defined in landmarks.xml
                   a bit quickly, then continuously pans at a constant slow
                   speed across to the rightmost one — sweeping past every
                   landmark along the way, no stop-and-go anywhere in the
@@ -34,7 +36,7 @@
    - filter-panel.js, enquiry-popup.js and plot-compare.js loaded (load
      order doesn't matter, only that they've run by the time a button is
      clicked).
-   - gui_fov_kumaran.xml loaded and window.krpano assigned (needed for
+   - landmarks.xml loaded and window.krpano assigned (needed for
      360 Tour — it reads every landmark_<slug>_dot hotspot's live ath
      straight from krpano; those are created automatically by that XML's
      own landmark_setup() on load, so nothing extra needs calling).
@@ -91,9 +93,28 @@
     // The 360 Tour starts here and sweeps rightward from it — any
     // landmark further left (lower ath) than this one is skipped rather
     // than swept through first. Must match a slug from landmark_define()
-    // in gui_fov_kumaran.xml, e.g. "alchemy_public_school" for
+    // in landmarks.xml, e.g. "alchemy_public_school" for
     // landmark_alchemy_public_school_dot.
     tourStartLandmarkSlug: "alchemy_public_school",
+
+    // ---- 360 Tour intro: little planet -> default view -> first landmark ----
+    // Set to false to skip the intro and go straight to the first landmark.
+    tourIntroEnabled: true,
+
+    // The scene's normal opening view. Keep these the same as the <view>
+    // tag in tour.xml (hlookat / vlookat / fov) -- the intro unwinds back
+    // to exactly this view before flying to the first landmark.
+    tourDefaultView: { hlookat: 6.629, vlookat: 90, fov: 140 },
+
+    // Field of view while the "little planet" is showing. Bigger = smaller
+    // planet. The view's fovmax is raised to this only for the intro.
+    tourPlanetFov: 150,
+
+    tourPlanetInSeconds: 1.0,     // current view -> little planet
+    tourPlanetHoldSeconds: 1.8,   // how long the planet is shown (slowly spinning)
+    tourPlanetSpinDegrees: 60,    // slow spin during that hold
+    tourPlanetOutSeconds: 2.8,    // unwind: planet -> default view
+    tourDefaultPauseSeconds: 0.8, // rest on the default view before flying on
 
     // ---- 360 Tour background music -----------------------------------
     // Path to your own audio file, played on loop for exactly the tour's
@@ -290,17 +311,20 @@
 
   // ---- 360 Tour state ------------------------------------------------------
   // Continuously pans the view from the leftmost to the rightmost
-  // landmark_<slug>_dot hotspot defined in gui_fov_kumaran.xml, at one
+  // landmark_<slug>_dot hotspot defined in landmarks.xml, at one
   // constant slow speed — a single linear tween across the whole span,
   // not a series of stop-start hops between waypoints (that's what made
-  // it look like it was pausing). gui_fov_kumaran.xml already reveals
+  // it look like it was pausing). landmarks.xml already reveals
   // each landmark's dot/line/label on its own whenever it drifts near
   // screen center (see landmark_tick there), so simply sweeping the
   // camera past it is enough — no extra calls needed from here.
   var TOUR = {
     active: false,
+    intro: false,        // true while the little-planet intro is running
+    saved: null,         // view settings to put back after the intro
     btn: null,
-    timer: null
+    timer: null,
+    restoreTimer: null
   };
 
   // landmark_<slug>_dot is one hotspot per landmark (paired with
@@ -338,26 +362,96 @@
     return list;
   }
 
-  function tourStart() {
-    if (!window.krpano) {
-      console.error("action-bar: window.krpano not available yet");
-      return;
-    }
-    var order = tourBuildOrder();
-    if (order.length < 2) {
-      console.warn("action-bar: need at least 2 landmark hotspots to sweep across (is gui_fov_kumaran.xml loaded?)");
-      return;
-    }
+  // ---- Little-planet intro ---------------------------------------------
+  // Only WebGL can draw the stereographic / fisheye projection; without it
+  // the intro is skipped and the tour just goes to the first landmark.
+  function tourIntroSupported() {
+    var kr = window.krpano;
+    return !!kr && String(kr.get("device.webgl")) === "true";
+  }
 
+  // Puts the projection back to normal (rectilinear, original fovmax).
+  function tourRestoreProjection() {
+    var kr = window.krpano;
+    if (TOUR.restoreTimer) {
+      window.clearTimeout(TOUR.restoreTimer);
+      TOUR.restoreTimer = null;
+    }
+    if (!kr || !TOUR.saved) return;
+    kr.call("set(view.stereographic, false);");
+    kr.call("set(view.fisheye, " + TOUR.saved.fisheye + ");");
+    kr.call("set(view.fovmax, " + TOUR.saved.fovmax + ");");
+    TOUR.saved = null;
+  }
+
+  function tourAfter(seconds, fn) {
+    TOUR.timer = window.setTimeout(function () {
+      if (!TOUR.active) return; // stopped meanwhile
+      fn();
+    }, seconds * 1000);
+  }
+
+  // 1) curl into a little planet  2) hold while it slowly spins
+  // 3) unwind back to the default view  4) short rest, then onDone().
+  function tourRunIntro(onDone) {
+    var kr = window.krpano;
+    var C = CONFIG;
+    var D = C.tourDefaultView;
+
+    var fovmax = parseFloat(kr.get("view.fovmax"));
+    var fisheye = parseFloat(kr.get("view.fisheye"));
+    TOUR.saved = {
+      fovmax: isNaN(fovmax) ? D.fov : fovmax,
+      fisheye: isNaN(fisheye) ? 0 : fisheye
+    };
+    TOUR.intro = true;
+
+    // Keep hlookat in -180..180 so the later unwind takes the short way round.
+    var h = parseFloat(kr.get("view.hlookat"));
+    if (isNaN(h)) h = D.hlookat;
+    h = ((h + 180) % 360 + 360) % 360 - 180;
+    kr.call("set(view.hlookat, " + h + ");");
+
+    // fov can only go above fovmax once fovmax itself is raised.
+    kr.call("set(view.fovmax, " + Math.max(C.tourPlanetFov, TOUR.saved.fovmax) + ");");
+    kr.call("set(view.stereographic, true);");
+
+    // 1) into the planet
+    var tin = C.tourPlanetInSeconds;
+    kr.call("tween(view.fisheye, 1.0, " + tin + ", easeInOutQuad);");
+    kr.call("tween(view.fov, " + C.tourPlanetFov + ", " + tin + ", easeInOutQuad);");
+    kr.call("tween(view.vlookat, 90, " + tin + ", easeInOutQuad);");
+
+    tourAfter(tin, function () {
+      // 2) hold, spinning slowly so the planet feels alive
+      var hold = C.tourPlanetHoldSeconds;
+      kr.call("tween(view.hlookat, " + (h + C.tourPlanetSpinDegrees) + ", " + hold + ", easeOutQuad);");
+
+      tourAfter(hold, function () {
+        // 3) unwind to the default view
+        var tout = C.tourPlanetOutSeconds;
+        kr.call("tween(view.fisheye, 0.0, " + tout + ", easeInOutQuad);");
+        kr.call("tween(view.fov, " + D.fov + ", " + tout + ", easeInOutQuad);");
+        kr.call("tween(view.vlookat, " + D.vlookat + ", " + tout + ", easeInOutQuad);");
+        kr.call("tween(view.hlookat, " + D.hlookat + ", " + tout + ", easeInOutQuad);");
+
+        tourAfter(tout, function () {
+          tourRestoreProjection();
+          TOUR.intro = false;
+          // 4) a beat on the default view, then on to the first landmark
+          tourAfter(C.tourDefaultPauseSeconds, onDone);
+        });
+      });
+    });
+  }
+
+  // Ease from the current view to the first landmark, then sweep across.
+  function tourApproachAndSweep(order) {
     var kr = window.krpano;
     var currentAth = parseFloat(kr.get("view.hlookat"));
     if (isNaN(currentAth)) currentAth = 0;
     var startAth = order[0].ath;
     var endAth = order[order.length - 1].ath;
-
-    TOUR.active = true;
-    if (TOUR.btn) TOUR.btn.classList.add("plot-action-pill--active");
-    startTourMusic();
 
     // Phase 1: ease from wherever the camera is right now over to the
     // leftmost landmark, a bit quicker than the main sweep so it reads as
@@ -384,11 +478,47 @@
     }, approachDuration * 1000);
   }
 
+  function tourStart() {
+    if (!window.krpano) {
+      console.error("action-bar: window.krpano not available yet");
+      return;
+    }
+    var order = tourBuildOrder();
+    if (order.length < 2) {
+      console.warn("action-bar: need at least 2 landmark hotspots to sweep across (is landmarks.xml loaded?)");
+      return;
+    }
+
+    tourRestoreProjection(); // clears any leftover from an interrupted intro
+    TOUR.active = true;
+    if (TOUR.btn) TOUR.btn.classList.add("plot-action-pill--active");
+    startTourMusic();
+
+    if (CONFIG.tourIntroEnabled && tourIntroSupported()) {
+      tourRunIntro(function () { tourApproachAndSweep(order); });
+    } else {
+      tourApproachAndSweep(order);
+    }
+  }
+
   function tourStop() {
     var kr = window.krpano;
+    var busy = TOUR.active || TOUR.intro;
     if (kr) {
       kr.call("stoptween(view.hlookat);");
+      if (busy) kr.call("stoptween(view.vlookat);");
+      if (TOUR.intro) {
+        // Stopped mid-intro: ease the planet back to a normal view first,
+        // then switch the projection flags off (avoids a visible snap).
+        var D = CONFIG.tourDefaultView;
+        kr.call("stoptween(view.fisheye);");
+        kr.call("stoptween(view.fov);");
+        kr.call("tween(view.fisheye, 0.0, 0.6, easeOutQuad);");
+        kr.call("tween(view.fov, " + D.fov + ", 0.6, easeOutQuad);");
+        TOUR.restoreTimer = window.setTimeout(tourRestoreProjection, 700);
+      }
     }
+    TOUR.intro = false;
     TOUR.active = false;
     if (TOUR.timer) {
       window.clearTimeout(TOUR.timer);
