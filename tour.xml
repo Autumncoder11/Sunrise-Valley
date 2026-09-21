@@ -123,7 +123,7 @@
 		     from their placeholder 100px css, which is the giant-yellow-
 		     letters bug. onloadcomplete guarantees everything has actually
 		     finished loading, so the rescan here catches them. -->
-		<events name="loading_events" onloadcomplete="js(hideLoadingOverlay()); js(window.roadLabelZoom &amp;&amp; window.roadLabelZoom.refresh()); js(window.plotPopup &amp;&amp; window.plotPopup.disableCaptureNow());" />
+		<events name="loading_events" onloadcomplete="js(hideLoadingOverlay()); js(window.roadLabelZoom &amp;&amp; window.roadLabelZoom.refresh()); js(window.plotPopup &amp;&amp; window.plotPopup.disableCaptureNow()); js(window.plotPopup &amp;&amp; window.plotPopup.restyleNow());" />
 
 		<!-- <action name="flatten_plot_labels">
     	for(set(i,0), i LE 397, inc(i),
