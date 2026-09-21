@@ -175,12 +175,11 @@
   color: #A16207;
 }
 
-/* kept as an alias so any markup still using the old "--hold" class
-   name doesn't silently lose its color; points at the same values as
-   --reserved above, which is the closer match to what "hold" meant. */
+/* Given its own clear yellow (previously aliased to --reserved's amber,
+   which read too close to --sold's red at a glance). */
 .plot-popup-badge--hold {
-  background: rgba(245, 158, 11, 0.16);
-  color: #92400E;
+  background: rgba(234, 179, 8, 0.18);
+  color: #854D0E;
 }
 
 /* Fallback for a status that isn't recognized (typo, blank, a future
