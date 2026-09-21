@@ -35,6 +35,15 @@
   var NARROW_ROAD_TEXT_RE = /7\.20M/i;
   var NARROW_ROAD_SCALE = 0.6;
 
+  // The narrow-road labels are hidden while zoomed out and only appear once
+  // the camera FOV drops to this value or lower (smaller fov = more zoomed in).
+  // They hide again once FOV rises above SHOW + HYSTERESIS (the gap stops
+  // them flickering when the user sits right on the threshold).
+  // Raise SHOW_BELOW_FOV to make them appear sooner, lower it to make them
+  // appear only when zoomed in further.
+  var NARROW_ROAD_SHOW_BELOW_FOV = 100;
+  var NARROW_ROAD_HYSTERESIS = 5;
+
   // Matches "roadlabel16", "roadlabel17", etc. Adjust if your road label
   // hotspots use a different naming scheme.
   var ROAD_LABEL_RE = /^roadlabel\d+$/;
@@ -94,8 +103,9 @@
       if (!name || !ROAD_LABEL_RE.test(name)) continue;
       var css = kr.get("hotspot[" + name + "].css") || "";
       var text = kr.get("hotspot[" + name + "].html") || "";
-      var scale = NARROW_ROAD_TEXT_RE.test(text) ? NARROW_ROAD_SCALE : 1;
-      list.push({ name: name, baseCss: css, scale: scale });
+      var narrow = NARROW_ROAD_TEXT_RE.test(text);
+      list.push({ name: name, baseCss: css, scale: narrow ? NARROW_ROAD_SCALE : 1,
+                  narrow: narrow, shown: null });
     }
     if (DEBUG && list.length) {
       var b = fovBounds();
@@ -152,6 +162,15 @@
           for (var i = 0; i < roadLabels.length; i++) {
             var rl = roadLabels[i];
             kset("hotspot[" + rl.name + "].css", withFontSize(rl.baseCss, px * rl.scale));
+            if (rl.narrow) {
+              var show = (rl.shown === true)
+                ? fov <= NARROW_ROAD_SHOW_BELOW_FOV + NARROW_ROAD_HYSTERESIS
+                : fov <= NARROW_ROAD_SHOW_BELOW_FOV;
+              if (show !== rl.shown) {
+                rl.shown = show;
+                kset("hotspot[" + rl.name + "].visible", show);
+              }
+            }
           }
         }
       }
