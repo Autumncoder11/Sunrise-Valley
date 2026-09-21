@@ -104,8 +104,8 @@
 		     memory pressure combined with the canvas resize on rotation
 		     is the most likely reason mobile browsers have been
 		     reloading the page. Desktop keeps the original 2.0. -->
-		<view hlookat="6.629" vlookat="90.000" fovtype="MFOV" fov="140.000" maxpixelzoom.mobile="1.0" maxpixelzoom.desktop="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
+		<!-- <view hlookat="6.629" vlookat="90.000" fovtype="MFOV" fov="140.000" maxpixelzoom.mobile="1.0" maxpixelzoom.desktop="2.0" fovmin="70" fovmax="140" limitview="auto" /> -->
+		<view hlookat="6.629" vlookat="90.000" fovtype="MFOV"fov.mobile="152.000" fov.desktop="140.000"maxpixelzoom.mobile="1.0" maxpixelzoom.desktop="2.0"fovmin="70"fovmax.mobile="165" fovmax.desktop="140"limitview="auto" />
 		<preview url="panos/IMG_20260921_100207.tiles/preview.jpg" />
 
 		<image>
