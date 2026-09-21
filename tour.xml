@@ -183,7 +183,7 @@
 	<!-- <events onclick="screentosphere(mouse.x, mouse.y, clicked_ath, clicked_atv); js(alert(calc('Clicked coordinates:\n\nath=\x22' + roundval(clicked_ath, 5) + '\x22\natv=\x22' + roundval(clicked_atv, 5) + '\x22')));" /> -->
 	<!-- 🔹 Load entire KML Layout (polygons and text) -->
     <!-- All real plot click events (styled sidebar card via show_plot_details) live in this file -->
-    <include url="output_hotspots.xml?v=6" />
+    <include url="output_hotspots.xml?v=7" />
     <!-- <include url="hotspots.xml" /> -->
     <!-- Landmark flags (schools, hospitals, tech parks...) + on/off-screen reveal logic + hidden FOV/zoom debug panel -->
     <include url="landmarks.xml?v=1" />
