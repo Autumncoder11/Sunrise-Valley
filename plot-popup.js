@@ -22,6 +22,12 @@
 (function () {
   "use strict";
 
+  // ---- TEMP debug: writes into the on-screen overlay from index.html ----
+  function dbg(msg) {
+    try { if (window.cacheDebugLog) window.cacheDebugLog(msg); } catch (e) { }
+  }
+  dbg("plot-popup.js loaded (restyle v2)");
+
   // ---- Config ------------------------------------------------------------
   var MAX_SIDE_LABELS = 8;      // pool size; covers any polygon up to 8 sides
   var LABEL_PREFIX = "sidelabel_";
@@ -333,7 +339,10 @@
         addPlaceholderPlots(data);
         PLOT_DATA = data;
         dataReady = true;
+        dbg("json ready: " + Object.keys(PLOT_DATA).length + " plots, krpano hotspots=" + kget("hotspot.count"));
         applyBaseStyling();
+        dbg("styled after json: " + probeStyle());
+        restyleLater("json");
         disableHotspotCapture();
         // applyPlotNumberLabelScale();
         if (pendingClick) {
@@ -1000,6 +1009,44 @@
     kset("hotspot[" + name + "].html", text);
 
     kset("hotspot[" + name + "].visible", "true");
+  }
+
+  // TEMP debug: reads back the live fill colour of the first PARK plot and
+  // of one ordinary plot, so the overlay shows whether styling really stuck.
+  function probeStyle() {
+    var park = null, plain = null;
+    Object.keys(PLOT_DATA).forEach(function (n) {
+      var pl = PLOT_DATA[n];
+      if (!pl) return;
+      if (!park && pl.category && pl.category.toString().toUpperCase() === "PARK") park = n;
+      if (!plain && !pl.category && /^kml_poly_/.test(n)) plain = n;
+    });
+    function rd(n) { return n ? n + " fill=" + kget("hotspot[" + n + "].fillcolor") + " bw=" + kget("hotspot[" + n + "].borderwidth") : "none"; }
+    return "PARK[" + rd(park) + "] plain[" + rd(plain) + "]";
+  }
+
+  // The plot <hotspot> tags come from output_hotspots.xml (async include).
+  // Whatever order the JSON / include / onloadcomplete finish in, re-apply the
+  // colours a couple more times shortly after so nothing can be left with the
+  // raw XML colours. Keeps a selected plot highlighted.
+  var restyleTimersSet = false;
+  function restyleOnce(tag) {
+    if (!dataReady) return;
+    var sel = currentSelected;
+    applyBaseStyling();
+    if (sel) highlight(sel);
+    // Plot-number label scale (mobile 0.80). Previously only applied on
+    // resize/rotate, so a first open on a phone showed the big desktop-size
+    // numbers until the screen was rotated or the page refreshed.
+    applyPlotNumberLabelScale();
+    dbg("restyle " + tag + ": " + probeStyle());
+  }
+  function restyleLater(from) {
+    if (restyleTimersSet) return;
+    restyleTimersSet = true;
+    setTimeout(function () { restyleOnce("+1s"); }, 1000);
+    setTimeout(function () { restyleOnce("+3s"); }, 3000);
+    setTimeout(function () { restyleOnce("+6s"); }, 6000);
   }
 
   // Sets each hotspot's fill/border to match its status + category, exactly
@@ -1739,6 +1786,23 @@
 
     // True once all_plots_matched.json has been fetched and processed
     // (buildCadRing etc.) into PLOT_DATA.
+    // Re-applies every plot's status/category fill + border colours.
+    // Called from tour.xml's onloadcomplete (same reason as
+    // disableCaptureNow above): the colours are set by JS as soon as
+    // all_plots_matched.json arrives, but the plot <hotspot> tags come
+    // from output_hotspots.xml, loaded via an async <include>. If the
+    // JSON wins the race, the colour writes hit hotspots that don't
+    // exist yet (or get overwritten when the include is parsed) and the
+    // plots keep the raw XML colours (blue PARK/LB/EB) until a reload
+    // happens to flip the timing. onloadcomplete fires only after the
+    // include is done, so restyling here is timing-proof. Idempotent;
+    // respects an active filter (applyBaseStyling handles that).
+    restyleNow: function () {
+      dbg("onloadcomplete -> restyleNow (dataReady=" + dataReady + ", krpano hotspots=" + kget("hotspot.count") + ")");
+      if (dataReady) restyleOnce("onloadcomplete");
+      restyleLater("onloadcomplete");
+    },
+
     isDataReady: function () { return dataReady; },
 
     // Registers cb to run once PLOT_DATA is ready -- immediately if it

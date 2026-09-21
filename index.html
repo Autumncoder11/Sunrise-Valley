@@ -22,8 +22,11 @@
 			var lines = [];
 			var el = null;
 
+			// Lets other scripts (plot-popup.js) write into this overlay.
+			window.cacheDebugLog = function (m) { log("[" + Math.round(performance.now()) + "ms] " + m); };
+
 			function render() {
-				if (el) el.textContent = lines.slice(-32).join("\n");
+				if (el) el.textContent = lines.slice(-44).join("\n");
 			}
 			function log(msg) {
 				lines.push(msg);
@@ -148,7 +151,7 @@
 				for (var i = 0; i < list.length; i++) {
 					var n = list[i].name;
 					if (/\.(xml|json)(\?|$)/.test(n)) {
-						log("data " + n.split("/").pop().split("?")[0] + " " + kindOf(list[i]));
+						log("data " + n.split("/").pop().slice(0, 34) + " " + kindOf(list[i]));
 					}
 				}
 			}
@@ -454,7 +457,7 @@
 
 	<script src="tour.js?v=202609211530"></script>
 	<script src="plot-popup-mobile.js?v=202609211530"></script>
-	<script src="plot-popup.js?v=202609211530"></script>
+	<script src="plot-popup.js?v=202609211800"></script>
 	<script src="plot-compare.js?v=202609195"></script>
 	<script src="filter-panel.js?v=202609211530"></script>
 	<script src="enquiry-popup.js?v=202609211530"></script>
@@ -564,7 +567,7 @@
 		}
 
 		embedpano({
-			xml: "tour.xml?v=202609211530",
+			xml: "tour.xml?v=202609211800",
 			target: "pano",
 			// Same touch-capability test the mobile CSS relies on (see
 			// action-bar.css / filter-panel.css / plot-popup-mobile.css),
