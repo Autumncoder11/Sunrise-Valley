@@ -12148,12 +12148,13 @@
     ]
   },
   "kml_poly_29": {
-    "status": "AVAILABLE",
+    "displayName": "Plot 30",
+    "status": "SOLD",
     "category": "TBD",
     "sides": [
       {
         "side": "A",
-        "length": "36' 3\"",
+        "length": "36' 3",
         "from": [
           31.55632,
           34.809
@@ -12165,7 +12166,7 @@
       },
       {
         "side": "D",
-        "length": "50' 3\"",
+        "length": "50' 3",
         "from": [
           26.61273,
           36.20741
@@ -12177,7 +12178,7 @@
       },
       {
         "side": "C",
-        "length": "42' 3\"",
+        "length": "42' 3",
         "from": [
           28.25505,
           38.15778
@@ -12189,7 +12190,7 @@
       },
       {
         "side": "B",
-        "length": "50' 0\"",
+        "length": "50' 0",
         "from": [
           33.78138,
           36.85294
@@ -12199,7 +12200,9 @@
           34.809
         ]
       }
-    ]
+    ],
+    "sideOffsets": null,
+    "needsReview": false
   },
   "kml_poly_290": {
     "status": "AVAILABLE",
