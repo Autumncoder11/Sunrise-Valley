@@ -59,9 +59,9 @@
   // old code only ever checked `status === "SOLD"`, so RESERVED/BOOKED/
   // anything else all fell into the same green "available" bucket).
   var STATUS_COLOR = {
-    AVAILABLE: { fill: "0xBBF7D0", border: "0x16A34A" },
-    SOLD:      { fill: "0xFECACA", border: "0xDC2626" },
-    RESERVED:  { fill: "0xFDE68A", border: "0xD97706" },
+    AVAILABLE: { fill: "0x86EFAC", border: "0x16A34A" },
+    SOLD:      { fill: "0xFCA5A5", border: "0xDC2626" },
+    RESERVED:  { fill: "0xFCD34D", border: "0xD97706" },
     BOOKED:    { fill: "0xDBEAFE", border: "0x3B82F6" },
     UNKNOWN:   { fill: "0xF3E8FF", border: "0xA855F7" }
   };
