@@ -21109,19 +21109,13 @@
     ]
   },
   "kml_poly_7": {
-    "sideOffsets": {
-      "B": {
-        "dx": 18,
-        "dy": 4,
-        "rot": 0
-      }
-    },
+    "displayName": "Plot 8",
     "status": "AVAILABLE",
-    "category": "TBD",
+    "category": "CORNER",
     "sides": [
       {
         "side": "A",
-        "length": "40' 0\"",
+        "length": "40' 0",
         "from": [
           54.58549,
           28.74956
@@ -21133,7 +21127,7 @@
       },
       {
         "side": "B",
-        "length": "18' 0\"",
+        "length": "18' 0",
         "from": [
           53.52998,
           29.26505
@@ -21145,7 +21139,7 @@
       },
       {
         "side": "C",
-        "length": "35' 0\"",
+        "length": "35' 0",
         "from": [
           56.32724,
           30.28068
@@ -21157,7 +21151,7 @@
       },
       {
         "side": "D",
-        "length": "7' 0\"",
+        "length": "7' 0",
         "from": [
           57.08332,
           29.86666
@@ -21169,7 +21163,7 @@
       },
       {
         "side": "E",
-        "length": "13' 0\"",
+        "length": "13' 0",
         "from": [
           57.00841,
           29.58794
@@ -21179,7 +21173,15 @@
           28.74956
         ]
       }
-    ]
+    ],
+    "sideOffsets": {
+      "B": {
+        "dx": 18,
+        "dy": 4,
+        "rot": 0
+      }
+    },
+    "needsReview": false
   },
   "kml_poly_70": {
     "status": "AVAILABLE",
