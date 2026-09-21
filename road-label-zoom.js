@@ -29,6 +29,12 @@
   var MIN_FONT_PX = 6;   // font size at full zoom-out
   var MAX_FONT_PX = 15;   // font size at full zoom-in (max zoom)
 
+  // Narrow roads (the 7.20M ones) can't fit a full-size label when zoomed in,
+  // so their font size is multiplied by this factor (1 = same as other roads).
+  // Matched on the label's displayed text. Lower it to shrink them further.
+  var NARROW_ROAD_TEXT_RE = /7\.20M/i;
+  var NARROW_ROAD_SCALE = 0.6;
+
   // Matches "roadlabel16", "roadlabel17", etc. Adjust if your road label
   // hotspots use a different naming scheme.
   var ROAD_LABEL_RE = /^roadlabel\d+$/;
@@ -87,7 +93,9 @@
       var name = kr.get("hotspot[" + i + "].name");
       if (!name || !ROAD_LABEL_RE.test(name)) continue;
       var css = kr.get("hotspot[" + name + "].css") || "";
-      list.push({ name: name, baseCss: css });
+      var text = kr.get("hotspot[" + name + "].html") || "";
+      var scale = NARROW_ROAD_TEXT_RE.test(text) ? NARROW_ROAD_SCALE : 1;
+      list.push({ name: name, baseCss: css, scale: scale });
     }
     if (DEBUG && list.length) {
       var b = fovBounds();
@@ -143,7 +151,7 @@
           }
           for (var i = 0; i < roadLabels.length; i++) {
             var rl = roadLabels[i];
-            kset("hotspot[" + rl.name + "].css", withFontSize(rl.baseCss, px));
+            kset("hotspot[" + rl.name + "].css", withFontSize(rl.baseCss, px * rl.scale));
           }
         }
       }
