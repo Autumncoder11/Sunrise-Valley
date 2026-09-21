@@ -130,7 +130,7 @@
     // a typical royalty-free ambient/piano track; the previous synthesized
     // pad was intentionally much quieter (0.035) since a raw tone at full
     // volume is harsh, but a real music track doesn't have that problem.
-    tourMusicVolume: 0.6,
+    tourMusicVolume: 1.0,
 
     // How long the fade in/out takes, in seconds. Keep this instead of an
     // abrupt start/stop -- it also gives the browser a moment to actually
