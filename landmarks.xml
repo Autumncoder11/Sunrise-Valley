@@ -446,7 +446,7 @@
 		landmark_define(kct_tech_park, 'KCT Tech Park', -119.32147, 40, '7 mins');
 		landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 98.67786, 250, '3 mins');
 		landmark_define(swathanthra_higher_secondary_school, 'Swathanthra Higher Secondary School', -38.89754, 40, '2 mins');
-		landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', -57.49882, 50, '3min');
+		landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', -57.49882, 120, '3min');
 		landmark_define(narayana_schools, 'Narayana Schools', -66.43549, 50, '3 mins');
 		landmark_define(don_bosco_sports_academy, 'Don Bosco Sports Academy', -128.98252, 50, '10 mins');
 		landmark_define(kgisl_institute_of_technology, 'KGiSL Institute of Technology', -129.43235, 50, '10 mins');
