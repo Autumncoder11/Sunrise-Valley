@@ -434,7 +434,7 @@
 		     — swap them for real drive/walk times to each place before going live. -->
 		set(landmark_count, 0);
 		landmark_define(dobbs_public_school_senior_secondary, 'DOBBS Public School Senior Secondary', -179.36, 0.8, 90, '8 mins');
-landmark_define(ruby_matric_higher_secondary_school, 'Ruby Matric Higher Secondary School', -163.64, 0, 160, '6 mins');
+landmark_define(ruby_matric_higher_secondary_school, 'Ruby Matric Higher Secondary School', -163.64, 0, 281, '6 mins');
 landmark_define(samashti_international_school, 'Samashti International School', -147.27, 0, 90, '4 mins');
 landmark_define(vimal_jyothi_hospital, 'Vimal Jyothi Hospital', -133.61, -0.8, 160, '5 mins');
 landmark_define(cri_trust_healthcare, 'CRI Trust Healthcare', -114.55, 0, 90, '5 mins');
@@ -442,17 +442,17 @@ landmark_define(dr_muthus_multispeciality_hospital, 'Dr. Muthus MultiSpeciality 
 landmark_define(kumaran_medical_center, 'Kumaran Medical Center', -81.82, 0, 93, '4 mins');
 landmark_define(kmch_specialty_hospital_kovilpalayam, 'KMCH Specialty Hospital (Kovilpalayam)', -65.45, 0, 300, '10 mins');
 landmark_define(kgisl_sez_it_park, 'KGiSL SEZ IT Park', -49.09, 0, 90, '9 mins');
-landmark_define(india_land_tech_park, 'India Land Tech Park', -32.73, 0, 270, '9 mins');
+landmark_define(india_land_tech_park, 'India Land Tech Park', -32.73, 0, 32, '9 mins');
 landmark_define(kct_tech_park, 'KCT Tech Park', -16.36, 0, 90, '7 mins');
 landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 0, 0, 300, '3 mins');
 landmark_define(swathanthra_higher_secondary_school, 'Swathanthra Higher Secondary School', 16.36, 0, 45, '2 mins');
 landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', 32.73, 0, 148, '3min');
 landmark_define(don_bosco_sports_academy, 'Don Bosco Sports Academy', 49.09, 0, 194, '10 mins');
-landmark_define(kgisl_institute_of_technology, 'KGiSL Institute of Technology', 65.45, 0, 101, '10 mins');
+landmark_define(kgisl_institute_of_technology, 'KGiSL Institute of Technology', 65.45, 0, 283, '10 mins');
 landmark_define(ppg_institute_of_technology, 'PPG Institute of Technology', 81.82, 0, 300, '10 mins');
 landmark_define(sri_ranganathar_institute_of_engineering_and_technology_sriet, 'Sri Ranganathar Institute of Engineering and Technology (SRIET)', 98.18, 0, 169, '4 mins');
 landmark_define(sri_ramakrishna_engineering_college, 'Sri Ramakrishna Engineering College', 114.55, 0, 300, '7 mins');
-landmark_define(p_p_g_college_of_physiotherapy_nursing_ahs_and_education, 'P.P.G. College of physiotherapy, nursing, ahs and education', 130.91, 0, 217, '10 mins');
+landmark_define(p_p_g_college_of_physiotherapy_nursing_ahs_and_education, 'P.P.G. College of physiotherapy, nursing, ahs and education', 130.91, 0, 300, '10 mins');
 landmark_define(sns_college_of_technology, 'SNS College of Technology', 147.27, 0, 182, '8 mins');
 landmark_define(narayana_schools, 'Narayana Schools', 163.64, 0, 74, '6 mins');
 	</action>
