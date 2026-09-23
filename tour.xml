@@ -186,7 +186,7 @@
     <include url="output_hotspots.xml?v=7" />
     <!-- <include url="hotspots.xml" /> -->
     <!-- Landmark flags (schools, hospitals, tech parks...) + on/off-screen reveal logic + hidden FOV/zoom debug panel -->
-    <include url="landmarks.xml?v=9" />
+    <include url="landmarks.xml?v=10" />
 	<!-- removed the extra "<events onloadcomplete="start_landmark_reveals();" />"
 	     that used to be here — hotspots.xml already triggers its own startup
 	     internally, so this was a redundant 3rd trigger on top of that. -->
