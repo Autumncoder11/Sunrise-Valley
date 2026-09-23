@@ -446,16 +446,15 @@
 		landmark_define(kct_tech_park, 'KCT Tech Park', -119.32147, 40, '7 mins');
 		landmark_define(kovilpalayam_bus_stop, 'Kovilpalayam Bus Stop', 98.67786, 250, '3 mins');
 		landmark_define(swathanthra_higher_secondary_school, 'Swathanthra Higher Secondary School', -38.89754, 40, '2 mins');
-		landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', -57.49882, 120, '3min');
-		landmark_define(narayana_schools, 'Narayana Schools', -66.43549, 50, '3 mins');
-		landmark_define(don_bosco_sports_academy, 'Don Bosco Sports Academy', -128.98252, 50, '10 mins');
+		landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', -57.49882, 150, '3min');
+		landmark_define(don_bosco_sports_academy, 'Don Bosco Sports Academy', -128.98252, 80, '10 mins');
 		landmark_define(kgisl_institute_of_technology, 'KGiSL Institute of Technology', -129.43235, 50, '10 mins');
 		landmark_define(ppg_institute_of_technology, 'PPG Institute of Technology', -137.91081, 50, '10 mins');
-		landmark_define(sri_ranganathar_institute_of_engineering_and_technology_sriet, 'Sri Ranganathar Institute of Engineering and Technology (SRIET)', -64.19104, 50, '4 mins');
-		landmark_define(sri_ramakrishna_engineering_college, 'Sri Ramakrishna Engineering College', -87.82129, 50, '7 mins');
-		landmark_define(p_p_g_college_of_physiotherapy_nursing_ahs_and_education, 'P.P.G. College of physiotherapy, nursing, ahs and education', -137.35549, 50, '10 mins');
+		landmark_define(sri_ranganathar_institute_of_engineering_and_technology_sriet, 'Sri Ranganathar Institute of Engineering and Technology (SRIET)', -64.19104, 170, '4 mins');
+		landmark_define(sri_ramakrishna_engineering_college, 'Sri Ramakrishna Engineering College', -87.82129, 190, '7 mins');
+		landmark_define(p_p_g_college_of_physiotherapy_nursing_ahs_and_education, 'P.P.G. College of physiotherapy, nursing, ahs and education', -137.35549, 120, '10 mins');
 		landmark_define(sns_college_of_technology, 'SNS College of Technology', 117.29698, 50, '8 mins');
-		landmark_define(alchemy_public_school, 'Alchemy Public School', -50.30403, 110, '6 mins');
+		landmark_define(narayana_schools, 'Narayana Schools', -50.30403, 110, '6 mins');
 	</action>
 
 	<!-- ========== MASTER TICK — add ONE line here per new landmark (for instant drag-response) ========== -->
@@ -474,7 +473,6 @@
 		landmark_tick(kovilpalayam_bus_stop);
 		landmark_tick(swathanthra_higher_secondary_school);
 		landmark_tick(einstein_public_school_cbse);
-		landmark_tick(narayana_schools);
 		landmark_tick(don_bosco_sports_academy);
 		landmark_tick(kgisl_institute_of_technology);
 		landmark_tick(ppg_institute_of_technology);
@@ -482,7 +480,7 @@
 		landmark_tick(sri_ramakrishna_engineering_college);
 		landmark_tick(p_p_g_college_of_physiotherapy_nursing_ahs_and_education);
 		landmark_tick(sns_college_of_technology);
-		landmark_tick(alchemy_public_school);
+		landmark_tick(narayana_schools);
 		set(layer[fov_gui_value].html, calc('FOV ' + roundval(view.fov, 0)));
 	</action>
 
