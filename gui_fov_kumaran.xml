@@ -449,6 +449,7 @@
 		landmark_define(einstein_public_school_cbse, 'Einstein Public School (CBSE)', -57.49882, 50, '3min');
 		landmark_define(narayana_schools, 'Narayana Schools', -66.43549, 50, '3 mins');
 		landmark_define(don_bosco_sports_academy, 'Don Bosco Sports Academy', -128.98252, 50, '10 mins');
+		landmark_define(kgisl_institute_of_technology, 'KGiSL Institute of Technology', -129.43235, 50, '10 mins');
 	</action>
 
 	<!-- ========== MASTER TICK — add ONE line here per new landmark (for instant drag-response) ========== -->
@@ -469,6 +470,7 @@
 		landmark_tick(einstein_public_school_cbse);
 		landmark_tick(narayana_schools);
 		landmark_tick(don_bosco_sports_academy);
+		landmark_tick(kgisl_institute_of_technology);
 		set(layer[fov_gui_value].html, calc('FOV ' + roundval(view.fov, 0)));
 	</action>
 
