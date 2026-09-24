@@ -8975,13 +8975,13 @@
     ]
   },
   "kml_poly_237a": {
-    "displayName": "Plot 238A",
+    "displayName": "Plot 238B",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
       {
         "side": "A",
-        "length": "10' 0\"",
+        "length": "20' 0\"",
         "from": [
           -110.15585,
           56.26648
@@ -9005,7 +9005,7 @@
       },
       {
         "side": "C",
-        "length": "10' 0\"",
+        "length": "20' 0\"",
         "from": [
           -98.89995,
           59.3578
@@ -9030,13 +9030,13 @@
     ]
   },
   "kml_poly_237b": {
-    "displayName": "Plot 238B",
+    "displayName": "Plot 238A",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
       {
         "side": "A",
-        "length": "20' 0\"",
+        "length": "10' 0\"",
         "from": [
           -108.16255,
           54.28434
@@ -9060,7 +9060,7 @@
       },
       {
         "side": "C",
-        "length": "20' 0\"",
+        "length": "10' 0\"",
         "from": [
           -98.31452,
           58.24706
