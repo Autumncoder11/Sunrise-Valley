@@ -4973,8 +4973,8 @@
       }
     ]
   },
-  "kml_poly_176a": {
-    "displayName": "Plot 177B",
+  "kml_poly_176b": {
+    "displayName": "Plot 177b",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
@@ -5028,8 +5028,8 @@
       }
     ]
   },
-  "kml_poly_176b": {
-    "displayName": "Plot 177A",
+  "kml_poly_176a": {
+    "displayName": "Plot 177a",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
