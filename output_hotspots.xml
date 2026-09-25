@@ -2068,7 +2068,7 @@
       <point ath="-97.72909" atv="57.13631"/>
       <point ath="-109.15920" atv="55.27541"/>
     </hotspot>
-    <hotspot name="kml_label_237b" ath="-104.59076" atv="57.79263" distorted="false" rx="32.20737" ry="0" rz="-17.00000" type="text" html="237b" css="font-family:Arial; font-size:6px; color:#000000; text-align:center;" bg="false" enabled="false" />
+    <hotspot name="kml_label_237b" ath="-104.20265" atv="57.27704" distorted="false" rx="32.72296" ry="0" rz="-17.00000" type="text" html="237b" css="font-family:Arial; font-size:6px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_238" fillcolor="0xDCFCE7" fillalpha="1.0" bordercolor="0x22C55E" borderwidth="1" onclick="js(showPlotDetails('kml_poly_238'));">
       <point ath="-111.15250" atv="57.25755"/>
       <point ath="-98.89995" atv="59.35780"/>
