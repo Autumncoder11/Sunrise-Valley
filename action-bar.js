@@ -21,7 +21,8 @@
                   motion — letting each landmark's own reveal animation
                   play as the camera passes it. Click again to stop
                   mid-sweep.
-   - Brochure  -> downloads the layout PDF from the site root.
+   - Brochure  -> opens the layout PDF from the site root in a new tab
+                  (displayed in the browser's viewer, not downloaded).
    - Call      -> opens the device's phone dialer via a tel: link.
    - Location  -> opens the site location in Google Maps.
 
@@ -64,7 +65,7 @@
 
     // Google Maps share link opened by the Location button. If left empty
     // (""), the button falls back to the lat/lng above.
-    locationUrl: "https://maps.app.goo.gl/Ms5j6VEPhzwR2Mo2A",
+    locationUrl: "https://maps.app.goo.gl/HmFY77TGAeBZifk87?g_st=ic",
 
     // Deliberately a RELATIVE path (no leading slash): this resolves
     // against the current page's own folder. A leading slash resolves
@@ -78,6 +79,8 @@
     // index.html (e.g. "assets/SUNRISE_VALLEY_layout.pdf"), update this
     // to match -- it's always relative to wherever index.html lives.
     brochureUrl: "SUNRISE_VALLEY_layout.pdf",
+    // Unused now that Brochure opens the PDF in a new tab instead of
+    // downloading it (kept in case you switch back to a forced download).
     brochureFileName: "SUNRISE_VALLEY_layout.pdf",
 
     // Constant speed (compass degrees per second) the camera pans at
@@ -347,16 +350,30 @@
     }
     list.sort(function (a, b) { return a.ath - b.ath; }); // left to right
 
-    // Pin the tour's starting point: drop any landmark further left (lower
-    // ath) than the configured start, so the sweep begins there and moves
-    // right through everything from that point on.
+    // Pin the tour's starting point, then WRAP a full 360° loop: landmarks
+    // that sorted before the start point are moved to the end instead of
+    // being dropped, with 360° added to their ath so the sweep keeps
+    // moving in the same direction (no backward snap) -- and the start
+    // landmark itself is appended one more time at the very end (also
+    // +360°) so the sweep visibly finishes back where it began, instead
+    // of stopping at whichever landmark happens to have the highest raw
+    // ath (which is what "left to right, drop everything before start"
+    // used to do -- it just stopped at the rightmost landmark overall,
+    // never wrapping back around).
     if (CONFIG.tourStartLandmarkSlug) {
       var startName = "landmark_" + CONFIG.tourStartLandmarkSlug + "_dot";
       var startIdx = -1;
       for (var j = 0; j < list.length; j++) {
         if (list[j].name === startName) { startIdx = j; break; }
       }
-      if (startIdx > 0) list = list.slice(startIdx);
+      if (startIdx !== -1) {
+        var tail = list.slice(startIdx);
+        var head = list.slice(0, startIdx).map(function (l) {
+          return { name: l.name, ath: l.ath + 360 };
+        });
+        list = tail.concat(head);
+        list.push({ name: list[0].name, ath: list[0].ath + 360 }); // close the loop
+      }
     }
 
     return list;
@@ -595,18 +612,11 @@
     bar.appendChild(tourBtn);
 
     // ---- Brochure ----
-    // The download attribute only forces a save when the PDF is served from
-    // the same origin as this page. Cross-origin (CDN) hosting needs a
-    // Content-Disposition: attachment header on the server instead.
+    // Opens the PDF in a new tab so the browser's built-in viewer displays
+    // it directly, instead of forcing a save-to-disk download.
     var brochureBtn = makePill("brochure", "Brochure");
     brochureBtn.addEventListener("click", function () {
-      var a = document.createElement("a");
-      a.href = CONFIG.brochureUrl;
-      a.download = CONFIG.brochureFileName;
-      a.rel = "noopener";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      window.open(CONFIG.brochureUrl, "_blank", "noopener");
     });
     bar.appendChild(brochureBtn);
 
