@@ -34,6 +34,21 @@
   var selected = [];      // ordered array of hotspotName strings
   var panelOpen = false;
 
+  // Set true (or via window.plotCompare.setDebugVisibility(true) below) to
+  // get the stacking/visibility diagnostic in debugLogCompareVisibility().
+  // It used to run UNCONDITIONALLY on every renderPanel() call -- i.e. on
+  // every single add/remove of a compared plot -- which forced several
+  // synchronous layout reflows (getBoundingClientRect / getComputedStyle
+  // on up to 20 ancestors + elementFromPoint) and logged live DOM node
+  // references to the console on every one of those calls. Console
+  // history holds onto logged object references, so those nodes (and
+  // anything they retain) can't be garbage-collected for as long as
+  // devtools stays open with those log entries present -- on a session
+  // with several add/remove cycles this is real, avoidable memory growth,
+  // on top of the wasted layout cost on every render. Same pattern as
+  // DEBUG in road-label-zoom.js.
+  var DEBUG_VISIBILITY = false;
+
   function dataFor(hotspotName) {
     return window.plotPopup && typeof window.plotPopup.getPlotData === "function"
       ? window.plotPopup.getPlotData(hotspotName)
@@ -258,14 +273,18 @@
       });
     });
 
-    debugLogCompareVisibility(root);
+    if (DEBUG_VISIBILITY) debugLogCompareVisibility(root);
   }
 
   // Diagnostic only -- logs everything needed to tell "the panel didn't
   // render" apart from "the panel rendered but something is making it
   // invisible / zero-size / off-screen", which look identical to the eye
-  // but need very different fixes. Runs every time the panel opens; it's
-  // cheap and console-only, so safe to leave in permanently. The
+  // but need very different fixes. Gated behind DEBUG_VISIBILITY (see
+  // above) -- NOT cheap: several forced-reflow layout reads plus an
+  // ancestor walk, and every console.log/group call below pins the DOM
+  // nodes it's passed in devtools' console history until that history is
+  // cleared, so leaving it running on every render was a real per-call
+  // memory/CPU cost, not just noise. The
   // ancestor walk specifically looks for anything that would give
   // position:fixed a containing block OTHER than the real viewport
   // (transform / filter / perspective / will-change:transform / contain
@@ -431,6 +450,10 @@
     closePanel: closePanel,
     togglePanel: togglePanel,
     isPanelOpen: function () { return panelOpen; },
-    maxPlots: CONFIG.maxPlots
+    maxPlots: CONFIG.maxPlots,
+    // Console helper: window.plotCompare.setDebugVisibility(true) turns the
+    // (expensive) stacking/visibility diagnostic back on for the next
+    // renders, without editing this file. See DEBUG_VISIBILITY above.
+    setDebugVisibility: function (on) { DEBUG_VISIBILITY = !!on; }
   };
 })();
