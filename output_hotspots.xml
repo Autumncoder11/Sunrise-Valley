@@ -2053,13 +2053,13 @@
       <point ath="-105.74536" atv="51.46666"/>
     </hotspot>
     <hotspot name="kml_label_236" ath="-101.77005" atv="53.7932" distorted="false" rx="36.20680" ry="0" rz="-10.00000" type="text" html="237" css="font-family:Arial; font-size:7px; color:#000000; text-align:center;" bg="false" enabled="false" />
-    <hotspot name="kml_poly_237a" fillcolor="0xDCFCE7" fillalpha="1.0" bordercolor="0x22C55E" borderwidth="1" onclick="js(showPlotDetails('kml_poly_237a'));">
+    <!-- <hotspot name="kml_poly_237a" fillcolor="0xDCFCE7" fillalpha="1.0" bordercolor="0x22C55E" borderwidth="1" onclick="js(showPlotDetails('kml_poly_237a'));">
       <point ath="-108.16255" atv="54.28434"/>
       <point ath="-109.15920" atv="55.27541"/>
       <point ath="-97.72909" atv="57.13631"/>
       <point ath="-97.14365" atv="56.02557"/>
       <point ath="-108.16255" atv="54.28434"/>
-    </hotspot>
+    </hotspot> -->
     <hotspot name="kml_label_237a" ath="-103.00861" atv="55.69074" distorted="false" rx="34.30926" ry="0" rz="-17.00000" type="text" html="237a" css="font-family:Arial; font-size:6px; color:#000000; text-align:center;" bg="false" enabled="false" />
     <hotspot name="kml_poly_237b" fillcolor="0xDCFCE7" fillalpha="1.0" bordercolor="0x22C55E" borderwidth="1" onclick="js(showPlotDetails('kml_poly_237b'));">
       <point ath="-109.15920" atv="55.27541"/>

@@ -7,7 +7,7 @@
   "filter-panel.css": "a8f23983afc9a90c22576e7e4dfd69501c70a7a87f33f2df5930147ff3550cbe",
   "filter-panel.js": "272ac2bd74de0100f8973536e73b2f814429eb74593f5cbae36439f25353306a",
   "landmarks.xml": "360599cbf72158ec6ea928093fb647578e532e9fdbe58cac051fabf8d08e98fb",
-  "output_hotspots.xml": "dc41ec43f628c17b4806eb7dc49f8bc0c13e61401f5f86c87c2f94d2e05d3d6f",
+  "output_hotspots.xml": "62cad6c7b4cd5ad1577310c1a63a5e022109a2dc1bb22af607193314e2c0af99",
   "plot-compare.css": "ee05fc03f1caf8f608b81ef85bbc43f785ebc88481e685a31bbbc15d9a0fc5bf",
   "plot-compare.js": "c5da2492524c376cb7c6b905edb74797f1d27e0c4e17a51febe2c96c67559ec3",
   "plot-popup-mobile.css": "43279dfbe7ac48272bcb4e22444ace5e24a0525ba2404ba7a39dd08bb3be3f5f",
@@ -16,5 +16,5 @@
   "plot-popup.js": "4d80699550a7b86bb5e4c5e8cf80a07829dd189e4c339a5c8e441e43a978d676",
   "road-label-zoom.js": "f61cc4d273338b0291972e2bb78dc07129ce8d87f09056e813b4014b6ee53295",
   "tour.js": "aba55fc14a6d61b19323fca98df597c0b0f9f47302642e53cde5c973194c3e96",
-  "tour.xml": "b63028dce67a84d19a72cd1f790e8f2e8119b22989ce667ca20da7d3186f8826"
+  "tour.xml": "0691022b96e25fc08497e72b829510c632b9b660e00fa8f80599131bee025ee6"
 }
