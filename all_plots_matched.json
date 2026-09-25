@@ -8974,8 +8974,8 @@
       }
     ]
   },
-  "kml_poly_237a": {
-    "displayName": "Plot 237a",
+  "kml_poly_237b": {
+    "displayName": "Plot 237b",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
@@ -9029,8 +9029,8 @@
       }
     ]
   },
-  "kml_poly_237b": {
-    "displayName": "Plot 237b",
+  "kml_poly_237a": {
+    "displayName": "Plot 237a",
     "status": "AVAILABLE",
     "category": "TBD",
     "sides": [
